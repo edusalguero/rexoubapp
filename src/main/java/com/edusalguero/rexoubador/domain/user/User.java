@@ -5,6 +5,9 @@ import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
+import com.edusalguero.rexoubador.domain.server.Server;
+import com.edusalguero.rexoubador.domain.server.ServerId;
+import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;
 import com.edusalguero.rexoubador.domain.user.service.HashingService;
 import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
 
@@ -48,6 +51,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Contact.class, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Server.class, orphanRemoval = true)
+    private List<Server> servers = new ArrayList<>();
+
     public User(UserId userId, String username, String password, String firstName, String lastName) {
         this.userId = userId;
         this.username = username;
@@ -65,6 +71,7 @@ public class User {
     public List<Contact> contacts() {
         return contacts;
     }
+
 
     public Boolean addContact(ContactId contactId, String email, String slackWebhookUrl, String slackChannelOrUsername) {
         Contact contact = new Contact(this, contactId, email, slackWebhookUrl, slackChannelOrUsername);
@@ -85,6 +92,31 @@ public class User {
         }
         if (!deleted) {
             throw new ContactNotFoundException();
+        }
+    }
+
+    public List<Server> servers() {
+        return servers;
+    }
+
+    public Boolean addServer(ServerId serverId, String label, String ip, Status status) {
+        Server server = new Server(this, serverId, label, ip, status);
+        return servers.add(server);
+    }
+
+    public void deleteServer(ServerId serverId) {
+        int index = 0;
+        Boolean deleted = false;
+        for (Server server : servers) {
+            if (server.id().equals(serverId.getId())) {
+                servers.remove(index);
+                deleted = true;
+                break;
+            }
+            index++;
+        }
+        if (!deleted) {
+            throw new ServerNotFoundException();
         }
     }
 
