@@ -2,7 +2,6 @@ package com.edusalguero.rexoubador.domain.contact;
 
 import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.user.User;
-import com.edusalguero.rexoubador.domain.user.UserId;
 
 import javax.persistence.*;
 import java.util.Date;
