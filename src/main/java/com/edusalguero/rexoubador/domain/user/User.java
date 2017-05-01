@@ -74,7 +74,6 @@ public class User {
     public void deleteContact(ContactId contactId) {
         int index = 0;
         Boolean deleted = false;
-        System.out.println(contacts);
         for (Contact contact : contacts) {
 
             if (contact.id().equals(contactId.getId())) {
@@ -84,7 +83,6 @@ public class User {
             }
             index++;
         }
-        System.out.println(contacts);
         if (!deleted) {
             throw new ContactNotFoundException();
         }
