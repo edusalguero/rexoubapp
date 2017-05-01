@@ -7,8 +7,6 @@ import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
 import com.edusalguero.rexoubador.domain.user.service.HashingService;
 import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.*;
