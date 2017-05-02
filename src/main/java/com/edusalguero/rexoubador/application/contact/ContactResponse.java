@@ -4,10 +4,7 @@ import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 
 public class ContactResponse {
@@ -50,7 +47,7 @@ public class ContactResponse {
     }
 
     public String getEntryDate() {
-        return DateConverter.getFormatedDateOrEmptyString(entryDate);
+        return DateConverter.getFormattedDateOrEmptyString(entryDate);
     }
 
     public Status getStatus() {

@@ -7,7 +7,7 @@ import java.util.TimeZone;
 
 public class DateConverter {
 
-    public static String getFormatedDateOrEmptyString(Date date) {
+    public static String getFormattedDateOrEmptyString(Date date) {
 
         if (date != null) {
             TimeZone tz = TimeZone.getTimeZone("UTC");

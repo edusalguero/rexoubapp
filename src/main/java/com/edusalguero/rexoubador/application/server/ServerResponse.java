@@ -45,7 +45,7 @@ public class ServerResponse {
     }
 
     public String getEntryDate() {
-        return DateConverter.getFormatedDateOrEmptyString(entryDate);
+        return DateConverter.getFormattedDateOrEmptyString(entryDate);
     }
 
     public Status getStatus() {
@@ -61,7 +61,7 @@ public class ServerResponse {
     }
 
     public String getLastHarvestDate() {
-        return DateConverter.getFormatedDateOrEmptyString(lastHarvestDate);
+        return DateConverter.getFormattedDateOrEmptyString(lastHarvestDate);
     }
 
     public int getUptime() {

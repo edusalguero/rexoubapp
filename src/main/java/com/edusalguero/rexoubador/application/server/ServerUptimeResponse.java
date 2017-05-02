@@ -25,6 +25,6 @@ public class ServerUptimeResponse {
     }
 
     public String getHarvestDate() {
-        return DateConverter.getFormatedDateOrEmptyString(harvestDate);
+        return DateConverter.getFormattedDateOrEmptyString(harvestDate);
     }
 }
