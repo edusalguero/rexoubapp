@@ -87,6 +87,10 @@ public class Contact {
         // Needed by JPA
     }
 
+    public ContactId contactId()
+    {
+        return contactId;
+    }
     public String id() {
         return contactId.toString();
     }
@@ -125,5 +129,13 @@ public class Contact {
 
     public Status status() {
         return status;
+    }
+
+    public Boolean isSoftDeleted() {
+        return status == Status.DISABLED;
+    }
+    public void delete()
+    {
+        status = Status.DELETED;
     }
 }

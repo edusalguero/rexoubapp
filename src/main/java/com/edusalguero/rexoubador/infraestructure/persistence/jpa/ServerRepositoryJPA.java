@@ -1,8 +1,10 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
+import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
 import com.edusalguero.rexoubador.domain.server.Server;
 import com.edusalguero.rexoubador.domain.server.ServerId;
+import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;
 import com.edusalguero.rexoubador.domain.server.ServerRepository;
 import com.edusalguero.rexoubador.domain.user.User;
 import org.springframework.stereotype.Repository;
@@ -20,22 +22,26 @@ public class ServerRepositoryJPA extends JPARepository implements ServerReposito
     @Override
     public Server ofId(ServerId serverId) {
         try {
-            String hql = "FROM Server as server where server.id = :serverId";
+            String hql = "FROM Server as server where server.id = :serverId and server.status<>:statusDeleted";
             return (Server) entityManager.createQuery(hql).
-                    setParameter("serverId", serverId).getSingleResult();
+                    setParameter("serverId", serverId).
+                    setParameter("statusDeleted", Status.DELETED).
+                    getSingleResult();
         } catch (NoResultException e) {
-            throw new ContactNotFoundException();
+            throw new ServerNotFoundException();
         }
     }
 
     @Override
     public Collection<Server> ofUser(User user) {
         try {
-            String hql = "FROM Server as server where server.user = :user";
+            String hql = "FROM Server as server where server.user = :user and server.status<>:statusDeleted";
             return (List<Server>) entityManager.createQuery(hql).
-                    setParameter("user", user).getResultList();
+                    setParameter("user", user).
+                    setParameter("statusDeleted", Status.DELETED).
+                    getResultList();
         } catch (NoResultException e) {
-            throw new ContactNotFoundException();
+            throw new ServerNotFoundException();
         }
     }
 

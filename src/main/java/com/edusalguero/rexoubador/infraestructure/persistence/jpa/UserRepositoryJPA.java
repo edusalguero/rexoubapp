@@ -1,6 +1,7 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
 
+import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.user.User;
 import com.edusalguero.rexoubador.domain.user.UserId;
 import com.edusalguero.rexoubador.domain.user.UserNotFoundException;
@@ -19,9 +20,11 @@ public class UserRepositoryJPA extends JPARepository implements UserRepository {
     @Override
     public User ofId(UserId userId) {
         try {
-            String hql = "FROM User as user where user.id = :userId";
+            String hql = "FROM User as user where user.id = :userId and user.status<>:statusDeleted";
             return (User) entityManager.createQuery(hql).
-                    setParameter("userId", userId).getSingleResult();
+                    setParameter("userId", userId).
+                    setParameter("statusDeleted", Status.DELETED).
+                    getSingleResult();
         } catch (NoResultException e) {
             throw new UserNotFoundException();
         }
@@ -29,9 +32,10 @@ public class UserRepositoryJPA extends JPARepository implements UserRepository {
 
     public User ofUsername(String username) {
         try {
-            String hql = "FROM User as user where user.username = :username";
+            String hql = "FROM User as user where user.username = :username and user.status<>:statusDeleted";
             return (User) entityManager.createQuery(hql).
                     setParameter("username", username).
+                    setParameter("statusDeleted", Status.DELETED).
                     getSingleResult();
         } catch (NoResultException e) {
             throw new UserNotFoundException();

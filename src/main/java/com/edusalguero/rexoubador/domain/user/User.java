@@ -13,6 +13,7 @@ import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
@@ -69,9 +70,10 @@ public class User {
     }
 
     public List<Contact> contacts() {
-        return contacts;
+        return contacts.stream()
+                .filter(c -> !c.isSoftDeleted())
+                .collect(Collectors.toList());
     }
-
 
     public Boolean addContact(ContactId contactId, String email, String slackWebhookUrl, String slackChannelOrUsername) {
         Contact contact = new Contact(this, contactId, email, slackWebhookUrl, slackChannelOrUsername);
@@ -79,24 +81,20 @@ public class User {
     }
 
     public void deleteContact(ContactId contactId) {
-        int index = 0;
-        Boolean deleted = false;
-        for (Contact contact : contacts) {
-
-            if (contact.id().equals(contactId.getId())) {
-                contacts.remove(index);
-                deleted = true;
-                break;
-            }
-            index++;
-        }
-        if (!deleted) {
+        Contact contact = contacts().stream()
+                .filter(c -> c.contactId().equals(contactId))
+                .findAny()
+                .orElse(null);
+        if (contact == null) {
             throw new ContactNotFoundException();
         }
+        contact.delete();
     }
 
     public List<Server> servers() {
-        return servers;
+        return servers.stream()
+                .filter(s -> !s.isSoftDeleted())
+                .collect(Collectors.toList());
     }
 
     public Boolean addServer(ServerId serverId, String label, String ip, Status status) {
@@ -105,19 +103,14 @@ public class User {
     }
 
     public void deleteServer(ServerId serverId) {
-        int index = 0;
-        Boolean deleted = false;
-        for (Server server : servers) {
-            if (server.id().equals(serverId.getId())) {
-                servers.remove(index);
-                deleted = true;
-                break;
-            }
-            index++;
-        }
-        if (!deleted) {
+        Server server = servers().stream()
+                .filter(s -> s.serverId().equals(serverId))
+                .findAny()
+                .orElse(null);
+        if (server == null) {
             throw new ServerNotFoundException();
         }
+        server.delete();
     }
 
     @Override

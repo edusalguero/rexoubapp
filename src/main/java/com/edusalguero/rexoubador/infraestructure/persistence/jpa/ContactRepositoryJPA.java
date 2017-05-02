@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
+import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
@@ -20,9 +21,11 @@ public class ContactRepositoryJPA extends JPARepository implements ContactReposi
     @Override
     public Contact ofId(ContactId contactId) {
         try {
-            String hql = "FROM Contact as contact where contact.id = :contactId";
+            String hql = "FROM Contact as contact where contact.id = :contactId and contact.status<>:statusDeleted";
             return (Contact) entityManager.createQuery(hql).
-                    setParameter("contactId", contactId).getSingleResult();
+                    setParameter("contactId", contactId).
+                    setParameter("statusDeleted", Status.DELETED).
+                    getSingleResult();
         } catch (NoResultException e) {
             throw new ContactNotFoundException();
         }
@@ -31,9 +34,11 @@ public class ContactRepositoryJPA extends JPARepository implements ContactReposi
     @Override
     public List<Contact> ofUser(User user) {
         try {
-            String hql = "FROM Contact as contact where contact.user = :user";
+            String hql = "FROM Contact as contact where contact.user = :user and contact.status<>:statusDeleted";
             return (List <Contact>) entityManager.createQuery(hql).
-                    setParameter("user", user).getResultList();
+                    setParameter("user", user).
+                    setParameter("statusDeleted", Status.DELETED).
+                    getResultList();
         } catch (NoResultException e) {
             throw new ContactNotFoundException();
         }
