@@ -54,12 +54,13 @@ public class Server {
         // Needed by JPA
     }
 
-    public Server(User user, ServerId serverId, String label, String ip, Status status){
+    public Server(User user, ServerId serverId, String label, String ip, Status status) {
         this.user = user;
         this.serverId = serverId;
         this.label = label;
         this.ip = ip;
         this.status = status;
+        this.entryDate = new Date();
         this.harvestStatus = HarvestStatus.PENDING;
         this.machineStatus = MachineStatus.UNKNOWN;
     }
@@ -116,12 +117,15 @@ public class Server {
         this.status = status;
     }
 
-    public void updateIp(String ip)
-    {
+    public void updateIp(String ip) {
         this.ip = ip;
     }
-    public void updateLabel(String label)
-    {
+
+    public void updateLabel(String label) {
         this.label = label;
+    }
+
+    public Boolean isEnabled() {
+        return this.status == Status.ENABLED;
     }
 }
