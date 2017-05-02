@@ -4,6 +4,7 @@ import com.edusalguero.rexoubador.domain.HarvestStatus;
 import com.edusalguero.rexoubador.domain.MachineStatus;
 import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.server.Server;
+import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 
 import java.util.Date;
 
@@ -43,8 +44,8 @@ public class ServerResponse {
         return ip;
     }
 
-    public Date getEntryDate() {
-        return entryDate;
+    public String getEntryDate() {
+        return DateConverter.getFormatedDateOrEmptyString(entryDate);
     }
 
     public Status getStatus() {
@@ -59,8 +60,8 @@ public class ServerResponse {
         return machineStatus;
     }
 
-    public Date getLastHarvestDate() {
-        return lastHarvestDate;
+    public String getLastHarvestDate() {
+        return DateConverter.getFormatedDateOrEmptyString(lastHarvestDate);
     }
 
     public int getUptime() {

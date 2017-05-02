@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.application.contact;
 
+import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 
@@ -49,10 +50,7 @@ public class ContactResponse {
     }
 
     public String getEntryDate() {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
-        df.setTimeZone(tz);
-        return df.format(entryDate);
+        return DateConverter.getFormatedDateOrEmptyString(entryDate);
     }
 
     public Status getStatus() {
