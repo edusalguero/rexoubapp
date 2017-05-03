@@ -1,7 +1,6 @@
 package com.edusalguero.rexoubador.application.event;
 
 import com.edusalguero.rexoubador.domain.event.Event;
-import com.edusalguero.rexoubador.domain.server.Server;
 import com.edusalguero.rexoubador.domain.user.User;
 import com.edusalguero.rexoubador.domain.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.EventRepositoryJPA;
