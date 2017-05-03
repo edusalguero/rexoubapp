@@ -23,7 +23,6 @@ public class ContactResponse {
 
     public ContactResponse(Contact contact) {
         this.id = contact.id();
-
         this.email = contact.email();
         this.slackChannelOrUsername = contact.slackChannelOrUsername();
         this.slackWebhookUrl = contact.slackWebhookUrl();
