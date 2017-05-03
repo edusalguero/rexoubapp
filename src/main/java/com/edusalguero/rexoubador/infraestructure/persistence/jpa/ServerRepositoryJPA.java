@@ -34,15 +34,11 @@ public class ServerRepositoryJPA extends JPARepository implements ServerReposito
 
     @Override
     public Collection<Server> ofUser(User user) {
-        try {
-            String hql = "FROM Server as server where server.user = :user and server.status<>:statusDeleted";
-            return (List<Server>) entityManager.createQuery(hql).
-                    setParameter("user", user).
-                    setParameter("statusDeleted", Status.DELETED).
-                    getResultList();
-        } catch (NoResultException e) {
-            throw new ServerNotFoundException();
-        }
+        String hql = "FROM Server as server where server.user = :user and server.status<>:statusDeleted";
+        return (List<Server>) entityManager.createQuery(hql).
+                setParameter("user", user).
+                setParameter("statusDeleted", Status.DELETED).
+                getResultList();
     }
 
     @Override

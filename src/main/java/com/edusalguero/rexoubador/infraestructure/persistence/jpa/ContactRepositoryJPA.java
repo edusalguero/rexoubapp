@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Repository
 @Transactional
-public class ContactRepositoryJPA extends JPARepository implements ContactRepository{
+public class ContactRepositoryJPA extends JPARepository implements ContactRepository {
 
     @Override
     public Contact ofId(ContactId contactId) {
@@ -33,15 +33,12 @@ public class ContactRepositoryJPA extends JPARepository implements ContactReposi
 
     @Override
     public List<Contact> ofUser(User user) {
-        try {
-            String hql = "FROM Contact as contact where contact.user = :user and contact.status<>:statusDeleted";
-            return (List <Contact>) entityManager.createQuery(hql).
-                    setParameter("user", user).
-                    setParameter("statusDeleted", Status.DELETED).
-                    getResultList();
-        } catch (NoResultException e) {
-            throw new ContactNotFoundException();
-        }
+
+        String hql = "FROM Contact as contact where contact.user = :user and contact.status<>:statusDeleted";
+        return (List<Contact>) entityManager.createQuery(hql).
+                setParameter("user", user).
+                setParameter("statusDeleted", Status.DELETED).
+                getResultList();
     }
 
     @Override
