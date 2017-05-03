@@ -5,6 +5,7 @@ import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class ContactResponse {
@@ -20,7 +21,7 @@ public class ContactResponse {
 
     private Status status;
 
-    ContactResponse(Contact contact) {
+    public ContactResponse(Contact contact) {
         this.id = contact.id();
 
         this.email = contact.email();
@@ -38,13 +39,13 @@ public class ContactResponse {
         return email;
     }
 
-    public String getSlackWebhookUrl() {
-        return slackWebhookUrl;
+    public HashMap<String, String> getSlack() {
+        HashMap<String, String> slack = new HashMap<>();
+        slack.put("channelOrUsername", slackChannelOrUsername);
+        slack.put("webhookUrl", slackWebhookUrl);
+        return slack;
     }
 
-    public String getSlackChannelOrUsername() {
-        return slackChannelOrUsername;
-    }
 
     public String getEntryDate() {
         return DateConverter.getFormattedDateOrEmptyString(entryDate);
