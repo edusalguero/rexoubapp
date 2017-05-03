@@ -21,15 +21,7 @@ public class UserEventsUseCase {
     private EventRepositoryJPA eventRepository;
 
     public ArrayList<EventResponse> execute(UserId userId) {
-
-
         User user = userRepository.ofId(userId);
-
-        Server server = user.servers().get(0);
-
-        Event e = new Event(eventRepository.nextIdentity(), server, user.contacts(), "Message");
-        eventRepository.save(e);
-
         ArrayList<EventResponse> eventResponses = new ArrayList<>();
         Collection<Event> events = eventRepository.ofUser(user);
         for (Event event : events) {
