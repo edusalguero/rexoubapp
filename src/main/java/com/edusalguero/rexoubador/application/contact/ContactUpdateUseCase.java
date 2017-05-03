@@ -13,11 +13,9 @@ public class ContactUpdateUseCase {
     @Autowired
     private ContactRepositoryJPA contactRepository;
 
-    public void execute(ContactUpdateRequest contactUpdateRequest)
-    {
+    public void execute(ContactUpdateRequest contactUpdateRequest) {
         Contact contact = contactRepository.ofId(contactUpdateRequest.getContactId());
-        if(!contact.user().id().equals(contactUpdateRequest.getUserId().getId()))
-        {
+        if (!contact.user().id().equals(contactUpdateRequest.getUserId().getId())) {
             throw new ContactNotFoundException();
         }
         contact.email(contactUpdateRequest.getEmail());

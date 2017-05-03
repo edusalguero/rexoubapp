@@ -8,10 +8,11 @@ import java.util.Collection;
 public interface ContactRepository {
 
     Contact ofId(ContactId contactId);
+
     Collection<Contact> ofUser(User user);
 
     ContactId nextIdentity();
 
-    void  update(Contact contact);
+    void update(Contact contact);
 
 }

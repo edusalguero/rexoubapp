@@ -21,7 +21,7 @@ public class ServersUptimeUseCase {
         User user = userRepository.ofId(userId);
         List<Server> servers = user.servers();
         for (Server server : servers) {
-            if(!server.isEnabled()) {
+            if (!server.isEnabled()) {
                 continue;
             }
             serversUptime.add(new ServerUptimeResponse(server));

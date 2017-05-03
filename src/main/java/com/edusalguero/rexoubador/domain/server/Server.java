@@ -69,10 +69,10 @@ public class Server {
         return user;
     }
 
-    public ServerId serverId()
-    {
-        return  serverId;
+    public ServerId serverId() {
+        return serverId;
     }
+
     public String id() {
         return serverId.toString();
     }
@@ -137,8 +137,7 @@ public class Server {
         return status == Status.DELETED;
     }
 
-    public void delete()
-    {
+    public void delete() {
         status = Status.DELETED;
     }
 }

@@ -13,11 +13,9 @@ public class ContactInformationUseCase {
     @Autowired
     private ContactRepositoryJPA contactRepository;
 
-    public ContactResponse execute(ContactId contactId, UserId userId)
-    {
+    public ContactResponse execute(ContactId contactId, UserId userId) {
         Contact contact = contactRepository.ofId(contactId);
-        if(!contact.user().id().equals(userId.getId()))
-        {
+        if (!contact.user().id().equals(userId.getId())) {
             throw new ContactNotFoundException();
         }
 

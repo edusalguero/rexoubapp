@@ -20,11 +20,11 @@ public class ServerCreateUserCase {
     @Autowired
     private UserRepositoryJPA userRepository;
 
-    public ServerCreateResponse execute(UserId userId, String label, String ip, Status status){
+    public ServerCreateResponse execute(UserId userId, String label, String ip, Status status) {
         ServerId serverId = serverRepository.nextIdentity();
         User user = userRepository.ofId(userId);
-        user.addServer(serverId,label, ip, status);
+        user.addServer(serverId, label, ip, status);
         userRepository.update(user);
-        return  new ServerCreateResponse(serverId,publicSSHKey);
+        return new ServerCreateResponse(serverId, publicSSHKey);
     }
 }

@@ -1,10 +1,10 @@
 package com.edusalguero.rexoubador.application.server;
 
+import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.domain.HarvestStatus;
 import com.edusalguero.rexoubador.domain.MachineStatus;
 import com.edusalguero.rexoubador.domain.Status;
 import com.edusalguero.rexoubador.domain.server.Server;
-import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 
 import java.util.Date;
 

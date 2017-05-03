@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "contact")
 public class Contact {
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -87,10 +87,10 @@ public class Contact {
         // Needed by JPA
     }
 
-    public ContactId contactId()
-    {
+    public ContactId contactId() {
         return contactId;
     }
+
     public String id() {
         return contactId.toString();
     }
@@ -134,8 +134,8 @@ public class Contact {
     public Boolean isSoftDeleted() {
         return status == Status.DISABLED;
     }
-    public void delete()
-    {
+
+    public void delete() {
         status = Status.DELETED;
     }
 }

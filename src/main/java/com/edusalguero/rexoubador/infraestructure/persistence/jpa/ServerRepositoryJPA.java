@@ -1,7 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
 import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
 import com.edusalguero.rexoubador.domain.server.Server;
 import com.edusalguero.rexoubador.domain.server.ServerId;
 import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;

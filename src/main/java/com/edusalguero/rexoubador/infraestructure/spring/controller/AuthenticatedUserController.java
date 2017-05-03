@@ -10,8 +10,7 @@ abstract public class AuthenticatedUserController {
     @Autowired
     private JwtAuthenticationFacade authenticationFacade;
 
-    protected UserId getAuthenticatedUserId()
-    {
+    protected UserId getAuthenticatedUserId() {
         return new UserId(authenticationFacade.getAuthenticatedUser().getId());
     }
 }

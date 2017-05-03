@@ -10,5 +10,6 @@ public interface EventRepository {
     Collection<Event> ofUser(User user);
 
     EventId nextIdentity();
+
     void save(Event event);
 }

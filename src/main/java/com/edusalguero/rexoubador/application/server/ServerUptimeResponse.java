@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.application.server;
 
-import com.edusalguero.rexoubador.domain.server.Server;
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
+import com.edusalguero.rexoubador.domain.server.Server;
 
 import java.util.Date;
 

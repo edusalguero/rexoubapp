@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/users/self", produces = "application/json")
-public class UserController extends AuthenticatedUserController{
+public class UserController extends AuthenticatedUserController {
 
     @Autowired
     private UserInformationUseCase userInformationUseCase;

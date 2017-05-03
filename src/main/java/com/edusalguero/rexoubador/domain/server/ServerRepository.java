@@ -1,6 +1,7 @@
 package com.edusalguero.rexoubador.domain.server;
 
 import com.edusalguero.rexoubador.domain.user.User;
+
 import java.util.Collection;
 
 

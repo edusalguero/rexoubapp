@@ -7,8 +7,7 @@ public class ServerCreateResponse {
     private String serverId;
     private String publicSSHKey;
 
-    ServerCreateResponse(ServerId serverId, String publicSSHKey)
-    {
+    ServerCreateResponse(ServerId serverId, String publicSSHKey) {
         this.serverId = serverId.toString();
         this.publicSSHKey = publicSSHKey;
     }

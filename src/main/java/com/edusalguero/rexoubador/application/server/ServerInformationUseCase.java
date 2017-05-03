@@ -14,11 +14,9 @@ public class ServerInformationUseCase {
     @Autowired
     private ServerRepositoryJPA serverRepository;
 
-    public ServerResponse execute(ServerId serverId, UserId userId)
-    {
+    public ServerResponse execute(ServerId serverId, UserId userId) {
         Server server = serverRepository.ofId(serverId);
-        if(!server.user().id().equals(userId.getId()))
-        {
+        if (!server.user().id().equals(userId.getId())) {
             throw new ServerNotFoundException();
         }
 

@@ -13,8 +13,7 @@ public class ContactDeleteUseCase {
     @Autowired
     private UserRepositoryJPA userRepository;
 
-    public void execute(ContactId contactId, UserId userId)
-    {
+    public void execute(ContactId contactId, UserId userId) {
         User user = userRepository.ofId(userId);
         user.deleteContact(contactId);
         userRepository.update(user);

@@ -12,7 +12,9 @@ import com.edusalguero.rexoubador.domain.user.service.HashingService;
 import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity

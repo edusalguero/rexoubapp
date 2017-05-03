@@ -2,7 +2,6 @@ package com.edusalguero.rexoubador.infraestructure.service;
 
 import com.edusalguero.rexoubador.domain.user.service.HashingService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

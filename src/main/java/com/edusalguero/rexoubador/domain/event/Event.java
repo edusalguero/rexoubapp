@@ -13,7 +13,7 @@ public class Event {
 
 
     @ManyToMany(targetEntity = Contact.class)
-    @JoinTable(name="event_contact")
+    @JoinTable(name = "event_contact")
     private Collection contact;
 
     @ManyToOne(fetch = FetchType.LAZY)

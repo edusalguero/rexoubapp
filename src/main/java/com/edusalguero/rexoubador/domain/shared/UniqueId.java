@@ -1,10 +1,11 @@
 package com.edusalguero.rexoubador.domain.shared;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.MappedSuperclass;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.UUID;
-
-import javax.persistence.*;
 
 @Embeddable
 @MappedSuperclass

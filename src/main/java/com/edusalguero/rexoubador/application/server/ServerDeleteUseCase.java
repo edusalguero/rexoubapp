@@ -13,8 +13,7 @@ public class ServerDeleteUseCase {
     @Autowired
     private UserRepositoryJPA userRepository;
 
-    public void execute(ServerId serverId, UserId userId)
-    {
+    public void execute(ServerId serverId, UserId userId) {
         User user = userRepository.ofId(userId);
         user.deleteServer(serverId);
         userRepository.update(user);

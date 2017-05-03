@@ -3,7 +3,6 @@ package com.edusalguero.rexoubador.application.contact;
 
 import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.user.User;
-import com.edusalguero.rexoubador.domain.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ContactRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,6 @@ public class ContactCreateUseCase {
         User user = userRepository.ofId(contactRequest.getUserId());
         user.addContact(contactId, contactRequest.getEmail(), contactRequest.getSlackWebhookUrl(), contactRequest.getSlackChannelOrUsername());
         userRepository.update(user);
-        return  contactId;
+        return contactId;
     }
 }

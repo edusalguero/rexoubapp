@@ -29,6 +29,7 @@ public class EventRepositoryJPA extends JPARepository implements EventRepository
         final String random = UUID.randomUUID().toString().toUpperCase();
         return new EventId(random);
     }
+
     @Override
     public void save(Event event) {
         entityManager.persist(event);

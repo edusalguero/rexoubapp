@@ -16,14 +16,13 @@ public class UserContactsUseCase {
     @Autowired
     private UserRepositoryJPA userRepository;
 
-    public ArrayList<ContactResponse> execute(UserId userId)
-    {
+    public ArrayList<ContactResponse> execute(UserId userId) {
         ArrayList<ContactResponse> userContacts = new ArrayList<>();
         User user = userRepository.ofId(userId);
         List<Contact> contacts = user.contacts();
-        for (Contact contact: contacts) {
-           userContacts.add(new ContactResponse(contact));
+        for (Contact contact : contacts) {
+            userContacts.add(new ContactResponse(contact));
         }
-        return  userContacts;
+        return userContacts;
     }
 }
