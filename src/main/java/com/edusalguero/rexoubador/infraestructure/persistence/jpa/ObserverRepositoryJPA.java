@@ -22,7 +22,7 @@ public class ObserverRepositoryJPA extends JPARepository implements ObserverRepo
         try {
             String hql = "FROM Observer as observer where observer.id = :observerId and observer.status<>:statusDeleted";
             return (Observer) entityManager.createQuery(hql).
-                    setParameter("checkId", observerId).
+                    setParameter("observerId", observerId).
                     setParameter("statusDeleted", Status.DELETED).
                     getSingleResult();
         } catch (NoResultException e) {
