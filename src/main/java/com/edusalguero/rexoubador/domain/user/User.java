@@ -2,7 +2,7 @@ package com.edusalguero.rexoubador.domain.user;
 
 
 import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.observer.*;
+import com.edusalguero.rexoubador.domain.monitor.observer.*;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;

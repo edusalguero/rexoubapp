@@ -1,7 +1,7 @@
-package com.edusalguero.rexoubador.application.observer;
+package com.edusalguero.rexoubador.application.monitor.observer;
 
 import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.observer.ObserverId;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverId;
 import com.edusalguero.rexoubador.domain.user.UserId;
 
 public class ObserverUpdateRequest {

@@ -1,10 +1,10 @@
-package com.edusalguero.rexoubador.application.observer;
+package com.edusalguero.rexoubador.application.monitor.observer;
 
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.observer.Observer;
-import com.edusalguero.rexoubador.domain.observer.ObserverType;
+import com.edusalguero.rexoubador.domain.monitor.observer.Observer;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverType;
 
 import java.util.Date;
 

@@ -1,8 +1,8 @@
-package com.edusalguero.rexoubador.application.observer;
+package com.edusalguero.rexoubador.application.monitor.observer;
 
 
-import com.edusalguero.rexoubador.domain.observer.ObserverId;
-import com.edusalguero.rexoubador.domain.observer.ObserverType;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverId;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverType;
 import com.edusalguero.rexoubador.domain.user.User;
 import com.edusalguero.rexoubador.domain.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ObserverRepositoryJPA;

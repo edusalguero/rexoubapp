@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubador.infraestructure.spring.controller;
 
-import com.edusalguero.rexoubador.application.observer.*;
+import com.edusalguero.rexoubador.application.monitor.observer.*;
 import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.observer.ObserverId;
-import com.edusalguero.rexoubador.domain.observer.ObserverType;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverId;
+import com.edusalguero.rexoubador.domain.monitor.observer.ObserverType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

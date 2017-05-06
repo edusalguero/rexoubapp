@@ -1,4 +1,4 @@
-package com.edusalguero.rexoubador.domain.observer;
+package com.edusalguero.rexoubador.domain.monitor.observer;
 
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
 import com.edusalguero.rexoubador.domain.shared.ValueObject;
