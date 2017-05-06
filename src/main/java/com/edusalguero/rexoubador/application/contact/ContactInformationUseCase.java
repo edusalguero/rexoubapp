@@ -5,20 +5,17 @@ import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
 import com.edusalguero.rexoubador.domain.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ContactRepositoryJPA;
+import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContactInformationUseCase {
     @Autowired
-    private ContactRepositoryJPA contactRepository;
+    private UserRepositoryJPA userRepository;
 
     public ContactResponse execute(ContactId contactId, UserId userId) {
-        Contact contact = contactRepository.ofId(contactId);
-        if (!contact.user().id().equals(userId.getId())) {
-            throw new ContactNotFoundException();
-        }
-
+        Contact contact = userRepository.ofId(userId).contact(contactId);
         return new ContactResponse(contact);
     }
 }

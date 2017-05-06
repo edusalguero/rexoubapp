@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.server;
 
 import com.edusalguero.rexoubador.domain.server.Server;
-import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ServerRepositoryJPA;
+import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,25 +10,14 @@ import org.springframework.stereotype.Service;
 public class ServerUpdateUseCase {
 
     @Autowired
-    private ServerRepositoryJPA serverRepository;
+    private UserRepositoryJPA userRepository;
 
     public void execute(ServerUpdateRequest serverUpdateRequest) {
-        Server server = serverRepository.ofId(serverUpdateRequest.getServerId());
-        if (!server.user().id().equals(serverUpdateRequest.getUserId().getId())) {
-            throw new ServerNotFoundException();
-        }
-
-        if (serverUpdateRequest.ipHasChanged()) {
-            server.updateIp(serverUpdateRequest.getIp());
-        }
-
-        if (serverUpdateRequest.labelHasChanged()) {
-            server.updateLabel(serverUpdateRequest.getLabel());
-        }
-
-        if (serverUpdateRequest.statusHasChanged()) {
-            server.updateStatus(serverUpdateRequest.getStatus());
-        }
-        serverRepository.update(server);
+        User user = userRepository.ofId(serverUpdateRequest.getUserId());
+        Server server = user.server(serverUpdateRequest.getServerId());
+        server.updateIp(serverUpdateRequest.getIp());
+        server.updateLabel(serverUpdateRequest.getLabel());
+        server.updateStatus(serverUpdateRequest.getStatus());
+        userRepository.update(user);
     }
 }

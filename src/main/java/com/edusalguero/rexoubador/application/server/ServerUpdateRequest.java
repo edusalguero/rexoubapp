@@ -41,15 +41,4 @@ public class ServerUpdateRequest {
         return status;
     }
 
-    public boolean ipHasChanged() {
-        return ip != null;
-    }
-
-    public boolean labelHasChanged() {
-        return label != null;
-    }
-
-    public boolean statusHasChanged() {
-        return status != null;
-    }
 }
