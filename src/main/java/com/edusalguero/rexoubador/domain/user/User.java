@@ -245,4 +245,9 @@ public class User {
     public String id() {
         return userId.toString();
     }
+
+    public UserId userId()
+    {
+        return  userId;
+    }
 }
