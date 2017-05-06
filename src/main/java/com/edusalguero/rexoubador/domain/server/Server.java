@@ -3,10 +3,21 @@ package com.edusalguero.rexoubador.domain.server;
 import com.edusalguero.rexoubador.domain.HarvestStatus;
 import com.edusalguero.rexoubador.domain.MachineStatus;
 import com.edusalguero.rexoubador.domain.Status;
+import com.edusalguero.rexoubador.domain.monitor.harvester.Harvester;
+import com.edusalguero.rexoubador.domain.monitor.observer.Observer;
+import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvester;
+import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvesterId;
+import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvesterNotFoundException;
+import com.edusalguero.rexoubador.domain.server.observer.ServerObserver;
+import com.edusalguero.rexoubador.domain.server.observer.ServerObserverId;
+import com.edusalguero.rexoubador.domain.server.observer.ServerObserverNotFoundException;
 import com.edusalguero.rexoubador.domain.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "server")
@@ -50,6 +61,14 @@ public class Server {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "server", targetEntity = ServerHarvester.class, orphanRemoval = true)
+    private List<ServerHarvester> harvesters = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "server", targetEntity = ServerObserver.class, orphanRemoval = true)
+    private List<ServerObserver> observers = new ArrayList<>();
+
+
     protected Server() {
         // Needed by JPA
     }
@@ -63,6 +82,60 @@ public class Server {
         this.entryDate = new Date();
         this.harvestStatus = HarvestStatus.PENDING;
         this.machineStatus = MachineStatus.UNKNOWN;
+    }
+
+    public Collection<ServerHarvester> harvesters()
+    {
+        return  harvesters;
+    }
+
+    public Boolean addHarvester(ServerHarvesterId serverHarvesterId, Harvester harvester)
+    {
+        ServerHarvester serverHarvester = new ServerHarvester(serverHarvesterId, this, harvester);
+        return  harvesters.add(serverHarvester);
+    }
+
+    public Boolean deleteHarvester(ServerHarvesterId serverHarvesterId)
+    {
+       return harvesters.remove(harvester(serverHarvesterId));
+    }
+
+    public ServerHarvester harvester(ServerHarvesterId serverHarvesterId) {
+        ServerHarvester harvester = harvesters().stream()
+                .filter(h ->h.serverHarvesterId().equals(serverHarvesterId))
+                .findAny()
+                .orElse(null);
+        if (harvester == null) {
+            throw new ServerHarvesterNotFoundException();
+        }
+        return harvester;
+    }
+
+    public Boolean addObserver(ServerObserverId serverObserverId, Observer observer)
+    {
+        ServerObserver serverObserver = new ServerObserver(serverObserverId, this, observer);
+        return  observers.add(serverObserver);
+    }
+
+    public Collection<ServerObserver> observers()
+    {
+        return  observers;
+    }
+
+    public ServerObserver observer(ServerObserverId serverObserverId) {
+        ServerObserver observer = observers().stream()
+                .filter(o ->o.serverObserverId().equals(serverObserverId))
+                .findAny()
+                .orElse(null);
+        if (observer == null) {
+            throw new ServerObserverNotFoundException();
+        }
+        return observer;
+    }
+
+    public Boolean deleteObserver(ServerObserverId serverObserverId)
+    {
+        return observers.remove(observer(serverObserverId));
     }
 
     public User user() {
