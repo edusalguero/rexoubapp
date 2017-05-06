@@ -41,7 +41,7 @@ public class ObserverController extends AuthenticatedUserController {
                           @RequestParam(value = "type", required = false, defaultValue = "SERVICE") ObserverType observerType,
                           @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status) {
 
-        return observerCreateUseCase.execute(getAuthenticatedUserId(), observerType, name, label, notifyStatusChanges, notifyInactivity);
+        return observerCreateUseCase.execute(getAuthenticatedUserId(), observerType, name, label, notifyStatusChanges, notifyInactivity, status);
     }
 
     @RequestMapping(path = "/{observerId}", method = RequestMethod.GET)
