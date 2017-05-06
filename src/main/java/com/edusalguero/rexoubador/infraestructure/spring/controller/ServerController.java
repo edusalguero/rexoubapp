@@ -47,8 +47,8 @@ public class ServerController extends AuthenticatedUserController {
 
     @RequestMapping(path = "/{serverId}", method = RequestMethod.PUT)
     public void update(@PathVariable String serverId,
-                       @RequestParam(value = "label", required = false) String label,
-                       @RequestParam(value = "ip", required = false) String ip,
+                       @RequestParam(value = "label") String label,
+                       @RequestParam(value = "ip") String ip,
                        @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status
     ) {
         ServerUpdateRequest serverUpdateRequest = new ServerUpdateRequest(getAuthenticatedUserId(), new ServerId(serverId), ip, label, status);

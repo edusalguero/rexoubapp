@@ -49,9 +49,9 @@ public class ContactController extends AuthenticatedUserController {
 
     @RequestMapping(path = "/{contactId}", method = RequestMethod.PUT)
     public void update(@PathVariable String contactId,
-                       @RequestParam(value = "email", required = false) String email,
-                       @RequestParam(value = "slackWebhookUrl", required = false) String slackWebhookUrl,
-                       @RequestParam(value = "slackChannelOrUsername", required = false) String slackChannelOrUsername,
+                       @RequestParam(value = "email") String email,
+                       @RequestParam(value = "slackWebhookUrl") String slackWebhookUrl,
+                       @RequestParam(value = "slackChannelOrUsername") String slackChannelOrUsername,
                        @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status
     ) {
         ContactUpdateRequest contactUpdateRequest = new ContactUpdateRequest(getAuthenticatedUserId(), new ContactId(contactId), email, slackWebhookUrl, slackChannelOrUsername, status);
