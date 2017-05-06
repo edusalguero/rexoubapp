@@ -132,7 +132,7 @@ public class Contact {
     }
 
     public Boolean isSoftDeleted() {
-        return status == Status.DISABLED;
+        return status == Status.DELETED;
     }
 
     public void delete() {
