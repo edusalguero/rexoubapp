@@ -1,6 +1,8 @@
 package com.edusalguero.rexoubador.domain.server;
 
-public class ServerNotFoundException extends RuntimeException {
+import com.edusalguero.rexoubador.domain.shared.NotFoundException;
+
+public class ServerNotFoundException extends NotFoundException {
     public ServerNotFoundException() {
         super("Server not found!");
     }

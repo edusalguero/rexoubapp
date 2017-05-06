@@ -1,6 +1,8 @@
 package com.edusalguero.rexoubador.domain.user;
 
-public class UserNotFoundException extends RuntimeException {
+import com.edusalguero.rexoubador.domain.shared.NotFoundException;
+
+public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException() {
         super("User not found!");
     }
