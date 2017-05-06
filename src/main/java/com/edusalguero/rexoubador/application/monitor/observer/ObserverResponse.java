@@ -9,7 +9,7 @@ import com.edusalguero.rexoubador.domain.monitor.observer.ObserverType;
 import java.util.Date;
 
 public class ObserverResponse {
-    private String checkId;
+    private String observerId;
     private String label;
     private ObserverType type;
     private String name;
@@ -19,7 +19,7 @@ public class ObserverResponse {
     private Status status;
 
     public ObserverResponse(Observer observer) {
-        this.checkId = observer.id();
+        this.observerId = observer.id();
         this.label = observer.label();
         this.type = observer.type();
         this.name = observer.name();
@@ -29,8 +29,8 @@ public class ObserverResponse {
         this.status = observer.status();
     }
 
-    public String getCheckId() {
-        return checkId;
+    public String getObserverId() {
+        return observerId;
     }
 
     public String getLabel() {
