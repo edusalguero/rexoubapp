@@ -46,7 +46,7 @@ abstract public class Observer {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedAt;
 
-    public Observer(User user, ObserverId observerId, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity) {
+    public Observer(User user, ObserverId observerId, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity, Status status) {
         this.user = user;
         this.observerId = observerId;
         this.name = name;
@@ -54,7 +54,7 @@ abstract public class Observer {
         this.notifyStatusChanges = notifyStatusChanges;
         this.notifyInactivity = notifyInactivity;
         this.entryDate = new Date();
-        this.status = Status.ENABLED;
+        this.status = status;
     }
 
     protected Observer()
