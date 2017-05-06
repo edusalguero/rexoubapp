@@ -2,6 +2,7 @@ package com.edusalguero.rexoubador.domain.user;
 
 
 import com.edusalguero.rexoubador.domain.Status;
+import com.edusalguero.rexoubador.domain.monitor.harvester.*;
 import com.edusalguero.rexoubador.domain.monitor.observer.*;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 import com.edusalguero.rexoubador.domain.contact.ContactId;
@@ -60,6 +61,9 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Observer.class, orphanRemoval = true)
     private List<Observer> observers = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Harvester.class, orphanRemoval = true)
+    private List<Harvester> harvesters = new ArrayList<>();
 
     public User(UserId userId, String username, String password, String firstName, String lastName) {
         this.userId = userId;
@@ -135,9 +139,9 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    public Boolean addObserver(ObserverId observerId, ObserverType type, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity) {
+    public Boolean addObserver(ObserverId observerId, ObserverType type, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity, Status status) {
         ObserverFactory observerFactory = new ObserverFactory();
-        Observer observer = observerFactory.make(this, observerId, type, name, label, notifyStatusChanges, notifyInactivity);
+        Observer observer = observerFactory.make(this, observerId, type, name, label, notifyStatusChanges, notifyInactivity, status);
         return observers.add(observer);
     }
 
@@ -156,6 +160,35 @@ public class User {
             throw new ObserverNotFoundException();
         }
         return observer;
+    }
+
+    public List<Harvester> harvesters() {
+        return harvesters.stream()
+                .filter(h -> !h.isSoftDeleted())
+                .collect(Collectors.toList());
+    }
+
+    public Boolean addHarvester(HarvesterId harvesterId, HarvesterType type, String label, Boolean notifyWarning, Boolean notifyAlert, String warningValue, String alertValue, Status status) {
+        HarvesterFactory harvesterFactory = new HarvesterFactory();
+        Harvester harvester = harvesterFactory.make(this,  harvesterId,  type,  label,  notifyWarning,  notifyAlert,  warningValue,  alertValue, status);
+        return harvesters.add(harvester);
+    }
+
+    public void deleteHarvester(HarvesterId harvesterId) {
+        Harvester harvester = harvester(harvesterId);
+        harvester.delete();
+    }
+
+    public Harvester harvester(HarvesterId harvesterId)
+    {
+        Harvester harvester = harvesters().stream()
+                .filter(h -> h.harvesterId().equals(harvesterId))
+                .findAny()
+                .orElse(null);
+        if (harvester == null) {
+            throw new HarvesterNotFoundException();
+        }
+        return harvester;
     }
 
     @Override
