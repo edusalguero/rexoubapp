@@ -10,6 +10,7 @@ public class ObserverUpdateRequest {
     private final String label;
     private final Boolean notifyStatusChanges;
     private final Boolean notifyInactivity;
+    private final Status status;
 
     public ObserverUpdateRequest(ObserverId observerId, UserId userId, String label, Boolean notifyStatusChanges, Boolean notifyInactivity, Status status) {
         this.observerId = observerId;
@@ -17,6 +18,7 @@ public class ObserverUpdateRequest {
         this.label = label;
         this.notifyStatusChanges = notifyStatusChanges;
         this.notifyInactivity = notifyInactivity;
+        this.status = status;
     }
 
     public String getLabel() {
@@ -37,5 +39,9 @@ public class ObserverUpdateRequest {
 
     public UserId getUserId() {
         return userId;
+    }
+
+    public Status getStatus(){
+        return status;
     }
 }
