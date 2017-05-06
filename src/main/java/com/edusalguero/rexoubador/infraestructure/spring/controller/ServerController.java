@@ -27,6 +27,9 @@ public class ServerController extends AuthenticatedUserController {
     @Autowired
     private ServerUpdateUseCase serverUpdateUseCase;
 
+    @Autowired
+    private ServerUptimeUseCase serverUptimeUseCase;
+
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ServerResponse> list() {
         return userServersUseCase.execute(getAuthenticatedUserId());
@@ -60,5 +63,8 @@ public class ServerController extends AuthenticatedUserController {
         serverDeleteUseCase.execute(new ServerId(serverId), getAuthenticatedUserId());
     }
 
-
+    @RequestMapping(path = "/{serverId}/uptime", method = RequestMethod.GET)
+    public ServerUptimeResponse uptime(@PathVariable String serverId) {
+        return serverUptimeUseCase.execute(new ServerId(serverId), getAuthenticatedUserId());
+    }
 }
