@@ -2,6 +2,7 @@ package com.edusalguero.rexoubador.domain.user;
 
 
 import com.edusalguero.rexoubador.domain.Status;
+import com.edusalguero.rexoubador.domain.observer.*;
 import com.edusalguero.rexoubador.domain.contact.Contact;
 import com.edusalguero.rexoubador.domain.contact.ContactId;
 import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
@@ -57,6 +58,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Server.class, orphanRemoval = true)
     private List<Server> servers = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Observer.class, orphanRemoval = true)
+    private List<Observer> observers = new ArrayList<>();
+
     public User(UserId userId, String username, String password, String firstName, String lastName) {
         this.userId = userId;
         this.username = username;
@@ -83,6 +87,11 @@ public class User {
     }
 
     public void deleteContact(ContactId contactId) {
+        Contact contact = contact(contactId);
+        contact.delete();
+    }
+
+    public Contact contact(ContactId contactId) {
         Contact contact = contacts().stream()
                 .filter(c -> c.contactId().equals(contactId))
                 .findAny()
@@ -90,7 +99,7 @@ public class User {
         if (contact == null) {
             throw new ContactNotFoundException();
         }
-        contact.delete();
+        return contact;
     }
 
     public List<Server> servers() {
@@ -105,6 +114,11 @@ public class User {
     }
 
     public void deleteServer(ServerId serverId) {
+        Server server = server(serverId);
+        server.delete();
+    }
+
+    public Server server(ServerId serverId) {
         Server server = servers().stream()
                 .filter(s -> s.serverId().equals(serverId))
                 .findAny()
@@ -112,7 +126,36 @@ public class User {
         if (server == null) {
             throw new ServerNotFoundException();
         }
-        server.delete();
+        return server;
+    }
+
+    public List<Observer> observers() {
+        return observers.stream()
+                .filter(o -> !o.isSoftDeleted())
+                .collect(Collectors.toList());
+    }
+
+    public Boolean addObserver(ObserverId observerId, ObserverType type, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity) {
+        ObserverFactory observerFactory = new ObserverFactory();
+        Observer observer = observerFactory.make(this, observerId, type, name, label, notifyStatusChanges, notifyInactivity);
+        return observers.add(observer);
+    }
+
+    public void deleteObserver(ObserverId observerId) {
+        Observer observer = observer(observerId);
+        observer.delete();
+    }
+
+    public Observer observer(ObserverId observerId)
+    {
+        Observer observer = observers().stream()
+                .filter(o -> o.observerId().equals(observerId))
+                .findAny()
+                .orElse(null);
+        if (observer == null) {
+            throw new ObserverNotFoundException();
+        }
+        return observer;
     }
 
     @Override
