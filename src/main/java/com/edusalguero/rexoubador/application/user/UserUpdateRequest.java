@@ -1,6 +1,6 @@
 package com.edusalguero.rexoubador.application.user;
 
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 
 public class UserUpdateRequest {
     private UserId userId;

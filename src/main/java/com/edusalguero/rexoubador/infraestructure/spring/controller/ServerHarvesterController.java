@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubador.infraestructure.spring.controller;
 
 import com.edusalguero.rexoubador.application.server.harvester.*;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterId;
-import com.edusalguero.rexoubador.domain.server.ServerId;
-import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvesterId;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
+import com.edusalguero.rexoubador.domain.model.server.ServerId;
+import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvesterId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

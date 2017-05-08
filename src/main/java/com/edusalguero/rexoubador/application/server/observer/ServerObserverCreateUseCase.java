@@ -1,13 +1,13 @@
 package com.edusalguero.rexoubador.application.server.observer;
 
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterNotFoundException;
-import com.edusalguero.rexoubador.domain.monitor.observer.Observer;
-import com.edusalguero.rexoubador.domain.monitor.observer.ObserverId;
-import com.edusalguero.rexoubador.domain.server.Server;
-import com.edusalguero.rexoubador.domain.server.ServerId;
-import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;
-import com.edusalguero.rexoubador.domain.server.observer.ServerObserverId;
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterNotFoundException;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverId;
+import com.edusalguero.rexoubador.domain.model.server.Server;
+import com.edusalguero.rexoubador.domain.model.server.ServerId;
+import com.edusalguero.rexoubador.domain.model.server.ServerNotFoundException;
+import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ObserverRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ServerObserverRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ServerRepositoryJPA;

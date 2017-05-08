@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.contact;
 
 
-import com.edusalguero.rexoubador.domain.contact.ContactId;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.model.contact.ContactId;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ContactRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;

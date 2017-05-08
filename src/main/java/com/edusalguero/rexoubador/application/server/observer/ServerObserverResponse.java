@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.server.observer;
 
 import com.edusalguero.rexoubador.application.monitor.observer.ObserverResponse;
-import com.edusalguero.rexoubador.domain.server.observer.Observation;
-import com.edusalguero.rexoubador.domain.server.observer.ServerObserver;
+import com.edusalguero.rexoubador.domain.model.server.observer.Observation;
+import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserver;
 
 public class ServerObserverResponse {
     private ObserverResponse observerResponse;

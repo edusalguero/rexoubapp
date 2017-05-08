@@ -1,10 +1,10 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.server.Server;
-import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvester;
-import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvesterId;
-import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvesterRepository;
-import com.edusalguero.rexoubador.domain.server.observer.ServerObserverNotFoundException;
+import com.edusalguero.rexoubador.domain.model.server.Server;
+import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
+import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvesterId;
+import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvesterRepository;
+import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

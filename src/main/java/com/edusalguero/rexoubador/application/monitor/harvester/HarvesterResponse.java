@@ -2,9 +2,9 @@ package com.edusalguero.rexoubador.application.monitor.harvester;
 
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.monitor.harvester.Harvester;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterType;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 
 import java.util.Date;
 

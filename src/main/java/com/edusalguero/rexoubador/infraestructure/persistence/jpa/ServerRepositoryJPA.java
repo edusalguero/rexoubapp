@@ -1,11 +1,11 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.server.Server;
-import com.edusalguero.rexoubador.domain.server.ServerId;
-import com.edusalguero.rexoubador.domain.server.ServerNotFoundException;
-import com.edusalguero.rexoubador.domain.server.ServerRepository;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.server.Server;
+import com.edusalguero.rexoubador.domain.model.server.ServerId;
+import com.edusalguero.rexoubador.domain.model.server.ServerNotFoundException;
+import com.edusalguero.rexoubador.domain.model.server.ServerRepository;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

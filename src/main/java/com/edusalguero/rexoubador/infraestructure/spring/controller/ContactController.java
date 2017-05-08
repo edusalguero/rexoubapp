@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.infraestructure.spring.controller;
 
 import com.edusalguero.rexoubador.application.contact.*;
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.contact.ContactId;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.contact.ContactId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.event.Event;
-import com.edusalguero.rexoubador.domain.event.EventId;
-import com.edusalguero.rexoubador.domain.event.EventRepository;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.model.event.Event;
+import com.edusalguero.rexoubador.domain.model.event.EventId;
+import com.edusalguero.rexoubador.domain.model.event.EventRepository;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

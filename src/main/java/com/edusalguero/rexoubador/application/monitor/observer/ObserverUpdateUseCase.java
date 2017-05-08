@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.application.monitor.observer;
 
-import com.edusalguero.rexoubador.domain.monitor.observer.Observer;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,9 +2,9 @@ package com.edusalguero.rexoubador.application.event;
 
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
-import com.edusalguero.rexoubador.domain.contact.Contact;
-import com.edusalguero.rexoubador.domain.event.Event;
-import com.edusalguero.rexoubador.domain.server.Server;
+import com.edusalguero.rexoubador.domain.model.contact.Contact;
+import com.edusalguero.rexoubador.domain.model.event.Event;
+import com.edusalguero.rexoubador.domain.model.server.Server;
 
 import java.util.ArrayList;
 import java.util.Collection;

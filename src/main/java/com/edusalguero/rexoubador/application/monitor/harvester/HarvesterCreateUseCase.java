@@ -1,11 +1,11 @@
 package com.edusalguero.rexoubador.application.monitor.harvester;
 
 
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterId;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterType;
-import com.edusalguero.rexoubador.domain.user.User;
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
+import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.HarvesterRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;

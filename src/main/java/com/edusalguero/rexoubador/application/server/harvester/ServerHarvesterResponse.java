@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.server.harvester;
 
 import com.edusalguero.rexoubador.application.monitor.harvester.HarvesterResponse;
-import com.edusalguero.rexoubador.domain.server.harvester.Harvest;
-import com.edusalguero.rexoubador.domain.server.harvester.ServerHarvester;
+import com.edusalguero.rexoubador.domain.model.server.harvester.Harvest;
+import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
 
 public class ServerHarvesterResponse {
     private HarvesterResponse harvesterResponse;

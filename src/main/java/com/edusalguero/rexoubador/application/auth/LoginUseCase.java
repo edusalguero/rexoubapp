@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.application.auth;
 
-import com.edusalguero.rexoubador.domain.user.User;
-import com.edusalguero.rexoubador.domain.user.UserNotFoundException;
+import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.model.user.UserNotFoundException;
 import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
 import com.edusalguero.rexoubador.infraestructure.spring.security.JwtTokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;

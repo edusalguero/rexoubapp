@@ -1,6 +1,6 @@
 package com.edusalguero.rexoubador.application.server;
 
-import com.edusalguero.rexoubador.domain.server.ServerId;
+import com.edusalguero.rexoubador.domain.model.server.ServerId;
 
 public class ServerCreateResponse {
 

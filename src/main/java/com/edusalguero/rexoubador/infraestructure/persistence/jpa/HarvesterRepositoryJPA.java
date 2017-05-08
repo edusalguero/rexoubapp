@@ -1,11 +1,11 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.monitor.harvester.Harvester;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterId;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterNotFoundException;
-import com.edusalguero.rexoubador.domain.monitor.harvester.HarvesterRepository;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterNotFoundException;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterRepository;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

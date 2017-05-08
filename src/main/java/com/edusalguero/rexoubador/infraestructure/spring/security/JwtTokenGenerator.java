@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.infraestructure.spring.security;
 
 import com.edusalguero.rexoubador.application.auth.TokenGenerator;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

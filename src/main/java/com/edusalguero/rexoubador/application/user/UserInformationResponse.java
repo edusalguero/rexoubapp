@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.user;
 
 
-import com.edusalguero.rexoubador.domain.user.User;
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

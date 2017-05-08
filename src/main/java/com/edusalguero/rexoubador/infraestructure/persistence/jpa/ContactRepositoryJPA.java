@@ -1,11 +1,11 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.contact.Contact;
-import com.edusalguero.rexoubador.domain.contact.ContactId;
-import com.edusalguero.rexoubador.domain.contact.ContactNotFoundException;
-import com.edusalguero.rexoubador.domain.contact.ContactRepository;
-import com.edusalguero.rexoubador.domain.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.contact.Contact;
+import com.edusalguero.rexoubador.domain.model.contact.ContactId;
+import com.edusalguero.rexoubador.domain.model.contact.ContactNotFoundException;
+import com.edusalguero.rexoubador.domain.model.contact.ContactRepository;
+import com.edusalguero.rexoubador.domain.model.user.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

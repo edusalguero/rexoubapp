@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.contact;
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.contact.Contact;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.contact.Contact;
 
 import java.util.Date;
 import java.util.HashMap;

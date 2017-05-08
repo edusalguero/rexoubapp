@@ -4,7 +4,7 @@ package com.edusalguero.rexoubador.infraestructure.spring.controller;
 import com.edusalguero.rexoubador.application.auth.LoginResponse;
 import com.edusalguero.rexoubador.application.auth.LoginUseCase;
 import com.edusalguero.rexoubador.application.user.UserRegistrationUseCase;
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

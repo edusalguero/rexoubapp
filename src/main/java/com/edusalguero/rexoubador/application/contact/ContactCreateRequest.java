@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.contact;
 
 
-import com.edusalguero.rexoubador.domain.Status;
-import com.edusalguero.rexoubador.domain.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.model.user.UserId;
 
 
 public class ContactCreateRequest {
