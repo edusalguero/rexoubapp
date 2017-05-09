@@ -9,8 +9,7 @@ public class ServerHarvesterResponse {
     private Harvest harvest;
     private String serverHarvesterId;
 
-    public ServerHarvesterResponse(ServerHarvester serverHarvester)
-    {
+    public ServerHarvesterResponse(ServerHarvester serverHarvester) {
         this.harvesterResponse = new HarvesterResponse(serverHarvester.harvester());
         this.harvest = serverHarvester.getLastHarvest();
         this.serverHarvesterId = serverHarvester.id();

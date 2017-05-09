@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubador.application.server;
 
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class ServerUpdateRequest {
     private UserId userId;

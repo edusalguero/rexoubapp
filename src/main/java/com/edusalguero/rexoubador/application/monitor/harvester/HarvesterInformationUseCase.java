@@ -3,7 +3,7 @@ package com.edusalguero.rexoubador.application.monitor.harvester;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class HarvesterInformationUseCase {
 
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     public HarvesterResponse execute(HarvesterId harvesterId, UserId userId) {
         User user = userRepository.ofId(userId);

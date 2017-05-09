@@ -1,14 +1,14 @@
 package com.edusalguero.rexoubador.application.user;
 
 import com.edusalguero.rexoubador.domain.model.user.User;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserUpdateUseCase {
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     public void execute(UserUpdateRequest userUpdateRequest) {
         User user = userRepository.ofId(userUpdateRequest.getUserId());

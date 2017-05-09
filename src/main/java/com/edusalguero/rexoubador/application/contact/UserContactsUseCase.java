@@ -3,7 +3,7 @@ package com.edusalguero.rexoubador.application.contact;
 import com.edusalguero.rexoubador.domain.model.contact.Contact;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class UserContactsUseCase {
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     public ArrayList<ContactResponse> execute(UserId userId) {
         ArrayList<ContactResponse> userContacts = new ArrayList<>();

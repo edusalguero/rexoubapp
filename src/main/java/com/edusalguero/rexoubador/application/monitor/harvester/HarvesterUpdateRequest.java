@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.monitor.harvester;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class HarvesterUpdateRequest {
     private final HarvesterId harvesterId;

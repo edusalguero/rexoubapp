@@ -2,9 +2,9 @@ package com.edusalguero.rexoubador.application.contact;
 
 
 import com.edusalguero.rexoubador.domain.model.contact.ContactId;
+import com.edusalguero.rexoubador.domain.model.contact.ContactRepository;
 import com.edusalguero.rexoubador.domain.model.user.User;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ContactRepositoryJPA;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class ContactCreateUseCase {
 
     @Autowired
-    private ContactRepositoryJPA contactRepository;
+    private ContactRepository contactRepository;
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     public ContactId execute(ContactCreateRequest contactRequest) {
         ContactId contactId = contactRepository.nextIdentity();

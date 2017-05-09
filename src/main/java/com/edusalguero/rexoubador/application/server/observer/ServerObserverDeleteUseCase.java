@@ -3,9 +3,9 @@ package com.edusalguero.rexoubador.application.server.observer;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.server.ServerNotFoundException;
+import com.edusalguero.rexoubador.domain.model.server.ServerRepository;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ServerRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class ServerObserverDeleteUseCase {
 
     @Autowired
-    private ServerRepositoryJPA serverRepository;
+    private ServerRepository serverRepository;
 
     public void execute(UserId userId, ServerId serverId, ServerObserverId serverObserverId) {
         Server server = serverRepository.ofId(serverId);

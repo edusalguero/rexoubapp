@@ -2,9 +2,9 @@ package com.edusalguero.rexoubador.application.monitor.observer;
 
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverType;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 import java.util.Date;
 

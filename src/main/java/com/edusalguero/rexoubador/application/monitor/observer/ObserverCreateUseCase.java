@@ -1,13 +1,13 @@
 package com.edusalguero.rexoubador.application.monitor.observer;
 
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverId;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverRepository;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverType;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.ObserverRepositoryJPA;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
+import com.edusalguero.rexoubador.domain.shared.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 public class ObserverCreateUseCase {
 
     @Autowired
-    private ObserverRepositoryJPA checkRepository;
+    private ObserverRepository checkRepository;
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     public ObserverId execute(UserId userId, ObserverType type, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity, Status status) {
         ObserverId observerId = checkRepository.nextIdentity();

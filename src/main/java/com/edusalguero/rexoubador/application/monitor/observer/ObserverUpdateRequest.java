@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.monitor.observer;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverId;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class ObserverUpdateRequest {
     private final ObserverId observerId;
@@ -41,7 +41,7 @@ public class ObserverUpdateRequest {
         return userId;
     }
 
-    public Status getStatus(){
+    public Status getStatus() {
         return status;
     }
 }

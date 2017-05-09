@@ -1,10 +1,10 @@
 package com.edusalguero.rexoubador.application.event;
 
 import com.edusalguero.rexoubador.domain.model.event.Event;
+import com.edusalguero.rexoubador.domain.model.event.EventRepository;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.EventRepositoryJPA;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +15,9 @@ import java.util.Collection;
 public class UserEventsUseCase {
 
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
     @Autowired
-    private EventRepositoryJPA eventRepository;
+    private EventRepository eventRepository;
 
     public ArrayList<EventResponse> execute(UserId userId) {
         User user = userRepository.ofId(userId);

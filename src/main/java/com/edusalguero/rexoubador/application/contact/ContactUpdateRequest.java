@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.application.contact;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.contact.ContactId;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class ContactUpdateRequest {
     private ContactId contactId;

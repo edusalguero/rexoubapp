@@ -2,8 +2,7 @@ package com.edusalguero.rexoubador.application.auth;
 
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserNotFoundException;
-import com.edusalguero.rexoubador.infraestructure.persistence.jpa.UserRepositoryJPA;
-import com.edusalguero.rexoubador.infraestructure.spring.security.JwtTokenGenerator;
+import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,10 +15,10 @@ public class LoginUseCase {
     private String secret;
 
     @Autowired
-    private UserRepositoryJPA userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private JwtTokenGenerator tokenGenerator;
+    private TokenGenerator tokenGenerator;
 
     public LoginResponse execute(String username, String password) {
         User u;
