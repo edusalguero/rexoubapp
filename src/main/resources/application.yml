@@ -27,9 +27,20 @@ spring:
 # the project
     hibernate:
       ddl-auto: none
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 management:
   security:
     enabled: true # set to false to disable 'default' Spring Boot security
 
 rexoubador:
   publicSSHKey: "THE PUBLIC KEY"
+  privateKeyPath: "/Users/edusalguero/.ssh/id_rsa"
+  passphrase:   "edusalguero"
