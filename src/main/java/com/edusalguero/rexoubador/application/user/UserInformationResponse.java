@@ -32,7 +32,7 @@ public class UserInformationResponse {
         this.firstName = user.firstName();
         this.lastName = user.lastName();
         this.signUpDate = user.signUpDate();
-        this.serverCount = serverCount;
+        this.serverCount = user.servers().size();
     }
 
     public String getId() {
