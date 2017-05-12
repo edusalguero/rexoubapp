@@ -13,6 +13,8 @@ public interface ServerRepository {
 
     ServerId nextIdentity();
 
+    Collection<Server> toBeCollected();
+
     void update(Server server);
 
 }
