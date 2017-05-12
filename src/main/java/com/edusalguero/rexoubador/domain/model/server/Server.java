@@ -190,10 +190,19 @@ public class Server {
         this.harvestStatus = status;
     }
 
+    public void updateHarvestDate(Date date)
+    {
+        this.lastHarvestDate = date;
+    }
+
     public void updateStatus(Status status) {
         this.status = status;
     }
 
+    public void updateUptime(int uptime)
+    {
+        this.uptime = uptime;
+    }
     public void updateIp(String ip) {
         this.ip = ip;
     }
