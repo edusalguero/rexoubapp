@@ -14,7 +14,6 @@ public class UserInformationUseCase {
 
     public UserInformationResponse execute(UserId userId) {
         User user = userRepository.ofId(userId);
-        return new UserInformationResponse(user,
-                0);
+        return new UserInformationResponse(user);
     }
 }

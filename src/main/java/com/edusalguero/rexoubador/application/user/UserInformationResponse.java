@@ -26,7 +26,7 @@ public class UserInformationResponse {
         this.serverCount = serverCount;
     }
 
-    public UserInformationResponse(User user, int serverCount) {
+    public UserInformationResponse(User user) {
         this.id = user.id();
         this.username = user.username();
         this.firstName = user.firstName();
