@@ -1,8 +1,5 @@
 package com.edusalguero.rexoubador.domain.model.server;
 
-import com.edusalguero.rexoubador.domain.shared.HarvestStatus;
-import com.edusalguero.rexoubador.domain.shared.MachineStatus;
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
@@ -12,6 +9,9 @@ import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserver;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverNotFoundException;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.shared.HarvestStatus;
+import com.edusalguero.rexoubador.domain.shared.MachineStatus;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 import javax.persistence.*;
 import java.util.ArrayList;

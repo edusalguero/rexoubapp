@@ -1,11 +1,11 @@
 package com.edusalguero.rexoubador.infraestructure.persistence.jpa;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverId;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverNotFoundException;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverRepository;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

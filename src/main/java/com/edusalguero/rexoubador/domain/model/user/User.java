@@ -1,16 +1,16 @@
 package com.edusalguero.rexoubador.domain.model.user;
 
 
-import com.edusalguero.rexoubador.domain.shared.Status;
-import com.edusalguero.rexoubador.domain.model.monitor.harvester.*;
-import com.edusalguero.rexoubador.domain.model.monitor.observer.*;
 import com.edusalguero.rexoubador.domain.model.contact.Contact;
 import com.edusalguero.rexoubador.domain.model.contact.ContactId;
 import com.edusalguero.rexoubador.domain.model.contact.ContactNotFoundException;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.*;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.*;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.server.ServerNotFoundException;
 import com.edusalguero.rexoubador.domain.model.user.service.HashingService;
+import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
 
 import javax.persistence.*;

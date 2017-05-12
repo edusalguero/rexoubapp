@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.domain.model.monitor.observer;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class ObserverFactory {
 

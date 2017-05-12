@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.domain.model.monitor.harvester;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.InvalidObserverTypeException;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 public class HarvesterFactory {
 

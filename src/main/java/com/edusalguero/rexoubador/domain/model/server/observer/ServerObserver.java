@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.domain.model.server.observer;
 
-import com.edusalguero.rexoubador.domain.shared.CheckStatus;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.server.Server;
+import com.edusalguero.rexoubador.domain.shared.CheckStatus;
 
 import javax.persistence.*;
 import java.util.Date;

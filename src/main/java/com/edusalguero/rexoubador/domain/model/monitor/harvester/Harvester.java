@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.domain.model.monitor.harvester;
 
-import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.shared.Status;
 
 import javax.persistence.*;
 import java.util.Date;
