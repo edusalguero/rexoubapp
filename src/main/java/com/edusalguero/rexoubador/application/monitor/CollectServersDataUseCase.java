@@ -59,10 +59,10 @@ public class CollectServersDataUseCase {
                 collectServerResponse.addMetric(id, (HarvesterType) result.getName(), result.getData());
                 server.harvester(id)
                         .addCollectedData(now, result.toJson());
-            } else if (result instanceof  ObserverCommandResponse) {
+            } else if (result instanceof ObserverCommandResponse) {
                 ServerObserverId id = (ServerObserverId) ((ObserverCommandResponse) result).getId();
                 CheckStatus checkStatus = (CheckStatus) result.getData("status");
-                collectServerResponse.addService(id,(String) result.getName(), checkStatus);
+                collectServerResponse.addService(id, (String) result.getName(), checkStatus);
                 server.observer(id)
                         .addObservation(now, checkStatus);
             } else if (result instanceof UptimeCommandResponse) {

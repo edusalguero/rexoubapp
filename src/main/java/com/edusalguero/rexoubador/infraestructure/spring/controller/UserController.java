@@ -33,7 +33,7 @@ public class UserController extends AuthenticatedUserController {
                        @RequestParam(value = "firstName", required = false) String firstName,
                        @RequestParam(value = "lastName", required = false) String lastName
     ) {
-        UserUpdateRequest updateRequest = new UserUpdateRequest(getAuthenticatedUserId(),password, firstName, lastName);
+        UserUpdateRequest updateRequest = new UserUpdateRequest(getAuthenticatedUserId(), password, firstName, lastName);
         userUpdateUseCase.execute(updateRequest);
     }
 

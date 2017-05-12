@@ -3,7 +3,7 @@ package com.edusalguero.rexoubador.domain.service.executor.command;
 
 import com.edusalguero.rexoubador.domain.service.executor.command.response.UptimeCommandResponse;
 
-public class Uptime  implements CommandInterface{
+public class Uptime implements CommandInterface {
 
     @Override
     public String getCommandString() {

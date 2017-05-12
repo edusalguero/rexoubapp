@@ -84,25 +84,22 @@ public class Server {
         this.machineStatus = MachineStatus.UNKNOWN;
     }
 
-    public Collection<ServerHarvester> harvesters()
-    {
-        return  harvesters;
+    public Collection<ServerHarvester> harvesters() {
+        return harvesters;
     }
 
-    public Boolean addHarvester(ServerHarvesterId serverHarvesterId, Harvester harvester)
-    {
+    public Boolean addHarvester(ServerHarvesterId serverHarvesterId, Harvester harvester) {
         ServerHarvester serverHarvester = new ServerHarvester(serverHarvesterId, this, harvester);
-        return  harvesters.add(serverHarvester);
+        return harvesters.add(serverHarvester);
     }
 
-    public Boolean deleteHarvester(ServerHarvesterId serverHarvesterId)
-    {
-       return harvesters.remove(harvester(serverHarvesterId));
+    public Boolean deleteHarvester(ServerHarvesterId serverHarvesterId) {
+        return harvesters.remove(harvester(serverHarvesterId));
     }
 
     public ServerHarvester harvester(ServerHarvesterId serverHarvesterId) {
         ServerHarvester harvester = harvesters().stream()
-                .filter(h ->h.serverHarvesterId().equals(serverHarvesterId))
+                .filter(h -> h.serverHarvesterId().equals(serverHarvesterId))
                 .findAny()
                 .orElse(null);
         if (harvester == null) {
@@ -111,20 +108,18 @@ public class Server {
         return harvester;
     }
 
-    public Boolean addObserver(ServerObserverId serverObserverId, Observer observer)
-    {
+    public Boolean addObserver(ServerObserverId serverObserverId, Observer observer) {
         ServerObserver serverObserver = new ServerObserver(serverObserverId, this, observer);
-        return  observers.add(serverObserver);
+        return observers.add(serverObserver);
     }
 
-    public Collection<ServerObserver> observers()
-    {
-        return  observers;
+    public Collection<ServerObserver> observers() {
+        return observers;
     }
 
     public ServerObserver observer(ServerObserverId serverObserverId) {
         ServerObserver observer = observers().stream()
-                .filter(o ->o.serverObserverId().equals(serverObserverId))
+                .filter(o -> o.serverObserverId().equals(serverObserverId))
                 .findAny()
                 .orElse(null);
         if (observer == null) {
@@ -133,8 +128,7 @@ public class Server {
         return observer;
     }
 
-    public Boolean deleteObserver(ServerObserverId serverObserverId)
-    {
+    public Boolean deleteObserver(ServerObserverId serverObserverId) {
         return observers.remove(observer(serverObserverId));
     }
 
@@ -190,8 +184,7 @@ public class Server {
         this.harvestStatus = status;
     }
 
-    public void updateHarvestDate(Date date)
-    {
+    public void updateHarvestDate(Date date) {
         this.lastHarvestDate = date;
     }
 
@@ -199,10 +192,10 @@ public class Server {
         this.status = status;
     }
 
-    public void updateUptime(int uptime)
-    {
+    public void updateUptime(int uptime) {
         this.uptime = uptime;
     }
+
     public void updateIp(String ip) {
         this.ip = ip;
     }

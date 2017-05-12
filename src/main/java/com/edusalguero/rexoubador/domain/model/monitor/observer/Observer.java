@@ -57,8 +57,7 @@ abstract public class Observer {
         this.status = status;
     }
 
-    protected Observer()
-    {
+    protected Observer() {
         // Needed by JPA
     }
 
@@ -83,10 +82,10 @@ abstract public class Observer {
     }
 
 
-    public ObserverId observerId()
-    {
+    public ObserverId observerId() {
         return observerId;
     }
+
     public String id() {
         return observerId.toString();
     }

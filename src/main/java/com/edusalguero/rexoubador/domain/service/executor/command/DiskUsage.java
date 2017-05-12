@@ -13,6 +13,7 @@ public class DiskUsage implements CommandInterface {
     public DiskUsage(UniqueId id) {
         this.id = id;
     }
+
     @Override
     public String getCommandString() {
         return "df -mlT | grep '^\\/dev'";
@@ -22,7 +23,7 @@ public class DiskUsage implements CommandInterface {
     public HarvestCommandResponse parseResult(String result) {
         String[] mountPoints = result.split("\\n");
 
-        HarvestCommandResponse harvestCommandResponse = new HarvestCommandResponse(id,HarvesterType.DISK_USAGE);
+        HarvestCommandResponse harvestCommandResponse = new HarvestCommandResponse(id, HarvesterType.DISK_USAGE);
 
         for (String point : mountPoints) {
             String[] parts = point.split("\\s+");

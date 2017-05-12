@@ -11,6 +11,7 @@ public class MemoryUsage implements CommandInterface {
     public MemoryUsage(UniqueId id) {
         this.id = id;
     }
+
     @Override
     public String getCommandString() {
         return "free -k | grep Mem";

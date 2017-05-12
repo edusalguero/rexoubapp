@@ -62,8 +62,7 @@ abstract public class Harvester {
         this.status = status;
     }
 
-    protected Harvester()
-    {
+    protected Harvester() {
         // Needed by JPA
     }
 
@@ -105,10 +104,10 @@ abstract public class Harvester {
     }
 
 
-    public HarvesterId harvesterId()
-    {
+    public HarvesterId harvesterId() {
         return harvesterId;
     }
+
     public String id() {
         return harvesterId.toString();
     }

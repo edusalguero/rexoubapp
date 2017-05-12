@@ -150,8 +150,7 @@ public class User {
         observer.delete();
     }
 
-    public Observer observer(ObserverId observerId)
-    {
+    public Observer observer(ObserverId observerId) {
         Observer observer = observers().stream()
                 .filter(o -> o.observerId().equals(observerId))
                 .findAny()
@@ -170,7 +169,7 @@ public class User {
 
     public Boolean addHarvester(HarvesterId harvesterId, HarvesterType type, String label, Boolean notifyWarning, Boolean notifyAlert, String warningValue, String alertValue, Status status) {
         HarvesterFactory harvesterFactory = new HarvesterFactory();
-        Harvester harvester = harvesterFactory.make(this,  harvesterId,  type,  label,  notifyWarning,  notifyAlert,  warningValue,  alertValue, status);
+        Harvester harvester = harvesterFactory.make(this, harvesterId, type, label, notifyWarning, notifyAlert, warningValue, alertValue, status);
         return harvesters.add(harvester);
     }
 
@@ -179,8 +178,7 @@ public class User {
         harvester.delete();
     }
 
-    public Harvester harvester(HarvesterId harvesterId)
-    {
+    public Harvester harvester(HarvesterId harvesterId) {
         Harvester harvester = harvesters().stream()
                 .filter(h -> h.harvesterId().equals(harvesterId))
                 .findAny()
@@ -246,8 +244,7 @@ public class User {
         return userId.toString();
     }
 
-    public UserId userId()
-    {
-        return  userId;
+    public UserId userId() {
+        return userId;
     }
 }

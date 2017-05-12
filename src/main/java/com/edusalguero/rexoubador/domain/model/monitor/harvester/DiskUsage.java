@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("DISK_USAGE")
-public class DiskUsage extends Harvester{
+public class DiskUsage extends Harvester {
     public DiskUsage(User user, HarvesterId harvesterId, String label, Boolean notifyWarning, Boolean notifyAlert, String warningValue, String alertValue, Status status) {
         super(user, harvesterId, label, notifyWarning, notifyAlert, warningValue, alertValue, status);
         type = HarvesterType.DISK_USAGE;

@@ -11,6 +11,7 @@ public class Load implements CommandInterface {
     public Load(UniqueId id) {
         this.id = id;
     }
+
     @Override
     public String getCommandString() {
         return "cat /proc/loadavg";

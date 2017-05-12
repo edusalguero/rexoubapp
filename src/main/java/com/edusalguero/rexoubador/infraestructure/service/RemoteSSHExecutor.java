@@ -65,7 +65,7 @@ public class RemoteSSHExecutor implements RemoteExecutor {
             session.disconnect();
 
         } catch (JSchException | IOException e) {
-            throw new ExecutionException("Remote execution exception ["+e.getMessage()+"]!");
+            throw new ExecutionException("Remote execution exception [" + e.getMessage() + "]!");
         }
         return command.parseResult(result);
     }

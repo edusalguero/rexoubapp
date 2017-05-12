@@ -30,16 +30,16 @@ public class SSHServerMonitorsExecutorService implements ServerMonitorsExecutorS
         HarvesterCommandFactory harvesterHarvesterCommandFactory = new HarvesterCommandFactory();
         ObserverCommandFactory observerHarvesterCommandFactory = new ObserverCommandFactory();
 
-        for (ServerHarvester serverHarvester: server.harvesters()) {
+        for (ServerHarvester serverHarvester : server.harvesters()) {
             collectedData.add(remoteExecutor.execute(connection, harvesterHarvesterCommandFactory.make(serverHarvester)));
         }
 
-        for (ServerObserver serverObserver: server.observers()) {
+        for (ServerObserver serverObserver : server.observers()) {
             collectedData.add(remoteExecutor.execute(connection, observerHarvesterCommandFactory.make(serverObserver)));
         }
 
-        collectedData.add(remoteExecutor.execute(connection,new Uptime()));
+        collectedData.add(remoteExecutor.execute(connection, new Uptime()));
 
-        return  collectedData;
+        return collectedData;
     }
 }

@@ -32,16 +32,16 @@ public class ServerObserverController extends AuthenticatedUserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ServerObserverId add(@PathVariable String serverId,
-                                 @RequestParam(value = "observerId") String observerId) {
+                                @RequestParam(value = "observerId") String observerId) {
         return serverObserverCreateUseCase.execute(getAuthenticatedUserId(), new ServerId(serverId), new ObserverId(observerId));
     }
 
     @RequestMapping(path = "/{serverObserverId}", method = RequestMethod.GET)
     public ServerObserverResponse show(@PathVariable String serverId,
-                                        @PathVariable String serverObserverId) {
+                                       @PathVariable String serverObserverId) {
         return serverObserverInformationUseCase.execute(getAuthenticatedUserId(), new ServerId(serverId), new ServerObserverId(serverObserverId));
     }
-    
+
     @RequestMapping(path = "/{serverObserverId}", method = RequestMethod.DELETE)
     public void delete(@PathVariable String serverId,
                        @PathVariable String serverObserverId) {

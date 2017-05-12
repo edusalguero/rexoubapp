@@ -5,7 +5,8 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 
 abstract public class CommandResponse {
-    protected final HashMap<String, Object> result = new HashMap<String, Object>();;
+    protected final HashMap<String, Object> result = new HashMap<String, Object>();
+    ;
 
     public void addData(String key, Object value) {
         getDataContent().put(key, value);
@@ -18,7 +19,8 @@ abstract public class CommandResponse {
     public String getType() {
         return (String) result.get("type");
     }
-    public abstract Object  getName();
+
+    public abstract Object getName();
 
     public Object getData(String key) {
         return getDataContent().get(key);
@@ -37,13 +39,11 @@ abstract public class CommandResponse {
         return result.toString();
     }
 
-    public HashMap<String, Object> getResult()
-    {
+    public HashMap<String, Object> getResult() {
         return result;
     }
 
-    public String toJson()
-    {
+    public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(result);
     }

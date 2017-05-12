@@ -12,7 +12,7 @@ public class ObserverCommandResponse extends CommandResponse {
     private final UniqueId id;
 
     public ObserverCommandResponse(UniqueId uniqueId, ObserverType name) {
-        id =  uniqueId;
+        id = uniqueId;
         result.put("type", "observer");
         result.put("name", name);
         result.put("data", new HashMap<String, Object>());

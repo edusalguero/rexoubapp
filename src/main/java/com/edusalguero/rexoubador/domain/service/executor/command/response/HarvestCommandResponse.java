@@ -12,7 +12,7 @@ public class HarvestCommandResponse extends CommandResponse {
     private final UniqueId id;
 
     public HarvestCommandResponse(UniqueId uniqueId, HarvesterType name) {
-        id =  uniqueId;
+        id = uniqueId;
         result.put("type", "harvest");
         result.put("name", name);
         result.put("data", new HashMap<String, Object>());
