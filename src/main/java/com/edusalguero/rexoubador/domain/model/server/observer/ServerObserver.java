@@ -25,7 +25,7 @@ public class ServerObserver {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastCheckDate;
 
-    @Column(name = "last_check_status")
+    @Enumerated(EnumType.STRING)
     private CheckStatus lastCheckStatus;
 
     @Column(name = "entry_date", columnDefinition = "DATETIME", updatable = false)
@@ -41,6 +41,7 @@ public class ServerObserver {
         this.serverObserverId = serverObserverId;
         this.server = server;
         this.observer = observer;
+        this.lastCheckStatus = CheckStatus.NOT_CHECKED;
         this.entryDate = new Date();
     }
 
