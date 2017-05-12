@@ -1,7 +1,11 @@
 package com.edusalguero.rexoubador.infraestructure.service;
 
 
-import com.edusalguero.rexoubador.domain.service.executor.*;
+import com.edusalguero.rexoubador.domain.service.executor.Connection;
+import com.edusalguero.rexoubador.domain.service.executor.ExecutionException;
+import com.edusalguero.rexoubador.domain.service.executor.RemoteExecutor;
+import com.edusalguero.rexoubador.domain.service.executor.command.CommandInterface;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponse;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -32,7 +36,7 @@ public class RemoteSSHExecutor implements RemoteExecutor {
     }
 
     @Override
-    public ExecutionResult execute(Connection connection, CommandInterface command) throws ExecutionException {
+    public CommandResponse execute(Connection connection, CommandInterface command) throws ExecutionException {
         String result = null;
         try {
             session = sshClient.getSession(connection.getUsername(), connection.getHost(), connection.getPort());
@@ -61,7 +65,7 @@ public class RemoteSSHExecutor implements RemoteExecutor {
             session.disconnect();
 
         } catch (JSchException | IOException e) {
-            throw new ExecutionException("Remote execution exception!");
+            throw new ExecutionException("Remote execution exception ["+e.getMessage()+"]!");
         }
         return command.parseResult(result);
     }
