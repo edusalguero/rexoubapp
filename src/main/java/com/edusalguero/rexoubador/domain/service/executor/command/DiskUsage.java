@@ -1,23 +1,28 @@
 package com.edusalguero.rexoubador.domain.service.executor.command;
 
-import com.edusalguero.rexoubador.domain.service.executor.CommandInterface;
-import com.edusalguero.rexoubador.domain.service.executor.ExecutionResult;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
+import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
 import java.util.HashMap;
 
 public class DiskUsage implements CommandInterface {
 
+    private UniqueId id;
+
+    public DiskUsage(UniqueId id) {
+        this.id = id;
+    }
     @Override
     public String getCommandString() {
         return "df -mlT | grep '^\\/dev'";
     }
 
     @Override
-    public ExecutionResult parseResult(String result) {
+    public HarvestCommandResponse parseResult(String result) {
         String[] mountPoints = result.split("\\n");
 
-        ExecutionResult executionResult = new ExecutionResult();
-        executionResult.set("type", "disk_usage");
+        HarvestCommandResponse harvestCommandResponse = new HarvestCommandResponse(id,HarvesterType.DISK_USAGE);
 
         for (String point : mountPoints) {
             String[] parts = point.split("\\s+");
@@ -29,10 +34,10 @@ public class DiskUsage implements CommandInterface {
             map.put("percentage_of_use", parts[5].replace("%", ""));
             map.put("type", parts[1]);
             map.put("mounted_on", parts[6]);
-            executionResult.set(parts[6], map);
+            harvestCommandResponse.addData(parts[6], map);
         }
 
-        return executionResult;
+        return harvestCommandResponse;
     }
 
 

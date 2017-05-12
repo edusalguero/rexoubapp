@@ -1,16 +1,18 @@
 package com.edusalguero.rexoubador.domain.service.executor.command;
 
 
-import com.edusalguero.rexoubador.domain.service.executor.CommandInterface;
-import com.edusalguero.rexoubador.domain.service.executor.ExecutionResult;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverType;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
 import com.edusalguero.rexoubador.domain.shared.CheckStatus;
+import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
 public class ServiceStatus implements CommandInterface {
 
+    private final UniqueId id;
     private String serviceName;
 
-    public ServiceStatus(String serviceName) {
-
+    public ServiceStatus(UniqueId id, String serviceName) {
+        this.id = id;
         this.serviceName = serviceName;
     }
 
@@ -20,14 +22,15 @@ public class ServiceStatus implements CommandInterface {
     }
 
     @Override
-    public ExecutionResult parseResult(String result) {
-        String serviceStatus = CheckStatus.DOWN.toString();
-        ExecutionResult executionResult = new ExecutionResult();
+    public ObserverCommandResponse parseResult(String result) {
+        CheckStatus serviceStatus = CheckStatus.DOWN;
+        ObserverCommandResponse observerCommandResponse = new ObserverCommandResponse(id, ObserverType.SERVICE);
+
         if (result.contains("running")) {
-            serviceStatus = CheckStatus.UP.toString();
+            serviceStatus = CheckStatus.UP;
         }
-        executionResult.set("name", serviceName);
-        executionResult.set("status", serviceStatus);
-        return executionResult;
+        observerCommandResponse.addData("name", serviceName);
+        observerCommandResponse.addData("status", serviceStatus);
+        return observerCommandResponse;
     }
 }

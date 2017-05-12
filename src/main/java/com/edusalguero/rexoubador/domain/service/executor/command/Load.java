@@ -1,24 +1,29 @@
 package com.edusalguero.rexoubador.domain.service.executor.command;
 
-import com.edusalguero.rexoubador.domain.service.executor.CommandInterface;
-import com.edusalguero.rexoubador.domain.service.executor.ExecutionResult;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
+import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
 public class Load implements CommandInterface {
 
+    private UniqueId id;
+
+    public Load(UniqueId id) {
+        this.id = id;
+    }
     @Override
     public String getCommandString() {
         return "cat /proc/loadavg";
     }
 
     @Override
-    public ExecutionResult parseResult(String result) {
+    public HarvestCommandResponse parseResult(String result) {
         String[] parts = result.split(" ");
-        ExecutionResult executionResult = new ExecutionResult();
-        executionResult.set("type", "load");
-        executionResult.set("last", parts[0]);
-        executionResult.set("5min", parts[1]);
-        executionResult.set("15min", parts[2]);
-        return executionResult;
+        HarvestCommandResponse harvestCommandResponse = new HarvestCommandResponse(id, HarvesterType.LOAD);
+        harvestCommandResponse.addData("last", parts[0]);
+        harvestCommandResponse.addData("5min", parts[1]);
+        harvestCommandResponse.addData("15min", parts[2]);
+        return harvestCommandResponse;
     }
 
 
