@@ -26,7 +26,7 @@ public class ServiceStatus implements CommandInterface {
         CheckStatus serviceStatus = CheckStatus.DOWN;
         ObserverCommandResponse observerCommandResponse = new ObserverCommandResponse(id, ObserverType.SERVICE);
 
-        if (result.contains("running")) {
+        if (result.contains("running") && !result.contains("not running")) {
             serviceStatus = CheckStatus.UP;
         }
         observerCommandResponse.addData("name", serviceName);
