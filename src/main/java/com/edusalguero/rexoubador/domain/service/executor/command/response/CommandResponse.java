@@ -42,8 +42,8 @@ abstract public class CommandResponse implements CommandResponseInterface {
         return result;
     }
 
-    public String toJson() {
+    public String getDataAsJson() {
         Gson gson = new Gson();
-        return gson.toJson(result);
+        return gson.toJson(getData());
     }
 }

@@ -9,5 +9,5 @@ public interface CommandResponseInterface {
 
     HashMap<String, Object> getData();
 
-    String toJson();
+    String getDataAsJson();
 }
