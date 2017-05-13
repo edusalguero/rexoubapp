@@ -2,6 +2,8 @@ package com.edusalguero.rexoubador.domain.model.server.harvester;
 
 
 import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Date;
 
@@ -14,10 +16,12 @@ public class Harvest {
         this.data = data;
     }
 
-    public String getDate() {
-        return DateConverter.getFormattedDateOrEmptyString(date);
+    public Date getDate() {
+        return date;
     }
 
+    @JsonValue
+    @JsonRawValue
     public String getData() {
         return data;
     }

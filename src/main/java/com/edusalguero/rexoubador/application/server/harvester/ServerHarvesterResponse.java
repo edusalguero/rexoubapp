@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.application.server.harvester;
 
+import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.application.monitor.harvester.HarvesterResponse;
 import com.edusalguero.rexoubador.domain.model.server.harvester.Harvest;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
@@ -15,15 +16,20 @@ public class ServerHarvesterResponse {
         this.serverHarvesterId = serverHarvester.id();
     }
 
-    public String getServerHarvesterId() {
-        return serverHarvesterId;
+    public String getHarvestDate() {
+        return DateConverter.getFormattedDateOrEmptyString(harvest.getDate());
     }
 
     public Harvest getHarvest() {
         return harvest;
     }
 
-    public HarvesterResponse getHarvesterResponse() {
+    public String getServerHarvesterId() {
+        return serverHarvesterId;
+    }
+
+
+    public HarvesterResponse getHarvester() {
         return harvesterResponse;
     }
 }
