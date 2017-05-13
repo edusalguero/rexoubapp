@@ -1,6 +1,9 @@
 package com.edusalguero.rexoubador.domain.model.server;
 
+import com.edusalguero.rexoubador.domain.model.monitor.Report;
+import com.edusalguero.rexoubador.domain.model.monitor.ReportId;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvesterId;
@@ -9,6 +12,11 @@ import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserver;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverNotFoundException;
 import com.edusalguero.rexoubador.domain.model.user.User;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponseInterface;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.UptimeCommandResponse;
+import com.edusalguero.rexoubador.domain.shared.CheckStatus;
 import com.edusalguero.rexoubador.domain.shared.HarvestStatus;
 import com.edusalguero.rexoubador.domain.shared.MachineStatus;
 import com.edusalguero.rexoubador.domain.shared.Status;
@@ -60,7 +68,6 @@ public class Server {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "server", targetEntity = ServerHarvester.class, orphanRemoval = true)
     private List<ServerHarvester> harvesters = new ArrayList<>();
@@ -172,29 +179,43 @@ public class Server {
         return entryDate;
     }
 
+
+    public Report packageMonitoredData(ReportId reportId, Collection<CommandResponseInterface> collectedData)
+    {
+        Date now = new Date();
+        Report report = new Report(reportId, now, this.user(), this);
+        for (CommandResponseInterface result : collectedData) {
+            if (result instanceof HarvestCommandResponse) {
+                ServerHarvesterId id = (ServerHarvesterId) ((HarvestCommandResponse) result).getId();
+                report.addMetric(id, (HarvesterType) result.getName(), result.getData());
+                this.harvester(id)
+                        .addCollectedData(now, result.getDataAsJson());
+            } else if (result instanceof ObserverCommandResponse) {
+                ServerObserverId id = (ServerObserverId) ((ObserverCommandResponse) result).getId();
+                CheckStatus checkStatus = (CheckStatus) result.getData("status");
+                report.addService(id, (String) result.getName(), checkStatus);
+                this.observer(id)
+                        .addObservation(now, checkStatus);
+            } else if (result instanceof UptimeCommandResponse) {
+                Integer uptime = (Integer) result.getData("uptime");
+                this.uptime = uptime;
+                report.setUptime(uptime);
+            }
+        }
+        this.harvestStatus = HarvestStatus.DONE;
+        this.lastHarvestDate = new Date();
+        this.machineStatus =  MachineStatus.UP;
+        return  report;
+    }
+
     public Date lastHarvestDate() {
         return lastHarvestDate;
-    }
-
-    public void updateMachineStatus(MachineStatus status) {
-        this.machineStatus = status;
-    }
-
-    public void updateHarvestStatus(HarvestStatus status) {
-        this.harvestStatus = status;
-    }
-
-    public void updateHarvestDate(Date date) {
-        this.lastHarvestDate = date;
     }
 
     public void updateStatus(Status status) {
         this.status = status;
     }
 
-    public void updateUptime(int uptime) {
-        this.uptime = uptime;
-    }
 
     public void updateIp(String ip) {
         this.ip = ip;
@@ -214,5 +235,14 @@ public class Server {
 
     public void delete() {
         status = Status.DELETED;
+    }
+
+    public void reportMonitorProblem() {
+        this.harvestStatus = HarvestStatus.CONNECTION_ERROR;
+        this.machineStatus = MachineStatus.DOWN;
+    }
+
+    public void monitoringStart() {
+        this.harvestStatus = HarvestStatus.IN_PROGRESS;
     }
 }
