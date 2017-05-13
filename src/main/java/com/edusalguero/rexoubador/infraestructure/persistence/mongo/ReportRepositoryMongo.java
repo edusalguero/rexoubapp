@@ -42,8 +42,7 @@ public class ReportRepositoryMongo implements ReportRepository {
         return new ReportId(random);
     }
 
-    public void save(Report report)
-    {
+    public void save(Report report) {
         mongoTemplate.save(report);
     }
 }

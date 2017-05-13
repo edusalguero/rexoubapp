@@ -2,8 +2,6 @@ package com.edusalguero.rexoubador.application.report;
 
 import com.edusalguero.rexoubador.domain.model.monitor.Report;
 import com.edusalguero.rexoubador.domain.model.monitor.ReportRepository;
-import com.edusalguero.rexoubador.domain.model.server.Server;
-import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
@@ -25,12 +23,11 @@ public class UserReportsUseCase {
         this.userRepository = userRepository;
     }
 
-    public Collection<ServerReportResponse> execute(UserId userId)
-    {
+    public Collection<ServerReportResponse> execute(UserId userId) {
         Collection<ServerReportResponse> reportResponses = new ArrayList<>();
         User user = userRepository.ofId(userId);
-        Collection<Report> reports =  reportRepository.ofUser(user);
-        for (Report report:reports) {
+        Collection<Report> reports = reportRepository.ofUser(user);
+        for (Report report : reports) {
             reportResponses.add(new ServerReportResponse(report));
         }
         return reportResponses;

@@ -16,5 +16,5 @@ public interface ReportRepository {
 
     ReportId nextIdentity();
 
-    void  save(Report report);
+    void save(Report report);
 }

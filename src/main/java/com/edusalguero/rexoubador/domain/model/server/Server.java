@@ -180,8 +180,7 @@ public class Server {
     }
 
 
-    public Report packageMonitoredData(ReportId reportId, Collection<CommandResponseInterface> collectedData)
-    {
+    public Report packageMonitoredData(ReportId reportId, Collection<CommandResponseInterface> collectedData) {
         Date now = new Date();
         Report report = new Report(reportId, now, this.user(), this);
         for (CommandResponseInterface result : collectedData) {
@@ -204,8 +203,8 @@ public class Server {
         }
         this.harvestStatus = HarvestStatus.DONE;
         this.lastHarvestDate = new Date();
-        this.machineStatus =  MachineStatus.UP;
-        return  report;
+        this.machineStatus = MachineStatus.UP;
+        return report;
     }
 
     public Date lastHarvestDate() {

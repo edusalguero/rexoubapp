@@ -3,7 +3,6 @@ package com.edusalguero.rexoubador.infraestructure.spring.controller;
 import com.edusalguero.rexoubador.application.report.ServerReportResponse;
 import com.edusalguero.rexoubador.application.report.ServerReportsUseCase;
 import com.edusalguero.rexoubador.application.report.UserReportsUseCase;
-import com.edusalguero.rexoubador.domain.model.monitor.Report;
 import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,7 +1,6 @@
 package com.edusalguero.rexoubador.domain.model.server.harvester;
 
 
-import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
