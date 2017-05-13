@@ -1,5 +1,4 @@
-package com.edusalguero.rexoubador.application.monitor;
-
+package com.edusalguero.rexoubador.domain.model.monitor;
 
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 import com.edusalguero.rexoubador.domain.model.server.Server;
@@ -8,13 +7,20 @@ import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.shared.CheckStatus;
 import com.google.gson.Gson;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class CollectServerResponse {
+@Document(collection = "reports")
+public class Report {
+    @Id
 
+    private String id;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date timestamp;
     private HashMap<String, String> user = new HashMap<String, String>();
     private HashMap<String, String> server = new HashMap<String, String>();
@@ -22,7 +28,12 @@ public class CollectServerResponse {
     private ArrayList<Object> metrics = new ArrayList<Object>();
     private HashMap<String, ArrayList> checks = new HashMap<String, ArrayList>();
 
-    public CollectServerResponse(Date timestamp, User user, Server server) {
+    protected Report() {
+        // Needs by Mongo
+    }
+
+    public Report(ReportId id, Date timestamp, User user, Server server) {
+        this.id = id.getId();
         this.timestamp = timestamp;
         this.user.put("id", user.id());
         this.server.put("id", server.id());
@@ -30,8 +41,36 @@ public class CollectServerResponse {
         this.uptime = 0;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public Date timestamp() {
+        return timestamp;
+    }
+
+    public HashMap<String, String> user() {
+        return user;
+    }
+
+    public HashMap<String, String> server() {
+        return server;
+    }
+
+    public Integer uptime() {
+        return uptime;
+    }
+
     public void setUptime(Integer uptime) {
         this.uptime = uptime;
+    }
+
+    public ArrayList<Object> metrics() {
+        return metrics;
+    }
+
+    public HashMap<String, ArrayList> checks() {
+        return checks;
     }
 
     public void addMetric(ServerHarvesterId serverHarvesterId, HarvesterType type, Object data) {
@@ -58,6 +97,5 @@ public class CollectServerResponse {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-
 
 }
