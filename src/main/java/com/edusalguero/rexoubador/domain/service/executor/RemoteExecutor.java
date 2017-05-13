@@ -1,8 +1,8 @@
 package com.edusalguero.rexoubador.domain.service.executor;
 
 import com.edusalguero.rexoubador.domain.service.executor.command.CommandInterface;
-import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponse;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponseInterface;
 
 public interface RemoteExecutor {
-    CommandResponse execute(Connection connection, CommandInterface command);
+    CommandResponseInterface execute(Connection connection, CommandInterface command);
 }

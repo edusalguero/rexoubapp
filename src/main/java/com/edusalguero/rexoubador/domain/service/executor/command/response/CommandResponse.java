@@ -4,9 +4,8 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 
-abstract public class CommandResponse {
+abstract public class CommandResponse implements CommandResponseInterface {
     protected final HashMap<String, Object> result = new HashMap<String, Object>();
-    ;
 
     public void addData(String key, Object value) {
         getDataContent().put(key, value);
@@ -20,12 +19,12 @@ abstract public class CommandResponse {
         return (String) result.get("type");
     }
 
-    public abstract Object getName();
-
+    @Override
     public Object getData(String key) {
         return getDataContent().get(key);
     }
 
+    @Override
     public HashMap<String, Object> getData() {
         return getDataContent();
     }

@@ -9,7 +9,7 @@ import com.edusalguero.rexoubador.domain.service.ServerMonitorsExecutorService;
 import com.edusalguero.rexoubador.domain.service.executor.Connection;
 import com.edusalguero.rexoubador.domain.service.executor.RemoteExecutor;
 import com.edusalguero.rexoubador.domain.service.executor.command.Uptime;
-import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponse;
+import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ public class SSHServerMonitorsExecutorService implements ServerMonitorsExecutorS
     private RemoteExecutor remoteExecutor;
 
     @Override
-    public Collection<CommandResponse> collect(Server server) {
+    public Collection<CommandResponseInterface> collect(Server server) {
 
-        Collection<CommandResponse> collectedData = new ArrayList<>();
+        Collection<CommandResponseInterface> collectedData = new ArrayList<>();
         Connection connection = new Connection("root", server.ip());
         HarvesterCommandFactory harvesterHarvesterCommandFactory = new HarvesterCommandFactory();
         ObserverCommandFactory observerHarvesterCommandFactory = new ObserverCommandFactory();
