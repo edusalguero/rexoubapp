@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-public class CollectServersDataUseCase {
+public class HarvestServersMonitoringDataUseCase {
 
     @Autowired
     private ServerRepository serverRepository;
