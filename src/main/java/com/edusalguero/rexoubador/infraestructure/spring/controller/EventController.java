@@ -13,8 +13,12 @@ import java.util.ArrayList;
 @RequestMapping(path = "/events", produces = "application/json")
 public class EventController extends AuthenticatedUserController {
 
+    private final UserEventsUseCase userEventsUseCase;
+
     @Autowired
-    private UserEventsUseCase userEventsUseCase;
+    public EventController(UserEventsUseCase userEventsUseCase) {
+        this.userEventsUseCase = userEventsUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<EventResponse> list() {

@@ -19,8 +19,12 @@ import java.util.Collection;
 @Service
 public class SSHServerMonitorsExecutorService implements ServerMonitorsExecutorService {
 
+    private final RemoteExecutor remoteExecutor;
+
     @Autowired
-    private RemoteExecutor remoteExecutor;
+    public SSHServerMonitorsExecutorService(RemoteExecutor remoteExecutor) {
+        this.remoteExecutor = remoteExecutor;
+    }
 
     @Override
     public Collection<CommandResponseInterface> collect(Server server) {

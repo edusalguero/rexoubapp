@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 
+    private final UserRegistrationUseCase userRegistrationUseCase;
+    private final LoginUseCase loginUseCase;
+
     @Autowired
-    private UserRegistrationUseCase userRegistrationUseCase;
-    @Autowired
-    private LoginUseCase loginUseCase;
+    public AuthController(UserRegistrationUseCase userRegistrationUseCase, LoginUseCase loginUseCase) {
+        this.userRegistrationUseCase = userRegistrationUseCase;
+        this.loginUseCase = loginUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.POST, path = "/register", produces = "application/json")
     public UserId register(@RequestParam(value = "username") String username,

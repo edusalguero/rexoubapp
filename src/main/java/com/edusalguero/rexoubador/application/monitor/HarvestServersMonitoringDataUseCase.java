@@ -16,14 +16,18 @@ import java.util.Collection;
 @Service
 public class HarvestServersMonitoringDataUseCase {
 
-    @Autowired
-    private ServerRepository serverRepository;
+    private final ServerRepository serverRepository;
+
+    private final ReportRepository reportRepository;
+
+    private final ServerMonitorsExecutorService serverMonitorsExecutorService;
 
     @Autowired
-    private ReportRepository reportRepository;
-
-    @Autowired
-    private ServerMonitorsExecutorService serverMonitorsExecutorService;
+    public HarvestServersMonitoringDataUseCase(ServerRepository serverRepository, ReportRepository reportRepository, ServerMonitorsExecutorService serverMonitorsExecutorService) {
+        this.serverRepository = serverRepository;
+        this.reportRepository = reportRepository;
+        this.serverMonitorsExecutorService = serverMonitorsExecutorService;
+    }
 
     public void execute() {
         Collection<Server> servers = serverRepository.toBeCollected();

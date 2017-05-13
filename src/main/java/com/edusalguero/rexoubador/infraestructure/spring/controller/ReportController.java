@@ -17,12 +17,15 @@ import java.util.Collection;
 @RequestMapping(path = "/reports", produces = "application/json")
 public class ReportController extends AuthenticatedUserController {
 
-    @Autowired
-    private ServerReportsUseCase serverReportsUseCase;
+    private final ServerReportsUseCase serverReportsUseCase;
 
+    private final UserReportsUseCase userReportsUseCase;
 
     @Autowired
-    private UserReportsUseCase userReportsUseCase;
+    public ReportController(ServerReportsUseCase serverReportsUseCase, UserReportsUseCase userReportsUseCase) {
+        this.serverReportsUseCase = serverReportsUseCase;
+        this.userReportsUseCase = userReportsUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public Collection<ServerReportResponse> ofUser() {

@@ -13,20 +13,24 @@ import java.util.ArrayList;
 @RequestMapping(path = "/observers", produces = "application/json")
 public class ObserverController extends AuthenticatedUserController {
 
-    @Autowired
-    protected ObserverCreateUseCase observerCreateUseCase;
+    private final ObserverCreateUseCase observerCreateUseCase;
+
+    private final ObserverInformationUseCase observerInformationUseCase;
+
+    private final ObserverUpdateUseCase observerUpdateUseCase;
+
+    private final ObserverDeleteUseCase observerDeleteUseCase;
+
+    private final UserObserversUseCase userObserversUseCase;
 
     @Autowired
-    protected ObserverInformationUseCase observerInformationUseCase;
-
-    @Autowired
-    protected ObserverUpdateUseCase observerUpdateUseCase;
-
-    @Autowired
-    protected ObserverDeleteUseCase observerDeleteUseCase;
-
-    @Autowired
-    protected UserObserversUseCase userObserversUseCase;
+    public ObserverController(ObserverCreateUseCase observerCreateUseCase, ObserverInformationUseCase observerInformationUseCase, ObserverUpdateUseCase observerUpdateUseCase, ObserverDeleteUseCase observerDeleteUseCase, UserObserversUseCase userObserversUseCase) {
+        this.observerCreateUseCase = observerCreateUseCase;
+        this.observerInformationUseCase = observerInformationUseCase;
+        this.observerUpdateUseCase = observerUpdateUseCase;
+        this.observerDeleteUseCase = observerDeleteUseCase;
+        this.userObserversUseCase = userObserversUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ObserverResponse> list() {

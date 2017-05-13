@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class UserServersUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServersUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public ArrayList<ServerResponse> execute(UserId userId) {
         ArrayList<ServerResponse> userServers = new ArrayList<>();

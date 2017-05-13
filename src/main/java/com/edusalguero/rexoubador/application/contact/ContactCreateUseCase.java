@@ -11,10 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContactCreateUseCase {
 
+    private final ContactRepository contactRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    private ContactRepository contactRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public ContactCreateUseCase(ContactRepository contactRepository, UserRepository userRepository) {
+        this.contactRepository = contactRepository;
+        this.userRepository = userRepository;
+    }
 
     public ContactId execute(ContactCreateRequest contactRequest) {
         ContactId contactId = contactRepository.nextIdentity();

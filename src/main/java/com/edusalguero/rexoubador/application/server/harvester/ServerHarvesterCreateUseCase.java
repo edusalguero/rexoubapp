@@ -17,14 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerHarvesterCreateUseCase {
 
-    @Autowired
-    private ServerRepository serverRepository;
+    private final ServerRepository serverRepository;
+
+    private final HarvesterRepository harvesterRepository;
+
+    private final ServerHarvesterRepository serverHarvesterRepository;
 
     @Autowired
-    private HarvesterRepository harvesterRepository;
-
-    @Autowired
-    private ServerHarvesterRepository serverHarvesterRepository;
+    public ServerHarvesterCreateUseCase(ServerRepository serverRepository, HarvesterRepository harvesterRepository, ServerHarvesterRepository serverHarvesterRepository) {
+        this.serverRepository = serverRepository;
+        this.harvesterRepository = harvesterRepository;
+        this.serverHarvesterRepository = serverHarvesterRepository;
+    }
 
     public ServerHarvesterId execute(UserId userId, ServerId serverId, HarvesterId harvesterId) {
         Server server = serverRepository.ofId(serverId);

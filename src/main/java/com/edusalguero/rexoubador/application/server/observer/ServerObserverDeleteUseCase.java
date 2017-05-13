@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerObserverDeleteUseCase {
 
+    private final ServerRepository serverRepository;
+
     @Autowired
-    private ServerRepository serverRepository;
+    public ServerObserverDeleteUseCase(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
+    }
 
     public void execute(UserId userId, ServerId serverId, ServerObserverId serverObserverId) {
         Server server = serverRepository.ofId(serverId);

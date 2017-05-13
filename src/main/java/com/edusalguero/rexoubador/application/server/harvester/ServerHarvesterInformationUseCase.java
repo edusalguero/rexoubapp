@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServerHarvesterInformationUseCase {
+    private final ServerRepository serverRepository;
+
     @Autowired
-    private ServerRepository serverRepository;
+    public ServerHarvesterInformationUseCase(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
+    }
 
     public ServerHarvesterResponse execute(UserId userId, ServerId serverId, ServerHarvesterId serverHarvesterId) {
         Server server = serverRepository.ofId(serverId);

@@ -13,17 +13,21 @@ import java.util.ArrayList;
 @RequestMapping(path = "/servers/{serverId}/observers", produces = "application/json")
 public class ServerObserverController extends AuthenticatedUserController {
 
-    @Autowired
-    private ServerObserversUseCase serverObserversUseCase;
+    private final ServerObserversUseCase serverObserversUseCase;
+
+    private final ServerObserverCreateUseCase serverObserverCreateUseCase;
+
+    private final ServerObserverInformationUseCase serverObserverInformationUseCase;
+
+    private final ServerObserverDeleteUseCase serverObserverDeleteUseCase;
 
     @Autowired
-    private ServerObserverCreateUseCase serverObserverCreateUseCase;
-
-    @Autowired
-    private ServerObserverInformationUseCase serverObserverInformationUseCase;
-
-    @Autowired
-    private ServerObserverDeleteUseCase serverObserverDeleteUseCase;
+    public ServerObserverController(ServerObserversUseCase serverObserversUseCase, ServerObserverCreateUseCase serverObserverCreateUseCase, ServerObserverInformationUseCase serverObserverInformationUseCase, ServerObserverDeleteUseCase serverObserverDeleteUseCase) {
+        this.serverObserversUseCase = serverObserversUseCase;
+        this.serverObserverCreateUseCase = serverObserverCreateUseCase;
+        this.serverObserverInformationUseCase = serverObserverInformationUseCase;
+        this.serverObserverDeleteUseCase = serverObserverDeleteUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ServerObserverResponse> list(@PathVariable String serverId) {

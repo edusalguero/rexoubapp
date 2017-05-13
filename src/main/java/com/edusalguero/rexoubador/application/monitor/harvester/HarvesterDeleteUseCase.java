@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class HarvesterDeleteUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public HarvesterDeleteUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void execute(HarvesterId harvesterId, UserId userId) {
         User user = userRepository.ofId(userId);

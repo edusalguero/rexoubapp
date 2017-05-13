@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerUptimeUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ServerUptimeUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public ServerUptimeResponse execute(ServerId serverId, UserId userId) {
         User user = userRepository.ofId(userId);

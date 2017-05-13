@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ObserverUpdateUseCase {
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ObserverUpdateUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void execute(ObserverUpdateRequest observerUpdateRequest) {
         User user = userRepository.ofId(observerUpdateRequest.getUserId());

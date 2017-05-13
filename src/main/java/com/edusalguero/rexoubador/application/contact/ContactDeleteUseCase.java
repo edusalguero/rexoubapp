@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContactDeleteUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ContactDeleteUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void execute(ContactId contactId, UserId userId) {
         User user = userRepository.ofId(userId);

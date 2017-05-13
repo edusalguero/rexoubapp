@@ -14,8 +14,12 @@ import java.util.ArrayList;
 @Service
 public class ServerHarvestersUseCase {
 
+    private final ServerRepository serverRepository;
+
     @Autowired
-    private ServerRepository serverRepository;
+    public ServerHarvestersUseCase(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
+    }
 
     public ArrayList<ServerHarvesterResponse> execute(UserId userId, ServerId serverId) {
         Server server = serverRepository.ofId(serverId);

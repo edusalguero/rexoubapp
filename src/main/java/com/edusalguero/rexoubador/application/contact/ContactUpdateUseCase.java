@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContactUpdateUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ContactUpdateUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void execute(ContactUpdateRequest contactUpdateRequest) {
 

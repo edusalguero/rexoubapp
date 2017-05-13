@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRegistrationUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserRegistrationUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserId execute(String username, String password, String firstName, String lastName) {
         UserId uid = userRepository.nextIdentity();

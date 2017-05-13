@@ -14,14 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(path = "/users/self", produces = "application/json")
 public class UserController extends AuthenticatedUserController {
 
-    @Autowired
-    private UserInformationUseCase userInformationUseCase;
+    private final UserInformationUseCase userInformationUseCase;
+
+    private final UserUpdateUseCase userUpdateUseCase;
+
+    private final UserDeleteUseCase userDeleteUseCase;
 
     @Autowired
-    private UserUpdateUseCase userUpdateUseCase;
-
-    @Autowired
-    private UserDeleteUseCase userDeleteUseCase;
+    public UserController(UserInformationUseCase userInformationUseCase, UserUpdateUseCase userUpdateUseCase, UserDeleteUseCase userDeleteUseCase) {
+        this.userInformationUseCase = userInformationUseCase;
+        this.userUpdateUseCase = userUpdateUseCase;
+        this.userDeleteUseCase = userDeleteUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public UserInformationResponse show(HttpServletRequest request) {

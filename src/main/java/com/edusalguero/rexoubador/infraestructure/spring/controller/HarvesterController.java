@@ -13,20 +13,24 @@ import java.util.ArrayList;
 @RequestMapping(path = "/harvesters", produces = "application/json")
 public class HarvesterController extends AuthenticatedUserController {
 
-    @Autowired
-    protected HarvesterCreateUseCase harvesterCreateUseCase;
+    private final HarvesterCreateUseCase harvesterCreateUseCase;
+
+    private final HarvesterInformationUseCase harvesterInformationUseCase;
+
+    private final HarvesterUpdateUseCase harvesterUpdateUseCase;
+
+    private final HarvesterDeleteUseCase harvesterDeleteUseCase;
+
+    private final UserHarvestersUseCase userHarvestersUseCase;
 
     @Autowired
-    protected HarvesterInformationUseCase harvesterInformationUseCase;
-
-    @Autowired
-    protected HarvesterUpdateUseCase harvesterUpdateUseCase;
-
-    @Autowired
-    protected HarvesterDeleteUseCase harvesterDeleteUseCase;
-
-    @Autowired
-    protected UserHarvestersUseCase userHarvestersUseCase;
+    public HarvesterController(HarvesterCreateUseCase harvesterCreateUseCase, HarvesterInformationUseCase harvesterInformationUseCase, HarvesterUpdateUseCase harvesterUpdateUseCase, HarvesterDeleteUseCase harvesterDeleteUseCase, UserHarvestersUseCase userHarvestersUseCase) {
+        this.harvesterCreateUseCase = harvesterCreateUseCase;
+        this.harvesterInformationUseCase = harvesterInformationUseCase;
+        this.harvesterUpdateUseCase = harvesterUpdateUseCase;
+        this.harvesterDeleteUseCase = harvesterDeleteUseCase;
+        this.userHarvestersUseCase = userHarvestersUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<HarvesterResponse> list() {

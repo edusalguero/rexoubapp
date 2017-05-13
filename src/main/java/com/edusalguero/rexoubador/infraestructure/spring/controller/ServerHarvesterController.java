@@ -13,17 +13,21 @@ import java.util.ArrayList;
 @RequestMapping(path = "/servers/{serverId}/harvesters", produces = "application/json")
 public class ServerHarvesterController extends AuthenticatedUserController {
 
-    @Autowired
-    private ServerHarvestersUseCase serverHarvestersUseCase;
+    private final ServerHarvestersUseCase serverHarvestersUseCase;
+
+    private final ServerHarvesterCreateUseCase serverHarvesterCreateUseCase;
+
+    private final ServerHarvesterInformationUseCase serverHarvesterInformationUseCase;
+
+    private final ServerHarvesterDeleteUseCase serverHarvesterDeleteUseCase;
 
     @Autowired
-    private ServerHarvesterCreateUseCase serverHarvesterCreateUseCase;
-
-    @Autowired
-    private ServerHarvesterInformationUseCase serverHarvesterInformationUseCase;
-
-    @Autowired
-    private ServerHarvesterDeleteUseCase serverHarvesterDeleteUseCase;
+    public ServerHarvesterController(ServerHarvestersUseCase serverHarvestersUseCase, ServerHarvesterCreateUseCase serverHarvesterCreateUseCase, ServerHarvesterInformationUseCase serverHarvesterInformationUseCase, ServerHarvesterDeleteUseCase serverHarvesterDeleteUseCase) {
+        this.serverHarvestersUseCase = serverHarvestersUseCase;
+        this.serverHarvesterCreateUseCase = serverHarvesterCreateUseCase;
+        this.serverHarvesterInformationUseCase = serverHarvesterInformationUseCase;
+        this.serverHarvesterDeleteUseCase = serverHarvesterDeleteUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ServerHarvesterResponse> list(@PathVariable String serverId) {

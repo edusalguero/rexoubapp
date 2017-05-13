@@ -14,10 +14,14 @@ import java.util.Collection;
 @Service
 public class UserEventsUseCase {
 
+    private final UserRepository userRepository;
+    private final EventRepository eventRepository;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private EventRepository eventRepository;
+    public UserEventsUseCase(UserRepository userRepository, EventRepository eventRepository) {
+        this.userRepository = userRepository;
+        this.eventRepository = eventRepository;
+    }
 
     public ArrayList<EventResponse> execute(UserId userId) {
         User user = userRepository.ofId(userId);

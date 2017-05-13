@@ -12,23 +12,27 @@ import java.util.ArrayList;
 @RequestMapping(path = "/servers", produces = "application/json")
 public class ServerController extends AuthenticatedUserController {
 
-    @Autowired
-    private UserServersUseCase userServersUseCase;
+    private final UserServersUseCase userServersUseCase;
+
+    private final ServerCreateUserCase serverCreateUserCase;
+
+    private final ServerInformationUseCase serverInformationUseCase;
+
+    private final ServerDeleteUseCase serverDeleteUseCase;
+
+    private final ServerUpdateUseCase serverUpdateUseCase;
+
+    private final ServerUptimeUseCase serverUptimeUseCase;
 
     @Autowired
-    private ServerCreateUserCase serverCreateUserCase;
-
-    @Autowired
-    private ServerInformationUseCase serverInformationUseCase;
-
-    @Autowired
-    private ServerDeleteUseCase serverDeleteUseCase;
-
-    @Autowired
-    private ServerUpdateUseCase serverUpdateUseCase;
-
-    @Autowired
-    private ServerUptimeUseCase serverUptimeUseCase;
+    public ServerController(UserServersUseCase userServersUseCase, ServerCreateUserCase serverCreateUserCase, ServerInformationUseCase serverInformationUseCase, ServerDeleteUseCase serverDeleteUseCase, ServerUpdateUseCase serverUpdateUseCase, ServerUptimeUseCase serverUptimeUseCase) {
+        this.userServersUseCase = userServersUseCase;
+        this.serverCreateUserCase = serverCreateUserCase;
+        this.serverInformationUseCase = serverInformationUseCase;
+        this.serverDeleteUseCase = serverDeleteUseCase;
+        this.serverUpdateUseCase = serverUpdateUseCase;
+        this.serverUptimeUseCase = serverUptimeUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ServerResponse> list() {

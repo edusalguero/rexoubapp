@@ -12,20 +12,24 @@ import java.util.ArrayList;
 @RequestMapping(path = "/contacts", produces = "application/json")
 public class ContactController extends AuthenticatedUserController {
 
-    @Autowired
-    private UserContactsUseCase userContactsUseCase;
+    private final UserContactsUseCase userContactsUseCase;
+
+    private final ContactInformationUseCase contactInformationUseCase;
+
+    private final ContactCreateUseCase contactCreateUseCase;
+
+    private final ContactDeleteUseCase contactDeleteUseCase;
+
+    private final ContactUpdateUseCase contactUpdateUseCase;
 
     @Autowired
-    private ContactInformationUseCase contactInformationUseCase;
-
-    @Autowired
-    private ContactCreateUseCase contactCreateUseCase;
-
-    @Autowired
-    private ContactDeleteUseCase contactDeleteUseCase;
-
-    @Autowired
-    private ContactUpdateUseCase contactUpdateUseCase;
+    public ContactController(UserContactsUseCase userContactsUseCase, ContactInformationUseCase contactInformationUseCase, ContactCreateUseCase contactCreateUseCase, ContactDeleteUseCase contactDeleteUseCase, ContactUpdateUseCase contactUpdateUseCase) {
+        this.userContactsUseCase = userContactsUseCase;
+        this.contactInformationUseCase = contactInformationUseCase;
+        this.contactCreateUseCase = contactCreateUseCase;
+        this.contactDeleteUseCase = contactDeleteUseCase;
+        this.contactUpdateUseCase = contactUpdateUseCase;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<ContactResponse> list() {

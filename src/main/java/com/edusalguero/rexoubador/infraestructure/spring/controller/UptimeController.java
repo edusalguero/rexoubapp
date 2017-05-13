@@ -13,8 +13,12 @@ import java.util.ArrayList;
 @RequestMapping(path = "/uptime", produces = "application/json")
 public class UptimeController extends AuthenticatedUserController {
 
+    private final ServersUptimeUseCase serversUptimeUseCase;
+
     @Autowired
-    private ServersUptimeUseCase serversUptimeUseCase;
+    public UptimeController(ServersUptimeUseCase serversUptimeUseCase) {
+        this.serversUptimeUseCase = serversUptimeUseCase;
+    }
 
 
     @RequestMapping(method = RequestMethod.GET)

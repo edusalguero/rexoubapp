@@ -14,10 +14,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class HarvesterCreateUseCase {
 
+    private final HarvesterRepository harvesterRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    private HarvesterRepository harvesterRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public HarvesterCreateUseCase(HarvesterRepository harvesterRepository, UserRepository userRepository) {
+        this.harvesterRepository = harvesterRepository;
+        this.userRepository = userRepository;
+    }
 
     public HarvesterId execute(UserId userId, HarvesterType type, String label, Boolean notifyWarning, Boolean notifyAlert, String warningValue, String alertValue, Status status) {
         HarvesterId harvesterId = harvesterRepository.nextIdentity();

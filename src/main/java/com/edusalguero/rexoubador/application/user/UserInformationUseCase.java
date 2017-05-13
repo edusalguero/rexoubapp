@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserInformationUseCase {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserInformationUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserInformationResponse execute(UserId userId) {
         User user = userRepository.ofId(userId);

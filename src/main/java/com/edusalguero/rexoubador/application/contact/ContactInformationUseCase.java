@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ContactInformationUseCase {
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ContactInformationUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public ContactResponse execute(ContactId contactId, UserId userId) {
         Contact contact = userRepository.ofId(userId).contact(contactId);

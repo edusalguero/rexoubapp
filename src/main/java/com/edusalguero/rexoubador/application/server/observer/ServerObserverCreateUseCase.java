@@ -17,14 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerObserverCreateUseCase {
 
-    @Autowired
-    private ServerRepository serverRepository;
+    private final ServerRepository serverRepository;
+
+    private final ObserverRepository observerRepository;
+
+    private final ServerObserverRepository serverObserverRepository;
 
     @Autowired
-    private ObserverRepository observerRepository;
-
-    @Autowired
-    private ServerObserverRepository serverObserverRepository;
+    public ServerObserverCreateUseCase(ServerRepository serverRepository, ObserverRepository observerRepository, ServerObserverRepository serverObserverRepository) {
+        this.serverRepository = serverRepository;
+        this.observerRepository = observerRepository;
+        this.serverObserverRepository = serverObserverRepository;
+    }
 
     public ServerObserverId execute(UserId userId, ServerId serverId, ObserverId observerId) {
         Server server = serverRepository.ofId(serverId);

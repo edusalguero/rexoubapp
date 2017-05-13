@@ -15,11 +15,15 @@ import java.util.Collection;
 
 @Service
 public class ServerReportsUseCase {
-    @Autowired
-    private ReportRepository reportRepository;
+    private final ReportRepository reportRepository;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public ServerReportsUseCase(ReportRepository reportRepository, UserRepository userRepository) {
+        this.reportRepository = reportRepository;
+        this.userRepository = userRepository;
+    }
 
     public Collection<ServerReportResponse> execute(UserId userId, ServerId serverId)
     {

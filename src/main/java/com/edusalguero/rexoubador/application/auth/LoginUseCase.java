@@ -11,14 +11,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginUseCase {
 
-    @Value("${jwt.secret}")
     private String secret;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final TokenGenerator tokenGenerator;
 
     @Autowired
-    private TokenGenerator tokenGenerator;
+    public LoginUseCase(@Value("${jwt.secret}") String secret, UserRepository userRepository, TokenGenerator tokenGenerator) {
+        this.secret = secret;
+        this.userRepository = userRepository;
+        this.tokenGenerator = tokenGenerator;
+    }
 
     public LoginResponse execute(String username, String password) {
         User u;

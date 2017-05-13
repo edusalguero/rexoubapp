@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerHarvesterDeleteUseCase {
 
+    private final ServerRepository serverRepository;
+
     @Autowired
-    private ServerRepository serverRepository;
+    public ServerHarvesterDeleteUseCase(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
+    }
 
     public void execute(UserId userId, ServerId serverId, ServerHarvesterId serverHarvesterId) {
         Server server = serverRepository.ofId(serverId);

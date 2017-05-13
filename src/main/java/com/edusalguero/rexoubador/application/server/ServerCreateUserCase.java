@@ -12,13 +12,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServerCreateUserCase {
-    @Value("${rexoubador.publicSSHKey}")
-    private String publicSSHKey;
+
+    private final String publicSSHKey;
+    private final ServerRepository serverRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private ServerRepository serverRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public ServerCreateUserCase(@Value("${rexoubador.publicSSHKey}") String publicSSHKey, ServerRepository serverRepository, UserRepository userRepository) {
+        this.publicSSHKey = publicSSHKey;
+        this.serverRepository = serverRepository;
+        this.userRepository = userRepository;
+    }
 
     public ServerCreateResponse execute(UserId userId, String label, String ip, Status status) {
         ServerId serverId = serverRepository.nextIdentity();

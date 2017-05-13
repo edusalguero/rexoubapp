@@ -13,8 +13,12 @@ import java.util.List;
 
 @Service
 public class ServersUptimeUseCase {
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public ServersUptimeUseCase(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public ArrayList<ServerUptimeResponse> execute(UserId userId) {
         ArrayList<ServerUptimeResponse> serversUptime = new ArrayList<>();

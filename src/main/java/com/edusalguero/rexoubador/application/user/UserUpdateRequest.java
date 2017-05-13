@@ -2,6 +2,7 @@ package com.edusalguero.rexoubador.application.user;
 
 import com.edusalguero.rexoubador.domain.model.user.UserId;
 
+@SuppressWarnings("WeakerAccess")
 public class UserUpdateRequest {
     private UserId userId;
     private String password = null;

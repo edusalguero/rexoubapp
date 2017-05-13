@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServerObserverInformationUseCase {
+    private final ServerRepository serverRepository;
+
     @Autowired
-    private ServerRepository serverRepository;
+    public ServerObserverInformationUseCase(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
+    }
 
     public ServerObserverResponse execute(UserId userId, ServerId serverId, ServerObserverId serverObserverId) {
         Server server = serverRepository.ofId(serverId);
