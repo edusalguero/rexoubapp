@@ -1,5 +1,10 @@
 package com.edusalguero.rexoubador.domain.model.server;
 
+import com.edusalguero.rexoubador.domain.model.contact.Contact;
+import com.edusalguero.rexoubador.domain.model.event.Event;
+import com.edusalguero.rexoubador.domain.model.event.EventId;
+import com.edusalguero.rexoubador.domain.shared.*;
+import com.edusalguero.rexoubador.domain.event.ServerWasUnreachable;
 import com.edusalguero.rexoubador.domain.model.monitor.Report;
 import com.edusalguero.rexoubador.domain.model.monitor.ReportId;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
@@ -16,10 +21,6 @@ import com.edusalguero.rexoubador.domain.service.executor.command.response.Comma
 import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.UptimeCommandResponse;
-import com.edusalguero.rexoubador.domain.shared.CheckStatus;
-import com.edusalguero.rexoubador.domain.shared.HarvestStatus;
-import com.edusalguero.rexoubador.domain.shared.MachineStatus;
-import com.edusalguero.rexoubador.domain.shared.Status;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -76,6 +77,10 @@ public class Server {
     private List<ServerObserver> observers = new ArrayList<>();
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "server", targetEntity = Event.class, orphanRemoval = true)
+    private List<Event> events = new ArrayList<>();
+
+
     protected Server() {
         // Needed by JPA
     }
@@ -94,6 +99,7 @@ public class Server {
     public Collection<ServerHarvester> harvesters() {
         return harvesters;
     }
+
 
     public Boolean addHarvester(ServerHarvesterId serverHarvesterId, Harvester harvester) {
         ServerHarvester serverHarvester = new ServerHarvester(serverHarvesterId, this, harvester);
@@ -179,6 +185,12 @@ public class Server {
         return entryDate;
     }
 
+    public Event recordEvent(EventId eventId, Collection<Contact> contacts, String message) {
+        Event event = new Event(eventId,this, contacts, message);
+        events.add(event);
+        return event;
+    }
+
 
     public Report packageMonitoredData(ReportId reportId, Collection<CommandResponseInterface> collectedData) {
         Date now = new Date();
@@ -237,6 +249,9 @@ public class Server {
     }
 
     public void reportMonitorProblem() {
+        if (this.machineStatus() == MachineStatus.UP) {
+            EventPublisher.publish(new ServerWasUnreachable(serverId(), user.userId()));
+        }
         this.harvestStatus = HarvestStatus.CONNECTION_ERROR;
         this.machineStatus = MachineStatus.DOWN;
     }

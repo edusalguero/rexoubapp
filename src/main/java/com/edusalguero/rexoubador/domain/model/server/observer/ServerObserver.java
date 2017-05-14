@@ -1,5 +1,8 @@
 package com.edusalguero.rexoubador.domain.model.server.observer;
 
+import com.edusalguero.rexoubador.domain.shared.EventPublisher;
+import com.edusalguero.rexoubador.domain.event.ServerObservableStatusWasChanged;
+import com.edusalguero.rexoubador.domain.event.ServerObservableWasInactive;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 import com.edusalguero.rexoubador.domain.shared.CheckStatus;
@@ -70,6 +73,17 @@ public class ServerObserver {
     }
 
     public void addObservation(Date observationDate, CheckStatus checkStatus) {
+        if (observer.notifyStatusChanges()) {
+            if (this.lastCheckStatus != checkStatus) {
+                EventPublisher.publish(new ServerObservableStatusWasChanged(server.serverId(), server.user().userId(), serverObserverId()));
+            }
+        }
+
+        if (observer.notifyInactivity()) {
+            if (checkStatus == CheckStatus.DOWN) {
+                EventPublisher.publish(new ServerObservableWasInactive(server.serverId(), server.user().userId(), serverObserverId()));
+            }
+        }
         this.lastCheckDate = observationDate;
         this.lastCheckStatus = checkStatus;
     }
