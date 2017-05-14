@@ -21,7 +21,7 @@ spring:
 # stripped before adding them to the entity manager).
 # Show or not log for each sql query
   jpa:
-    show-sql: true
+    show-sql: false
 # Hibernate ddl auto (create, create-drop, update): with "update" the database
 # schema will be automatically updated accordingly to java entities found in
 # the project
@@ -45,3 +45,7 @@ rexoubador:
   publicSSHKey: "THE PUBLIC KEY"
   privateKeyPath: "/Users/edusalguero/.ssh/id_rsa"
   passphrase:   "edusalguero"
+  domain:
+    events:
+      exchange-name: "domainEvents"
+      notifications-queue-name: "notificationsQueue"
