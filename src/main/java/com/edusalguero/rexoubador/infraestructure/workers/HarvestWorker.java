@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component
 public class HarvestWorker implements Workable {
-    private static final Logger log = LoggerFactory.getLogger(HarvestWorker.class);
+    private static final Logger logger = LoggerFactory.getLogger(HarvestWorker.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private final HarvestServersMonitoringDataUseCase harvestServersMonitoringDataUseCase;
 
@@ -26,8 +26,8 @@ public class HarvestWorker implements Workable {
     @Scheduled(fixedRate = 10000)
     @Transactional
     public void work() {
-        log.info("==> Harvesting monitoring data at {}...", dateFormat.format(new Date()));
+        logger.info("==> Harvesting monitoring data at {}...", dateFormat.format(new Date()));
         harvestServersMonitoringDataUseCase.execute();
-        log.info("==> Data harvested at {}...", dateFormat.format(new Date()));
+        logger.info("==> Data harvested at {}...", dateFormat.format(new Date()));
     }
 }
