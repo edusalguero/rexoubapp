@@ -8,6 +8,8 @@ import com.edusalguero.rexoubador.domain.model.server.ServerRepository;
 import com.edusalguero.rexoubador.domain.service.ServerMonitorsExecutorService;
 import com.edusalguero.rexoubador.domain.service.executor.ExecutionException;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponseInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.Collection;
 
 @Service
 public class HarvestServersMonitoringDataUseCase {
+
+    private static final Logger logger = LoggerFactory.getLogger(HarvestServersMonitoringDataUseCase.class);
 
     private final ServerRepository serverRepository;
 
@@ -30,20 +34,28 @@ public class HarvestServersMonitoringDataUseCase {
     }
 
     public void execute() {
+        logger.info("Harvest start!");
+        logger.info("Retrieving collectible servers");
         Collection<Server> servers = serverRepository.toBeCollected();
-
+        Integer count = servers.size();
+        logger.info(String.format("There are [%s] collectable servers", count ));
+        Integer i = 1;
         for (Server server : servers) {
+            logger.info(String.format("Collecting monitoring data from server [%s] [%s/%s]...", server.id(), i, count ));
             server.monitoringStart();
             try {
                 Collection<CommandResponseInterface> collectedData = serverMonitorsExecutorService.collect(server);
                 ReportId reportId = reportRepository.nextIdentity();
                 Report report = server.packageMonitoredData(reportId, collectedData);
                 reportRepository.save(report);
-                System.out.println(reportRepository.ofId(reportId).toJson());
+                logger.debug("Monitoring data: "+ report.toJson());
             } catch (ExecutionException e) {
                 server.reportMonitorProblem();
             }
             serverRepository.update(server);
+            logger.info(String.format("Monitoring data collected for server [%s]", server.id()));
+            i++;
         }
+        logger.info("Harvest end!");
     }
 }
