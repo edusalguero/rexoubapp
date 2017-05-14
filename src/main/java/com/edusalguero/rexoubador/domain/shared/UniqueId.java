@@ -3,13 +3,14 @@ package com.edusalguero.rexoubador.domain.shared;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.UUID;
 
 @Embeddable
 @MappedSuperclass
-public class UniqueId {
+public class UniqueId implements Serializable{
 
     @Column(columnDefinition = "BINARY(16)", length = 16, updatable = false, nullable = false)
     protected byte[] id;
