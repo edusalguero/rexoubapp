@@ -26,11 +26,9 @@ public class EventMessage implements NotificationMessage{
 
     public String getTextBody() {
         return subject + System.lineSeparator() + " - Occurred on: " + dateString() + System.lineSeparator() + " - Message: " + body;
-
     }
 
     public String getMarkdownBody() {
-
         return "*" + subject + "*" + System.lineSeparator() + " - Occurred on: " + dateString() + System.lineSeparator() + " - Message: " + body;
     }
 
