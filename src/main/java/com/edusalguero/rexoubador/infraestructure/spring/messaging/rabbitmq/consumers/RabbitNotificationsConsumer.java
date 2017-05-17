@@ -27,7 +27,7 @@ public class RabbitNotificationsConsumer implements MessageConsumer<DomainEvent>
     private final ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler;
 
     @Autowired
-    public RabbitNotificationsConsumer(ServerWasUnreachableHandler serverWasUnreachableHandler,ServerWasReconnectedHandler serverWasReconnectedHandler, ServerObservableWasInactiveHandler serverObservableWasInactiveHandler, ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler) {
+    public RabbitNotificationsConsumer(ServerWasUnreachableHandler serverWasUnreachableHandler, ServerWasReconnectedHandler serverWasReconnectedHandler, ServerObservableWasInactiveHandler serverObservableWasInactiveHandler, ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler) {
         this.serverWasUnreachableHandler = serverWasUnreachableHandler;
         this.serverWasReconnectedHandler = serverWasReconnectedHandler;
         this.serverObservableWasInactiveHandler = serverObservableWasInactiveHandler;
