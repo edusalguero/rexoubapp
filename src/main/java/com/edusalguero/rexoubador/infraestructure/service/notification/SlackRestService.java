@@ -18,7 +18,6 @@ public class SlackRestService implements SlackService {
 
     public SlackRestService() {
         this.restTemplate = new RestTemplate();
-        ;
     }
 
     private String encodeMessage(String message) {
@@ -35,7 +34,7 @@ public class SlackRestService implements SlackService {
         } else {
             body = "{\"channel\":\"" + to + "\",\"text\":\"" + encodeMessage(message) + "\"}";
         }
-        HttpEntity<String> entity = new HttpEntity<String>(body, headers);
+        HttpEntity<String> entity = new HttpEntity<>(body, headers);
         logger.info("Posting slack message: " + body);
         restTemplate.postForLocation(webhookUrl, entity);
         logger.info("Slack message posted");
