@@ -1,6 +1,9 @@
 package com.edusalguero.rexoubador.domain.model.server.harvester;
 
+import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.harvest.HarvestFactory;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.harvest.UptimeHarvest;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 
 import javax.persistence.*;
@@ -63,13 +66,14 @@ public class ServerHarvester {
         return harvester;
     }
 
-    public Harvest getLastHarvest() {
-        return new Harvest(this.lastHarvestDate, this.lastHarvestData);
+   public Harvest getLastHarvest() {
+       HarvestFactory harvestFactory = new HarvestFactory();
+       return new Harvest(lastHarvestDate, harvestFactory.make(harvester(), this.lastHarvestData));
     }
 
-    public void addCollectedData(Date harvestDate, String data) {
+    public void addCollectedData(Date harvestDate, MonitorDataInterface data) {
         this.lastHarvestDate = harvestDate;
-        this.lastHarvestData = data;
+        this.lastHarvestData = data.toJson();
     }
 
     public Date entryDate() {

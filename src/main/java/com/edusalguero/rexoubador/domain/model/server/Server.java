@@ -9,6 +9,8 @@ import com.edusalguero.rexoubador.domain.model.monitor.Report;
 import com.edusalguero.rexoubador.domain.model.monitor.ReportId;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
+import com.edusalguero.rexoubador.domain.model.monitor.harvester.harvest.UptimeHarvest;
+import com.edusalguero.rexoubador.domain.model.monitor.observer.Observation;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.Observer;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvester;
 import com.edusalguero.rexoubador.domain.model.server.harvester.ServerHarvesterId;
@@ -205,15 +207,15 @@ public class Server {
                 ServerHarvesterId id = (ServerHarvesterId) ((HarvestCommandResponse) result).getId();
                 report.addMetric(id, (HarvesterType) result.getName(), result.getData());
                 this.harvester(id)
-                        .addCollectedData(now, result.getDataAsJson());
+                        .addCollectedData(now, result.getData());
             } else if (result instanceof ObserverCommandResponse) {
                 ServerObserverId id = (ServerObserverId) ((ObserverCommandResponse) result).getId();
-                CheckStatus checkStatus = (CheckStatus) result.getData("status");
+                CheckStatus checkStatus =  ((Observation)result.getData()).getCheckStatus();
                 report.addService(id, (String) result.getName(), checkStatus);
                 this.observer(id)
                         .addObservation(now, checkStatus);
             } else if (result instanceof UptimeCommandResponse) {
-                Integer uptime = (Integer) result.getData("uptime");
+                Integer uptime = ((UptimeHarvest) result.getData()).getUptime();
                 this.uptime = uptime;
                 report.setUptime(uptime);
             }

@@ -1,13 +1,15 @@
 package com.edusalguero.rexoubador.domain.service.executor.command.response;
 
-import java.util.HashMap;
+import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
+
 
 public interface CommandResponseInterface {
     Object getName();
 
-    Object getData(String key);
+    MonitorDataInterface getData();
 
-    HashMap<String, Object> getData();
+    String getType();
 
-    String getDataAsJson();
+    void setData(MonitorDataInterface monitorDataInterface);
+
 }

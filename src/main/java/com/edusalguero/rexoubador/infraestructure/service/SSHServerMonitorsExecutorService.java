@@ -8,7 +8,7 @@ import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserver;
 import com.edusalguero.rexoubador.domain.service.ServerMonitorsExecutorService;
 import com.edusalguero.rexoubador.domain.service.executor.Connection;
 import com.edusalguero.rexoubador.domain.service.executor.RemoteExecutor;
-import com.edusalguero.rexoubador.domain.service.executor.command.Uptime;
+import com.edusalguero.rexoubador.domain.service.executor.command.UptimeCommand;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.CommandResponseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +42,7 @@ public class SSHServerMonitorsExecutorService implements ServerMonitorsExecutorS
             collectedData.add(remoteExecutor.execute(connection, observerHarvesterCommandFactory.make(serverObserver)));
         }
 
-        collectedData.add(remoteExecutor.execute(connection, new Uptime()));
+        collectedData.add(remoteExecutor.execute(connection, new UptimeCommand()));
 
         return collectedData;
     }

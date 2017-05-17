@@ -11,10 +11,10 @@ public class ServerReportResponse {
 
     private String id;
     private Date timestamp;
-    private HashMap<String, String> server = new HashMap<String, String>();
+    private HashMap<String, String> server = new HashMap<>();
     private Integer uptime;
-    private ArrayList<Object> metrics = new ArrayList<Object>();
-    private HashMap<String, ArrayList> checks = new HashMap<String, ArrayList>();
+    private ArrayList<Object> metrics = new ArrayList<>();
+    private HashMap<String, ArrayList> checks;
 
     ServerReportResponse(Report report) {
         id = report.getId();

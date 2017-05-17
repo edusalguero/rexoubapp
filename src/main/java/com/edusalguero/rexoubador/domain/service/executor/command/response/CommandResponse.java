@@ -1,49 +1,25 @@
 package com.edusalguero.rexoubador.domain.service.executor.command.response;
 
-import com.google.gson.Gson;
-
-import java.util.HashMap;
+import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
 
 abstract public class CommandResponse implements CommandResponseInterface {
-    protected final HashMap<String, Object> result = new HashMap<String, Object>();
 
-    public void addData(String key, Object value) {
-        getDataContent().put(key, value);
-    }
+    protected String type;
+    protected Object name;
+    private MonitorDataInterface data;
 
-    private HashMap<String, Object> getDataContent() {
-        return (HashMap<String, Object>) result.get("data");
-    }
-
+    @Override
     public String getType() {
-        return (String) result.get("type");
+        return type;
     }
 
     @Override
-    public Object getData(String key) {
-        return getDataContent().get(key);
+    public MonitorDataInterface getData() {
+        return data;
     }
 
-    @Override
-    public HashMap<String, Object> getData() {
-        return getDataContent();
-    }
-
-    public Boolean hasKey(String key) {
-        return getDataContent().containsKey(key);
-    }
-
-    @Override
-    public String toString() {
-        return result.toString();
-    }
-
-    public HashMap<String, Object> getResult() {
-        return result;
-    }
-
-    public String getDataAsJson() {
-        Gson gson = new Gson();
-        return gson.toJson(getData());
+    public void setData(MonitorDataInterface data)
+    {
+        this.data = data;
     }
 }

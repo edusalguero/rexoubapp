@@ -11,19 +11,19 @@ public class ObserverCommandResponse extends CommandResponse {
 
     private final UniqueId id;
 
-    public ObserverCommandResponse(UniqueId uniqueId, ObserverType name) {
+    public ObserverCommandResponse(UniqueId uniqueId, ObserverType type, String name) {
         id = uniqueId;
-        result.put("type", "observer");
-        result.put("name", name);
-        result.put("data", new HashMap<String, Object>());
+        this.type = type.toString();
+        this.name =  name;
     }
 
     public UniqueId getId() {
         return id;
     }
 
+
     @Override
     public String getName() {
-        return (String) getData("name");
+        return (String) name;
     }
 }

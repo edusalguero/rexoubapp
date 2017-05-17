@@ -22,11 +22,11 @@ public class Report {
     private String id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date timestamp;
-    private HashMap<String, String> user = new HashMap<String, String>();
-    private HashMap<String, String> server = new HashMap<String, String>();
+    private HashMap<String, String> user = new HashMap<>();
+    private HashMap<String, String> server = new HashMap<>();
     private Integer uptime;
-    private ArrayList<Object> metrics = new ArrayList<Object>();
-    private HashMap<String, ArrayList> checks = new HashMap<String, ArrayList>();
+    private ArrayList<Object> metrics = new ArrayList<>();
+    private HashMap<String, ArrayList> checks = new HashMap<>();
 
     protected Report() {
         // Needs by Mongo
@@ -73,8 +73,8 @@ public class Report {
         return checks;
     }
 
-    public void addMetric(ServerHarvesterId serverHarvesterId, HarvesterType type, Object data) {
-        HashMap<String, Object> metric = new HashMap<String, Object>();
+    public void addMetric(ServerHarvesterId serverHarvesterId, HarvesterType type, MonitorDataInterface data) {
+        HashMap<String, Object> metric = new HashMap<>();
         metric.put("id", serverHarvesterId.getId());
         metric.put("type", type);
         metric.put("data", data);
@@ -82,7 +82,7 @@ public class Report {
     }
 
     public void addService(ServerObserverId serverObserverId, String serviceName, CheckStatus status) {
-        HashMap<String, String> check = new HashMap<String, String>();
+        HashMap<String, String> check = new HashMap<>();
         check.put("id", serverObserverId.getId());
         check.put("name", serviceName);
         check.put("status", status.toString());

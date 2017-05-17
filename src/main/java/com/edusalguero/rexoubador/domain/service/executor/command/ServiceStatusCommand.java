@@ -1,17 +1,18 @@
 package com.edusalguero.rexoubador.domain.service.executor.command;
 
 
+import com.edusalguero.rexoubador.domain.model.monitor.observer.Observation;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverType;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
 import com.edusalguero.rexoubador.domain.shared.CheckStatus;
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
-public class ServiceStatus implements CommandInterface {
+public class ServiceStatusCommand implements CommandInterface {
 
     private final UniqueId id;
     private String serviceName;
 
-    public ServiceStatus(UniqueId id, String serviceName) {
+    public ServiceStatusCommand(UniqueId id, String serviceName) {
         this.id = id;
         this.serviceName = serviceName;
     }
@@ -24,13 +25,12 @@ public class ServiceStatus implements CommandInterface {
     @Override
     public ObserverCommandResponse parseResult(String result) {
         CheckStatus serviceStatus = CheckStatus.DOWN;
-        ObserverCommandResponse observerCommandResponse = new ObserverCommandResponse(id, ObserverType.SERVICE);
+        ObserverCommandResponse observerCommandResponse = new ObserverCommandResponse(id, ObserverType.SERVICE, serviceName);
 
         if (result.contains("running") && !result.contains("not running")) {
             serviceStatus = CheckStatus.UP;
         }
-        observerCommandResponse.addData("name", serviceName);
-        observerCommandResponse.addData("status", serviceStatus);
+        observerCommandResponse.setData(new Observation(serviceStatus));
         return observerCommandResponse;
     }
 }

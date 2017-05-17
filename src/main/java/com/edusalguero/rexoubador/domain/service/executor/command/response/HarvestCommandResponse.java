@@ -1,6 +1,7 @@
 package com.edusalguero.rexoubador.domain.service.executor.command.response;
 
 
+import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
@@ -12,10 +13,9 @@ public class HarvestCommandResponse extends CommandResponse {
     private final UniqueId id;
 
     public HarvestCommandResponse(UniqueId uniqueId, HarvesterType name) {
-        id = uniqueId;
-        result.put("type", "harvest");
-        result.put("name", name);
-        result.put("data", new HashMap<String, Object>());
+        this.id = uniqueId;
+        this.name = name;
+        this.type = "harvest";
     }
 
     public UniqueId getId() {
@@ -24,6 +24,8 @@ public class HarvestCommandResponse extends CommandResponse {
 
     @Override
     public HarvesterType getName() {
-        return (HarvesterType) result.get("name");
+        return (HarvesterType) name;
     }
+
+
 }
