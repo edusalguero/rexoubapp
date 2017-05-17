@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.service.notification;
 
+import com.edusalguero.rexoubador.domain.service.notification.NotificationMessage;
 import com.edusalguero.rexoubador.domain.service.notification.SlackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,18 +26,21 @@ public class SlackRestService implements SlackService {
     }
 
     @Override
-    public void postMessage(String webhookUrl, String to, String subject, String message) {
-        String body;
+    public void postMessage(String webhookUrl, String to, NotificationMessage notificationMessage) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        String body;
+        String slackMessage = notificationMessage.getMarkdownBody();
         if (to.startsWith("@")) {
-            body = "{\"username\":\"" + to + "\",\"text\":\"" + encodeMessage(message) + "\"}";
+
+            body = "{\"username\":\"" + to + "\",\"text\":\"" + slackMessage + "\"}";
         } else {
-            body = "{\"channel\":\"" + to + "\",\"text\":\"" + encodeMessage(message) + "\"}";
+            body = "{\"channel\":\"" + to + "\",\"text\":\"" + slackMessage + "\"}";
         }
         HttpEntity<String> entity = new HttpEntity<>(body, headers);
         logger.info("Posting slack message: " + body);
         restTemplate.postForLocation(webhookUrl, entity);
         logger.info("Slack message posted");
     }
+
 }

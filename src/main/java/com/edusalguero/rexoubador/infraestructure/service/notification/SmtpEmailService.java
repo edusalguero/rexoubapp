@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.service.notification;
 
+import com.edusalguero.rexoubador.domain.service.notification.NotificationMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ public class SmtpEmailService implements com.edusalguero.rexoubador.domain.servi
     }
 
     @Override
-    public void send(String to, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
-        message.setFrom(from);
-        logger.info("Sending email message: " + message.toString());
-        emailSender.send(message);
+    public void send(String to, NotificationMessage message) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(to);
+        mailMessage.setSubject(message.getSubject());
+        mailMessage.setText(message.getTextBody());
+        mailMessage.setFrom(from);
+        logger.info("Sending email message: " + mailMessage.toString());
+        emailSender.send(mailMessage);
         logger.info("Email message sent");
     }
 }
