@@ -37,16 +37,17 @@ public class RemoteSSHExecutor implements RemoteExecutor {
 
     @Override
     public CommandResponseInterface execute(Connection connection, CommandInterface command) throws ExecutionException {
-        String result = null;
+        String result;
         try {
             session = sshClient.getSession(connection.getUsername(), connection.getHost(), connection.getPort());
             session.setConfig("PreferredAuthentications", "publickey");
+            session.setTimeout(2000);
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
             session.connect();
 
-            Channel channel = null;
+            Channel channel;
             channel = session.openChannel("exec");
 
             ((ChannelExec) channel).setCommand(command.getCommandString());
@@ -55,7 +56,7 @@ public class RemoteSSHExecutor implements RemoteExecutor {
             channel.setInputStream(null);
             ((ChannelExec) channel).setErrStream(System.err);
 
-            InputStream in = null;
+            InputStream in;
             in = channel.getInputStream();
 
             channel.connect();
