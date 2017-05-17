@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubador.domain.event.handler;
 
-import com.edusalguero.rexoubador.domain.event.ServerObservableStatusWasChanged;
+import com.edusalguero.rexoubador.domain.event.ServerWasReconnected;
+import com.edusalguero.rexoubador.domain.event.ServerWasUnreachable;
 import com.edusalguero.rexoubador.domain.model.event.EventRepository;
 import com.edusalguero.rexoubador.domain.model.server.Server;
-import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserver;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import com.edusalguero.rexoubador.domain.service.notification.EmailService;
@@ -15,20 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ServerObservableStatusWasChangedHandler extends ServerEvent implements EventHandler<ServerObservableStatusWasChanged> {
-
+public class ServerWasReconnectedHandler extends ServerEvent implements EventHandler<ServerWasReconnected> {
 
     @Autowired
-    public ServerObservableStatusWasChangedHandler(UserRepository userRepository, EventRepository eventRepository, EmailService emailService, SlackService slackService) {
+    public ServerWasReconnectedHandler(UserRepository userRepository, EventRepository eventRepository, EmailService emailService, SlackService slackService) {
         super(userRepository, eventRepository, emailService, slackService);
     }
 
     @Override
-    public void handle(ServerObservableStatusWasChanged event) {
+    public void handle(ServerWasReconnected event) {
         User user = userRepository.ofId(event.getUserId());
         Server server = user.server(event.getServerId());
-        ServerObserver serverObserver = server.observer(event.getServerObserverId());
-        String message = "Observer [" + serverObserver.observer().label() + "] status was changed to [" + event.getCheckStatus() + "] in server [" + server.label() + "/ " + server.ip() + "]";
-        createAndNotifyEvent(user, server, "Observer status was changed", message);
+        String message = "Server [" + server.label() + "/ " + server.ip() + "] was reconnected";
+        createAndNotifyEvent(user, server, "Server was reconnected", message);
     }
+
+
 }
