@@ -75,7 +75,7 @@ public class ServerObserver {
     public void addObservation(Date observationDate, CheckStatus checkStatus) {
         if (observer.notifyStatusChanges()) {
             if (this.lastCheckStatus != checkStatus) {
-                EventPublisher.publish(new ServerObservableStatusWasChanged(server.serverId(), server.user().userId(), serverObserverId()));
+                EventPublisher.publish(new ServerObservableStatusWasChanged(server.serverId(), server.user().userId(), serverObserverId(), checkStatus));
             }
         }
 

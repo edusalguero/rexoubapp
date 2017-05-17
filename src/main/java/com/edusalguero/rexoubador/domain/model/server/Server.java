@@ -1,10 +1,10 @@
 package com.edusalguero.rexoubador.domain.model.server;
 
+import com.edusalguero.rexoubador.domain.event.ServerWasReconnected;
+import com.edusalguero.rexoubador.domain.event.ServerWasUnreachable;
 import com.edusalguero.rexoubador.domain.model.contact.Contact;
 import com.edusalguero.rexoubador.domain.model.event.Event;
 import com.edusalguero.rexoubador.domain.model.event.EventId;
-import com.edusalguero.rexoubador.domain.shared.*;
-import com.edusalguero.rexoubador.domain.event.ServerWasUnreachable;
 import com.edusalguero.rexoubador.domain.model.monitor.Report;
 import com.edusalguero.rexoubador.domain.model.monitor.ReportId;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.Harvester;
@@ -21,6 +21,7 @@ import com.edusalguero.rexoubador.domain.service.executor.command.response.Comma
 import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.UptimeCommandResponse;
+import com.edusalguero.rexoubador.domain.shared.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -186,7 +187,7 @@ public class Server {
     }
 
     public Event recordEvent(EventId eventId, Collection<Contact> contacts, String message) {
-        Event event = new Event(eventId,this, contacts, message);
+        Event event = new Event(eventId, this, contacts, message);
         events.add(event);
         return event;
     }
@@ -195,6 +196,10 @@ public class Server {
     public Report packageMonitoredData(ReportId reportId, Collection<CommandResponseInterface> collectedData) {
         Date now = new Date();
         Report report = new Report(reportId, now, this.user(), this);
+
+        if (machineStatus.equals(MachineStatus.DOWN)) {
+            EventPublisher.publish(new ServerWasReconnected(serverId(), user.userId()));
+        }
         for (CommandResponseInterface result : collectedData) {
             if (result instanceof HarvestCommandResponse) {
                 ServerHarvesterId id = (ServerHarvesterId) ((HarvestCommandResponse) result).getId();
