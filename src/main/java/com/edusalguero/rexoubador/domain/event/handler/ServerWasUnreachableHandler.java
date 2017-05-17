@@ -28,8 +28,8 @@ public class ServerWasUnreachableHandler extends ServerEventHandler implements E
         User user = userRepository.ofId(event.getUserId());
         Server server = user.server(event.getServerId());
         String body = "Server [" + server.label() + " / " + server.ip() + "] was unreachable";
-        NotificationMessage notificationMessage = new EventMessage("Server was unreachable",body, event.occurredOn() );
-        createAndNotifyEvent(user, server,notificationMessage);
+        NotificationMessage notificationMessage = new EventMessage("Server was unreachable", body, event.occurredOn());
+        createAndNotifyEvent(user, server, notificationMessage);
     }
 
 

@@ -119,13 +119,11 @@ public class Contact {
         this.slackChannelOrUsername = slackChannelOrUsername;
     }
 
-    public Boolean hasEmail()
-    {
+    public Boolean hasEmail() {
         return !email.isEmpty();
     }
 
-    public Boolean hasSlack()
-    {
+    public Boolean hasSlack() {
         return !slackChannelOrUsername.isEmpty() && !slackWebhookUrl.isEmpty();
     }
 

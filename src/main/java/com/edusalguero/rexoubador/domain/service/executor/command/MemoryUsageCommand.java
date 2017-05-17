@@ -1,7 +1,6 @@
 package com.edusalguero.rexoubador.domain.service.executor.command;
 
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
-import com.edusalguero.rexoubador.domain.model.monitor.harvester.MemoryUsage;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.harvest.MemoryUsageHarvest;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.HarvestCommandResponse;
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
@@ -24,7 +23,7 @@ public class MemoryUsageCommand implements CommandInterface {
         String[] parts = result.split("\\s+");
 
         HarvestCommandResponse harvestCommandResponse = new HarvestCommandResponse(id, HarvesterType.MEMORY_USAGE);
-        harvestCommandResponse.setData(new MemoryUsageHarvest(Integer.valueOf(parts[1]),Integer.valueOf(parts[2]), Integer.valueOf(parts[3]) ));
+        harvestCommandResponse.setData(new MemoryUsageHarvest(Integer.valueOf(parts[1]), Integer.valueOf(parts[2]), Integer.valueOf(parts[3])));
         return harvestCommandResponse;
     }
 

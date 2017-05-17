@@ -4,8 +4,6 @@ package com.edusalguero.rexoubador.domain.service.executor.command.response;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverType;
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
 
-import java.util.HashMap;
-
 
 public class ObserverCommandResponse extends CommandResponse {
 
@@ -14,7 +12,7 @@ public class ObserverCommandResponse extends CommandResponse {
     public ObserverCommandResponse(UniqueId uniqueId, ObserverType type, String name) {
         id = uniqueId;
         this.type = type.toString();
-        this.name =  name;
+        this.name = name;
     }
 
     public UniqueId getId() {

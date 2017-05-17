@@ -1,11 +1,8 @@
 package com.edusalguero.rexoubador.domain.service.executor.command.response;
 
 
-import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 import com.edusalguero.rexoubador.domain.shared.UniqueId;
-
-import java.util.HashMap;
 
 
 public class HarvestCommandResponse extends CommandResponse {

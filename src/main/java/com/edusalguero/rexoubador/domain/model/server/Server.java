@@ -210,7 +210,7 @@ public class Server {
                         .addCollectedData(now, result.getData());
             } else if (result instanceof ObserverCommandResponse) {
                 ServerObserverId id = (ServerObserverId) ((ObserverCommandResponse) result).getId();
-                CheckStatus checkStatus =  ((Observation)result.getData()).getCheckStatus();
+                CheckStatus checkStatus = ((Observation) result.getData()).getCheckStatus();
                 report.addService(id, (String) result.getName(), checkStatus);
                 this.observer(id)
                         .addObservation(now, checkStatus);

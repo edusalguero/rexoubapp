@@ -27,7 +27,7 @@ abstract class ServerEventHandler {
     }
 
     void createAndNotifyEvent(User user, Server server, NotificationMessage message) {
-       createAndNotifyEvent(user, server, message, true);
+        createAndNotifyEvent(user, server, message, true);
     }
 
     void createAndNotifyEvent(User user, Server server, NotificationMessage message, Boolean notifyToContacts) {

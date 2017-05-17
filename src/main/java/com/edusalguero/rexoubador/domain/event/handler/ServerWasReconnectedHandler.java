@@ -28,7 +28,7 @@ public class ServerWasReconnectedHandler extends ServerEventHandler implements E
         User user = userRepository.ofId(event.getUserId());
         Server server = user.server(event.getServerId());
         String body = "Server [" + server.label() + " / " + server.ip() + "] was reconnected";
-        NotificationMessage notificationMessage = new EventMessage("Server was reconnected",body, event.occurredOn() );
+        NotificationMessage notificationMessage = new EventMessage("Server was reconnected", body, event.occurredOn());
         createAndNotifyEvent(user, server, notificationMessage);
     }
 

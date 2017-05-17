@@ -30,7 +30,7 @@ public class ServerObservableWasInactiveHandler extends ServerEventHandler imple
         Server server = user.server(event.getServerId());
         ServerObserver serverObserver = server.observer(event.getServerObserverId());
         String body = "Observer [" + serverObserver.observer().label() + "] is inactive in server [" + server.label() + " / " + server.ip() + "]";
-        NotificationMessage notificationMessage = new EventMessage("Observer is inactive",body, event.occurredOn() );
-        createAndNotifyEvent(user, server,notificationMessage, serverObserver.notifyInactivity());
+        NotificationMessage notificationMessage = new EventMessage("Observer is inactive", body, event.occurredOn());
+        createAndNotifyEvent(user, server, notificationMessage, serverObserver.notifyInactivity());
     }
 }

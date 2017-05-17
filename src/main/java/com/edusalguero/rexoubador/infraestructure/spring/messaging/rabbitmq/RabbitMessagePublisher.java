@@ -1,7 +1,7 @@
 package com.edusalguero.rexoubador.infraestructure.spring.messaging.rabbitmq;
 
-import com.edusalguero.rexoubador.domain.shared.DomainEvent;
 import com.edusalguero.rexoubador.domain.service.messaging.MessagePublisher;
+import com.edusalguero.rexoubador.domain.shared.DomainEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

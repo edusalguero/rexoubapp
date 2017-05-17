@@ -38,17 +38,17 @@ public class HarvestServersMonitoringDataUseCase {
         logger.info("Retrieving collectible servers");
         Collection<Server> servers = serverRepository.toBeCollected();
         Integer count = servers.size();
-        logger.info(String.format("There are [%s] collectable servers", count ));
+        logger.info(String.format("There are [%s] collectable servers", count));
         Integer i = 1;
         for (Server server : servers) {
-            logger.info(String.format("Collecting monitoring data from server [%s] [%s/%s]...", server.id(), i, count ));
+            logger.info(String.format("Collecting monitoring data from server [%s] [%s/%s]...", server.id(), i, count));
             server.monitoringStart();
             try {
                 Collection<CommandResponseInterface> collectedData = serverMonitorsExecutorService.collect(server);
                 ReportId reportId = reportRepository.nextIdentity();
                 Report report = server.packageMonitoredData(reportId, collectedData);
                 reportRepository.save(report);
-                logger.debug("Monitoring data: "+ report.toJson());
+                logger.debug("Monitoring data: " + report.toJson());
             } catch (ExecutionException e) {
                 server.reportMonitorProblem();
             }

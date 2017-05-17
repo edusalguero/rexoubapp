@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Embeddable
 @MappedSuperclass
-public class UniqueId implements Serializable{
+public class UniqueId implements Serializable {
 
     @Column(columnDefinition = "BINARY(16)", length = 16, updatable = false, nullable = false)
     protected byte[] id;

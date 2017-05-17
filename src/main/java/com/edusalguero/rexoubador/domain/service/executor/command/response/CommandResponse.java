@@ -18,8 +18,7 @@ abstract public class CommandResponse implements CommandResponseInterface {
         return data;
     }
 
-    public void setData(MonitorDataInterface data)
-    {
+    public void setData(MonitorDataInterface data) {
         this.data = data;
     }
 }

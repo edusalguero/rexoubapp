@@ -3,7 +3,7 @@ package com.edusalguero.rexoubador.domain.model.monitor.harvester.harvest;
 import com.edusalguero.rexoubador.domain.model.monitor.MonitorDataInterface;
 import com.google.gson.Gson;
 
-public class DiskMountPoint implements MonitorDataInterface{
+public class DiskMountPoint implements MonitorDataInterface {
 
     private int total;
     private int percentageOfUse;

@@ -86,7 +86,7 @@ public class ServerHarvester {
             if (thresholdUsageService.exceeded(harvester().alertValue())) {
                 EventPublisher.publish(new ServerHarvesterExceededUsageThresholdUsage(server.serverId(), server.user().userId(),
                         serverHarvesterId(), ThresholdExceededUsageType.ALERT, harvester().alertValue()));
-            }else if (thresholdUsageService.exceeded(harvester().warningValue())) {
+            } else if (thresholdUsageService.exceeded(harvester().warningValue())) {
                 EventPublisher.publish(new ServerHarvesterExceededUsageThresholdUsage(server.serverId(), server.user().userId(),
                         serverHarvesterId(), ThresholdExceededUsageType.WARNING, harvester().warningValue()));
             }

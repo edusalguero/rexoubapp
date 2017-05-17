@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class EventMessage implements NotificationMessage{
+public class EventMessage implements NotificationMessage {
     private String subject;
     private String body;
     private Date date;
