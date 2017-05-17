@@ -37,6 +37,17 @@ spring:
     port: 5672
     username: guest
     password: guest
+  mail:
+    host: host
+    port: 587
+    username: username
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: false
 management:
   security:
     enabled: true # set to false to disable 'default' Spring Boot security
@@ -45,6 +56,8 @@ rexoubador:
   publicSSHKey: "THE PUBLIC KEY"
   privateKeyPath: "/Users/edusalguero/.ssh/id_rsa"
   passphrase:   "edusalguero"
+  email:
+    from: from@domain
   domain:
     events:
       exchange-name: "domainEvents"
