@@ -25,4 +25,5 @@ public class Harvest {
     public String getData() {
         return data.toJson();
     }
+
 }

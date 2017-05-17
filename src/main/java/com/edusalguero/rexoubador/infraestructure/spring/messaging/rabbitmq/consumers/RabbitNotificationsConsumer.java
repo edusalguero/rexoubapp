@@ -1,14 +1,8 @@
 package com.edusalguero.rexoubador.infraestructure.spring.messaging.rabbitmq.consumers;
 
 
-import com.edusalguero.rexoubador.domain.event.ServerObservableStatusWasChanged;
-import com.edusalguero.rexoubador.domain.event.ServerObservableWasInactive;
-import com.edusalguero.rexoubador.domain.event.ServerWasReconnected;
-import com.edusalguero.rexoubador.domain.event.ServerWasUnreachable;
-import com.edusalguero.rexoubador.domain.event.handler.ServerObservableStatusWasChangedHandler;
-import com.edusalguero.rexoubador.domain.event.handler.ServerObservableWasInactiveHandler;
-import com.edusalguero.rexoubador.domain.event.handler.ServerWasReconnectedHandler;
-import com.edusalguero.rexoubador.domain.event.handler.ServerWasUnreachableHandler;
+import com.edusalguero.rexoubador.domain.event.*;
+import com.edusalguero.rexoubador.domain.event.handler.*;
 import com.edusalguero.rexoubador.domain.service.messaging.MessageConsumer;
 import com.edusalguero.rexoubador.domain.shared.DomainEvent;
 import org.slf4j.Logger;
@@ -25,13 +19,15 @@ public class RabbitNotificationsConsumer implements MessageConsumer<DomainEvent>
     private final ServerWasReconnectedHandler serverWasReconnectedHandler;
     private final ServerObservableWasInactiveHandler serverObservableWasInactiveHandler;
     private final ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler;
+    private final ServerHarvesterExceededUsageThresholdUsageHandler serverHarvesterExceededUsageThresholdUsageHandler;
 
     @Autowired
-    public RabbitNotificationsConsumer(ServerWasUnreachableHandler serverWasUnreachableHandler, ServerWasReconnectedHandler serverWasReconnectedHandler, ServerObservableWasInactiveHandler serverObservableWasInactiveHandler, ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler) {
+    public RabbitNotificationsConsumer(ServerWasUnreachableHandler serverWasUnreachableHandler, ServerWasReconnectedHandler serverWasReconnectedHandler, ServerObservableWasInactiveHandler serverObservableWasInactiveHandler, ServerObservableStatusWasChangedHandler serverObservableStatusWasChangedHandler, ServerHarvesterExceededUsageThresholdUsageHandler serverHarvesterExceededUsageThresholdUsageHandler) {
         this.serverWasUnreachableHandler = serverWasUnreachableHandler;
         this.serverWasReconnectedHandler = serverWasReconnectedHandler;
         this.serverObservableWasInactiveHandler = serverObservableWasInactiveHandler;
         this.serverObservableStatusWasChangedHandler = serverObservableStatusWasChangedHandler;
+        this.serverHarvesterExceededUsageThresholdUsageHandler = serverHarvesterExceededUsageThresholdUsageHandler;
     }
 
     @RabbitListener(queues = "${rexoubador.domain.events.notifications-queue-name}")
@@ -46,6 +42,8 @@ public class RabbitNotificationsConsumer implements MessageConsumer<DomainEvent>
             serverWasUnreachableHandler.handle((ServerWasUnreachable) event);
         } else if (event instanceof ServerWasReconnected) {
             serverWasReconnectedHandler.handle((ServerWasReconnected) event);
+        } else if (event instanceof ServerHarvesterExceededUsageThresholdUsage) {
+            serverHarvesterExceededUsageThresholdUsageHandler.handle((ServerHarvesterExceededUsageThresholdUsage) event);
         }
     }
 }
