@@ -32,6 +32,6 @@ public class ServerObservableStatusWasChangedHandler extends ServerEventHandler 
         ServerObserver serverObserver = server.observer(event.getServerObserverId());
         String body = "Observer [" + serverObserver.observer().label() + "] status was changed to [" + event.getCheckStatus() + "] in server [" + server.label() + "/ " + server.ip() + "]";
         NotificationMessage notificationMessage = new EventMessage("Observer status was changed",body, event.occurredOn() );
-        createAndNotifyEvent(user, server,notificationMessage);
+        createAndNotifyEvent(user, server,notificationMessage, serverObserver.notifyStatusChanges());
     }
 }

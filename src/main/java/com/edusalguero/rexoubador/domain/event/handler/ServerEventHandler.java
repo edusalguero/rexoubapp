@@ -27,15 +27,21 @@ abstract class ServerEventHandler {
     }
 
     void createAndNotifyEvent(User user, Server server, NotificationMessage message) {
+       createAndNotifyEvent(user, server, message, true);
+    }
+
+    void createAndNotifyEvent(User user, Server server, NotificationMessage message, Boolean notifyToContacts) {
         EventId eventId = eventRepository.nextIdentity();
         List<Contact> contacts = user.contacts();
         server.recordEvent(eventId, user.contacts(), message.getBody());
-        for (Contact contact : contacts) {
-            if (contact.hasEmail()) {
-                emailService.send(contact.email(), message);
-            }
-            if (contact.hasSlack()) {
-                slackService.postMessage(contact.slackWebhookUrl(),contact.slackChannelOrUsername(), message);
+        if (notifyToContacts) {
+            for (Contact contact : contacts) {
+                if (contact.hasEmail()) {
+                    emailService.send(contact.email(), message);
+                }
+                if (contact.hasSlack()) {
+                    slackService.postMessage(contact.slackWebhookUrl(), contact.slackChannelOrUsername(), message);
+                }
             }
         }
     }
