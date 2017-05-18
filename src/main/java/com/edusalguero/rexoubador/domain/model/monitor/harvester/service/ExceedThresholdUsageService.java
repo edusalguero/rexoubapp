@@ -19,11 +19,12 @@ public class ExceedThresholdUsageService {
         this.previousData = previousData;
     }
 
-    public Boolean exceeded(Object referenceValue) {
+    public Boolean exceeded(Object threshold) {
         if (monitorData instanceof LoadHarvest) {
             Float currentUsage = ((LoadHarvest) monitorData).getLast() * 100;
             Float previousUsage = ((LoadHarvest) previousData).getLast() * 100;
-            if (currentUsage > previousUsage && currentUsage > Float.parseFloat((String) referenceValue)) {
+            Float referenceValue = Float.parseFloat((String) threshold);
+            if (currentUsage > previousUsage && currentUsage > referenceValue) {
                 return true;
             }
         } else if (monitorData instanceof MemoryUsageHarvest) {
@@ -35,16 +36,18 @@ public class ExceedThresholdUsageService {
             Integer freePrevious = ((MemoryUsageHarvest) previousData).getFree();
             Integer previousUsage = 100 - ((100 * freePrevious) / totalPrevious);
 
-            if (currentUsage > previousUsage && currentUsage > Integer.parseInt((String) referenceValue)) {
+            Integer referenceValue = Integer.parseInt((String) threshold);
+            if (currentUsage > previousUsage && currentUsage > referenceValue) {
                 return true;
             }
         } else if (monitorData instanceof DiskUsageHarvest) {
             ArrayList<DiskMountPoint> diskMountPoints = ((DiskUsageHarvest) monitorData).getMountPoints();
             ArrayList<DiskMountPoint> previousMountPoints = ((DiskUsageHarvest) previousData).getMountPoints();
             Integer i = 0;
+            Integer referenceValue = Integer.parseInt((String) threshold);
             for (DiskMountPoint point : diskMountPoints) {
                 if (point.getPercentageOfUse() > previousMountPoints.get(i).getPercentageOfUse()
-                        && point.getPercentageOfUse() > Integer.parseInt((String) referenceValue)) {
+                        && point.getPercentageOfUse() > referenceValue) {
                     return true;
                 }
             }
