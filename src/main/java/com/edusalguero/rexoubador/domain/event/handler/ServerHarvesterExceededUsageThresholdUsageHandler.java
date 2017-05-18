@@ -9,7 +9,6 @@ import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
 import com.edusalguero.rexoubador.domain.service.notification.EmailService;
 import com.edusalguero.rexoubador.domain.service.notification.EventMessage;
-import com.edusalguero.rexoubador.domain.service.notification.NotificationMessage;
 import com.edusalguero.rexoubador.domain.service.notification.SlackService;
 import com.edusalguero.rexoubador.domain.shared.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,8 @@ public class ServerHarvesterExceededUsageThresholdUsageHandler extends ServerEve
         Boolean notify = event.getType() == ThresholdExceededUsageType.ALERT && serverHarvester.notifyAlert()
                 || event.getType() == ThresholdExceededUsageType.WARNING && serverHarvester.notifyWarning();
         String body = "Harvester [" + serverHarvester.harvester().label() + "] exceeds " + type + " value (" + event.getExceededValue() + "% usage) in server [" + server.label() + "/ " + server.ip() + "]";
-        NotificationMessage notificationMessage = new EventMessage("Harvest threshold " + event.getType() + " value exceeded", body, event.occurredOn());
+        EventMessage notificationMessage = new EventMessage("Harvest threshold " + event.getType() + " value exceeded", body, event.occurredOn());
+        notificationMessage.addExtraData("Harvested data", serverHarvester.getLastHarvest().getData());
         createAndNotifyEvent(user, server, notificationMessage, notify);
     }
 }
