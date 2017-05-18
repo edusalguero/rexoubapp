@@ -50,6 +50,7 @@ public class HarvestServersMonitoringDataUseCase {
                 reportRepository.save(report);
                 logger.debug("Monitoring data: " + report.toJson());
             } catch (ExecutionException e) {
+                logger.error(String.format("Error collecting data for server [%s]: %s", server.id(), e.getMessage()));
                 server.reportMonitorProblem();
             }
             serverRepository.update(server);
