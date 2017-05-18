@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "/events", produces = "application/json")
+@RequestMapping(path = "/v1/events", produces = "application/json")
 public class EventController extends AuthenticatedUserController {
 
     private final UserEventsUseCase userEventsUseCase;

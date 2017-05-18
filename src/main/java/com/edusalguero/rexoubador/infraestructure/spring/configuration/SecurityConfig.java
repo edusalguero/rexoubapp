@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-        NegatedRequestMatcher requiresAuthenticationRequestMatcher = new NegatedRequestMatcher(new AntPathRequestMatcher("/auth/*"));
+        NegatedRequestMatcher requiresAuthenticationRequestMatcher = new NegatedRequestMatcher(new AntPathRequestMatcher("/v1/auth/*"));
         JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter(requiresAuthenticationRequestMatcher);
         authenticationTokenFilter.setAuthenticationManager(authenticationManager());
         authenticationTokenFilter.setAuthenticationSuccessHandler(new JwtAuthenticationSuccessHandler());
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 // All urls must be authenticated (filter for token always fires (/**)
                 .authorizeRequests()
-                .antMatchers("/auth/*").permitAll()
+                .antMatchers("/v1/auth/*").permitAll()
                 .antMatchers("/**/*").authenticated()
                 .and()
                 // Call our errorHandler if authentication/authorisation fails

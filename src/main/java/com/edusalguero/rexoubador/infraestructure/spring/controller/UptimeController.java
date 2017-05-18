@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "/uptime", produces = "application/json")
+@RequestMapping(path = "/v1/uptime", produces = "application/json")
 public class UptimeController extends AuthenticatedUserController {
 
     private final ServersUptimeUseCase serversUptimeUseCase;

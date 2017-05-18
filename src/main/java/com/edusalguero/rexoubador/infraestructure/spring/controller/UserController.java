@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping(path = "/users/self", produces = "application/json")
+@RequestMapping(path = "/v1/users/self", produces = "application/json")
 public class UserController extends AuthenticatedUserController {
 
     private final UserInformationUseCase userInformationUseCase;

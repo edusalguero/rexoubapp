@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "/contacts", produces = "application/json")
+@RequestMapping(path = "/v1/contacts", produces = "application/json")
 public class ContactController extends AuthenticatedUserController {
 
     private final UserContactsUseCase userContactsUseCase;

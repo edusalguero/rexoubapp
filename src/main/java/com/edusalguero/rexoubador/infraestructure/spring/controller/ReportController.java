@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "/reports", produces = "application/json")
+@RequestMapping(path = "/v1/reports", produces = "application/json")
 public class ReportController extends AuthenticatedUserController {
 
     private final ServerReportsUseCase serverReportsUseCase;

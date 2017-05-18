@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "/harvesters", produces = "application/json")
+@RequestMapping(path = "/v1/harvesters", produces = "application/json")
 public class HarvesterController extends AuthenticatedUserController {
 
     private final HarvesterCreateUseCase harvesterCreateUseCase;

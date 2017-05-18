@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(path = "/servers/{serverId}/observers", produces = "application/json")
+@RequestMapping(path = "/v1/servers/{serverId}/observers", produces = "application/json")
 public class ServerObserverController extends AuthenticatedUserController {
 
     private final ServerObserversUseCase serverObserversUseCase;
