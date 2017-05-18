@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -22,7 +23,14 @@ public class SlackRestService implements SlackService {
     }
 
     private String encodeMessage(String message) {
-        return message.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        return message.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("{", "")
+                .replace("}", "")
+                .replace("\"","")
+                .replace(",",", ")
+                .replace("  "," ");
     }
 
     @Override
@@ -30,7 +38,7 @@ public class SlackRestService implements SlackService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String body;
-        String slackMessage = notificationMessage.getMarkdownBody();
+        String slackMessage = encodeMessage(notificationMessage.getMarkdownBody());
         if (to.startsWith("@")) {
 
             body = "{\"username\":\"" + to + "\",\"text\":\"" + slackMessage + "\"}";
@@ -39,8 +47,14 @@ public class SlackRestService implements SlackService {
         }
         HttpEntity<String> entity = new HttpEntity<>(body, headers);
         logger.info("Posting slack message: " + body);
-        restTemplate.postForLocation(webhookUrl, entity);
-        logger.info("Slack message posted");
+        try {
+            restTemplate.postForLocation(webhookUrl, entity);
+            logger.info("Slack message posted");
+        }catch (HttpClientErrorException  e)
+        {
+            logger.error("Error posting slack message: " + e.getMessage());
+        }
+
     }
 
 }
