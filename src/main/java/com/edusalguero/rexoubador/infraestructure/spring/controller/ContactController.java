@@ -3,6 +3,7 @@ package com.edusalguero.rexoubador.infraestructure.spring.controller;
 import com.edusalguero.rexoubador.application.contact.*;
 import com.edusalguero.rexoubador.domain.model.contact.ContactId;
 import com.edusalguero.rexoubador.domain.shared.Status;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path = "/v1/contacts", produces = "application/json")
+@Api(description="Authenticated user contacts management operations")
 public class ContactController extends AuthenticatedUserController {
 
     private final UserContactsUseCase userContactsUseCase;

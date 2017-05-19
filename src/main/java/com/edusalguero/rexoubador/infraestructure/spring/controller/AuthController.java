@@ -5,6 +5,7 @@ import com.edusalguero.rexoubador.application.auth.LoginResponse;
 import com.edusalguero.rexoubador.application.auth.LoginUseCase;
 import com.edusalguero.rexoubador.application.user.UserRegistrationUseCase;
 import com.edusalguero.rexoubador.domain.model.user.UserId;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/v1/auth")
+@Api(description="Login and register")
 public class AuthController {
 
 

@@ -4,6 +4,7 @@ import com.edusalguero.rexoubador.application.server.observer.*;
 import com.edusalguero.rexoubador.domain.model.monitor.observer.ObserverId;
 import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.server.observer.ServerObserverId;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path = "/v1/servers/{serverId}/observers", produces = "application/json")
+@Api(description="Server observers management operations")
 public class ServerObserverController extends AuthenticatedUserController {
 
     private final ServerObserversUseCase serverObserversUseCase;

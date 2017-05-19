@@ -2,6 +2,7 @@ package com.edusalguero.rexoubador.infraestructure.spring.controller;
 
 
 import com.edusalguero.rexoubador.application.user.*;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/v1/users/self", produces = "application/json")
+@Api(description="Authenticated user management operations")
 public class UserController extends AuthenticatedUserController {
 
     private final UserInformationUseCase userInformationUseCase;

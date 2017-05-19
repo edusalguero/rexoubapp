@@ -4,6 +4,7 @@ import com.edusalguero.rexoubador.application.monitor.harvester.*;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterId;
 import com.edusalguero.rexoubador.domain.model.monitor.harvester.HarvesterType;
 import com.edusalguero.rexoubador.domain.shared.Status;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path = "/v1/harvesters", produces = "application/json")
+@Api(description="Authenticated user harvesters management operations")
 public class HarvesterController extends AuthenticatedUserController {
 
     private final HarvesterCreateUseCase harvesterCreateUseCase;
