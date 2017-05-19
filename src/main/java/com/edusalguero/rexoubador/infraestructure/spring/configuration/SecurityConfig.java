@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 import java.util.Arrays;
 
@@ -35,7 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-        NegatedRequestMatcher requiresAuthenticationRequestMatcher = new NegatedRequestMatcher(new AntPathRequestMatcher("/v1/auth/*"));
+        NegatedRequestMatcher requiresAuthenticationRequestMatcher = new NegatedRequestMatcher(
+                new OrRequestMatcher(
+                        new AntPathRequestMatcher("/v1/auth/*"),
+                        new AntPathRequestMatcher("/docs"),
+                        new AntPathRequestMatcher("/swagger-ui.html"),
+                        new AntPathRequestMatcher("/webjars/**/*"),
+                        new AntPathRequestMatcher("/swagger-resources"),
+                        new AntPathRequestMatcher("/swagger-resources/**/*")
+                ));
         JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter(requiresAuthenticationRequestMatcher);
         authenticationTokenFilter.setAuthenticationManager(authenticationManager());
         authenticationTokenFilter.setAuthenticationSuccessHandler(new JwtAuthenticationSuccessHandler());
@@ -50,6 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // All urls must be authenticated (filter for token always fires (/**)
                 .authorizeRequests()
                 .antMatchers("/v1/auth/*").permitAll()
+                .antMatchers("/docs").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/webjars/**/*").permitAll()
+                .antMatchers("/swagger-resources").permitAll()
+                .antMatchers("/swagger-resources/**/*").permitAll()
                 .antMatchers("/**/*").authenticated()
                 .and()
                 // Call our errorHandler if authentication/authorisation fails
