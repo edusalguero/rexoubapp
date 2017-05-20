@@ -4,6 +4,6 @@ import com.edusalguero.rexoubador.domain.shared.NotFoundException;
 
 public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException() {
-        super("User not found!");
+        super("00010","User not found!");
     }
 }

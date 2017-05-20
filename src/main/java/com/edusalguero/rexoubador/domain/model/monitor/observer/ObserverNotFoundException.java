@@ -4,6 +4,6 @@ import com.edusalguero.rexoubador.domain.shared.NotFoundException;
 
 public class ObserverNotFoundException extends NotFoundException {
     public ObserverNotFoundException() {
-        super("Observer not found!");
+        super("00006","Observer not found!");
     }
 }

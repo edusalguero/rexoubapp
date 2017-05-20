@@ -4,6 +4,6 @@ import com.edusalguero.rexoubador.domain.shared.RexoubadorException;
 
 public class InvalidHarvesterTypeException extends RexoubadorException {
     public InvalidHarvesterTypeException() {
-        super("Invalid harvester type!");
+        super("00004","Invalid harvester type!");
     }
 }

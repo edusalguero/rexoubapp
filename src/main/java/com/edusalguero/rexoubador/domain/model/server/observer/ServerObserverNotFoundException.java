@@ -4,6 +4,6 @@ import com.edusalguero.rexoubador.domain.shared.NotFoundException;
 
 public class ServerObserverNotFoundException extends NotFoundException {
     public ServerObserverNotFoundException() {
-        super("Server harvester not found!");
+        super("00009","Server harvester not found!");
     }
 }

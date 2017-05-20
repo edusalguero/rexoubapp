@@ -4,6 +4,6 @@ import com.edusalguero.rexoubador.domain.shared.NotFoundException;
 
 public class ContactNotFoundException extends NotFoundException {
     public ContactNotFoundException() {
-        super("Contact not found!");
+        super("00001","Contact not found!");
     }
 }
