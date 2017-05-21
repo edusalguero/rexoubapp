@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,12 @@ public class ExceptionHandlerController {
     @ResponseBody
     public ResponseEntity<ApiErrorResponse> handleAccessDeniedException(AccessDeniedException error) {
         return errorResponse("40001", "Unauthorized", HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({MissingServletRequestParameterException.class})
+    public ResponseEntity<ApiErrorResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException error) {
+        return errorResponse("10001", error.getMessage(), HttpStatus.BAD_REQUEST);
+
     }
 
     private ResponseEntity<ApiErrorResponse> errorResponse(String code, String message, HttpStatus status) {
