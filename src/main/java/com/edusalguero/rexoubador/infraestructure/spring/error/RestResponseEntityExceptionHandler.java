@@ -1,8 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.spring.error;
 
 import com.edusalguero.rexoubador.domain.shared.RexoubadorException;
-import com.edusalguero.rexoubador.infraestructure.spring.security.exception.JwtTokenMalformedException;
-import com.edusalguero.rexoubador.infraestructure.spring.security.exception.JwtTokenMissingException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -10,12 +8,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,9 +29,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return errorResponse(ex.getCode(), ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({JwtException.class, JwtTokenMalformedException.class, JwtTokenMissingException.class})
+    @ExceptionHandler({JwtException.class, AuthenticationException.class})
     public ResponseEntity<Object> handleAccessDeniedException(final Exception ex, final WebRequest request) {
-        return errorResponse("10000", ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+        return errorResponse("40001", ex.getMessage(), new HttpHeaders(), HttpStatus.UNAUTHORIZED);
 
     }
 

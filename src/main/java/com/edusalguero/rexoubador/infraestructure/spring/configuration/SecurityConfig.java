@@ -1,5 +1,6 @@
 package com.edusalguero.rexoubador.infraestructure.spring.configuration;
 
+import com.edusalguero.rexoubador.infraestructure.spring.error.AuthFailureHandler;
 import com.edusalguero.rexoubador.infraestructure.spring.security.JwtAuthenticationEntryPoint;
 import com.edusalguero.rexoubador.infraestructure.spring.security.JwtAuthenticationProvider;
 import com.edusalguero.rexoubador.infraestructure.spring.security.JwtAuthenticationSuccessHandler;
@@ -27,12 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationProvider authenticationProvider;
 
+    @Autowired
+    private AuthFailureHandler authFailureHandler;
+
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
 
         return new ProviderManager(Arrays.asList(authenticationProvider));
     }
+
+
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
@@ -48,6 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter(requiresAuthenticationRequestMatcher);
         authenticationTokenFilter.setAuthenticationManager(authenticationManager());
         authenticationTokenFilter.setAuthenticationSuccessHandler(new JwtAuthenticationSuccessHandler());
+
+        System.out.println("Set authFailureHandlerauthFailureHandlerauthFailureHandlerauthFailureHandler");
+        authenticationTokenFilter.setAuthenticationFailureHandler(authFailureHandler);
         return authenticationTokenFilter;
     }
 
@@ -56,24 +65,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
-                // All urls must be authenticated (filter for token always fires (/**)
-                .authorizeRequests()
-                .antMatchers("/v1/auth/*").permitAll()
-                .antMatchers("/docs").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/webjars/**/*").permitAll()
-                .antMatchers("/swagger-resources").permitAll()
-                .antMatchers("/swagger-resources/**/*").permitAll()
-                .antMatchers("/**/*").authenticated()
-                .and()
                 // Call our errorHandler if authentication/authorisation fails
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 // don't create session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //.and()
-        // Custom JWT based security filter
-        httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //.and()
+                .and()
+                // All urls must be authenticated (filter for token always fires (/**)
+                    .authorizeRequests()
+                    .antMatchers("/v1/auth/*").permitAll()
+                    .antMatchers("/docs").permitAll()
+                    .antMatchers("/swagger-ui.html").permitAll()
+                    .antMatchers("/webjars/**/*").permitAll()
+                    .antMatchers("/swagger-resources").permitAll()
+                    .antMatchers("/swagger-resources/**/*").permitAll()
+                    .antMatchers("/**/*").authenticated()
+                .and()
+                    .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         // disable page caching
         httpSecurity.headers().cacheControl();

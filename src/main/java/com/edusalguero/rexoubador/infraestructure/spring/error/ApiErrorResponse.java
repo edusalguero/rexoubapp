@@ -16,4 +16,8 @@ class ApiErrorResponse {
     public String getMessage() {
         return message;
     }
+
+    public String toJson() {
+        return "{\"code\":\"" + code + "\",\"message\":\"" + message + "\"}";
+    }
 }

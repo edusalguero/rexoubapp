@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
 
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -26,6 +26,12 @@ public class ExceptionHandlerController {
     @ResponseBody
     public ResponseEntity<ApiErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException error) {
         return errorResponse("40005", "Not allowed", HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public ResponseEntity<ApiErrorResponse> handleAccessDeniedException(AccessDeniedException error) {
+        return errorResponse("40001", "Unauthorized", HttpStatus.UNAUTHORIZED);
     }
 
     private ResponseEntity<ApiErrorResponse> errorResponse(String code, String message, HttpStatus status) {
