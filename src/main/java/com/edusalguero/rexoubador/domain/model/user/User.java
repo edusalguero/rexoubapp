@@ -11,9 +11,14 @@ import com.edusalguero.rexoubador.domain.model.server.ServerId;
 import com.edusalguero.rexoubador.domain.model.server.ServerNotFoundException;
 import com.edusalguero.rexoubador.domain.model.user.service.HashingService;
 import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.shared.ValidationException;
+import com.edusalguero.rexoubador.domain.shared.validator.EmailValidator;
 import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.validation.ValidationUtils;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,12 +72,20 @@ public class User {
 
     public User(UserId userId, String username, String password, String firstName, String lastName) {
         this.userId = userId;
-        this.username = username;
+        setUsername(username);
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = Status.ENABLED;
         this.signUpDate = new Date();
         this.changePassword(password);
+    }
+
+    private void setUsername(String username) {
+        EmailValidator emailValidator =new EmailValidator();
+        if (!emailValidator.validate(username)) {
+            throw new ValidationException("Username must be an email address");
+        }
+        this.username = username;
     }
 
     protected User() {
@@ -223,8 +236,9 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void updateStatus(Status status) {
-        this.status = status;
+    public void delete()
+    {
+        status = Status.DELETED;
     }
 
     public void changePassword(String password) {

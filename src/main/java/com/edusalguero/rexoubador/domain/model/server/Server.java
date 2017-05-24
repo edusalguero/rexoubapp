@@ -24,6 +24,8 @@ import com.edusalguero.rexoubador.domain.service.executor.command.response.Harve
 import com.edusalguero.rexoubador.domain.service.executor.command.response.ObserverCommandResponse;
 import com.edusalguero.rexoubador.domain.service.executor.command.response.UptimeCommandResponse;
 import com.edusalguero.rexoubador.domain.shared.*;
+import com.edusalguero.rexoubador.domain.shared.validator.IPv4Validator;
+import com.edusalguero.rexoubador.domain.shared.validator.LabelValidator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -91,12 +93,30 @@ public class Server {
     public Server(User user, ServerId serverId, String label, String ip, Status status) {
         this.user = user;
         this.serverId = serverId;
-        this.label = label;
-        this.ip = ip;
+        setLabel(label);
+        setIP(ip);
         this.status = status;
         this.entryDate = new Date();
         this.harvestStatus = HarvestStatus.PENDING;
         this.machineStatus = MachineStatus.UNKNOWN;
+    }
+
+    private void setLabel(String label) {
+        LabelValidator labelValidator = new LabelValidator();
+        if(!labelValidator.validate(label))
+        {
+            throw new ValidationException("Invalid label.");
+        }
+        this.label = label;
+    }
+
+    private void setIP(String ip) {
+        IPv4Validator IPv4Validator = new IPv4Validator();
+        if(!IPv4Validator.validate(ip))
+        {
+            throw new ValidationException(String.format("%s is not a valid IPv4", ip));
+        }
+        this.ip = ip;
     }
 
     public Collection<ServerHarvester> harvesters() {
@@ -188,10 +208,9 @@ public class Server {
         return entryDate;
     }
 
-    public Event recordEvent(EventId eventId, Collection<Contact> contacts, String message) {
+    public void recordEvent(EventId eventId, Collection<Contact> contacts, String message) {
         Event event = new Event(eventId, this, contacts, message);
         events.add(event);
-        return event;
     }
 
 
@@ -230,17 +249,20 @@ public class Server {
         return lastHarvestDate;
     }
 
-    public void updateStatus(Status status) {
-        this.status = status;
+    public void disable() {
+        status = Status.DISABLED;
     }
 
+    public void enable() {
+        status = Status.ENABLED;
+    }
 
     public void updateIp(String ip) {
-        this.ip = ip;
+        setIP(ip);
     }
 
     public void updateLabel(String label) {
-        this.label = label;
+        setLabel(label);
     }
 
     public Boolean isEnabled() {

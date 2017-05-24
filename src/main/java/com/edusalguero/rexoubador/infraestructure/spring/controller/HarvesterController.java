@@ -58,12 +58,11 @@ public class HarvesterController extends AuthenticatedUserController {
 
     @RequestMapping(path = "/{harvesterId}", method = RequestMethod.PUT)
     public void update(@PathVariable String harvesterId,
-                       @RequestParam(value = "label") String label,
-                       @RequestParam(value = "notifyWarning") Boolean notifyWarning,
-                       @RequestParam(value = "notifyAlert") Boolean notifyAlert,
-                       @RequestParam(value = "warningValue") String warningValue,
-                       @RequestParam(value = "alertValue") String alertValue,
-                       @RequestParam(value = "type") HarvesterType type,
+                       @RequestParam(value = "label", required = false) String label,
+                       @RequestParam(value = "notifyWarning", required = false) Boolean notifyWarning,
+                       @RequestParam(value = "notifyAlert", required = false) Boolean notifyAlert,
+                       @RequestParam(value = "warningValue", required = false) String warningValue,
+                       @RequestParam(value = "alertValue", required = false) String alertValue,
                        @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status
     ) {
         HarvesterUpdateRequest harvesterUpdateRequest = new HarvesterUpdateRequest(new HarvesterId(harvesterId), getAuthenticatedUserId(), label, notifyWarning, notifyAlert, warningValue, alertValue, status);

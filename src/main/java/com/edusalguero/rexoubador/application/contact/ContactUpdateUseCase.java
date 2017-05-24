@@ -4,6 +4,7 @@ package com.edusalguero.rexoubador.application.contact;
 import com.edusalguero.rexoubador.domain.model.contact.Contact;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
+import com.edusalguero.rexoubador.domain.shared.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,13 @@ public class ContactUpdateUseCase {
         User user = userRepository.ofId(contactUpdateRequest.getUserId());
         Contact contact = user.contact(contactUpdateRequest.getContactId());
         contact.email(contactUpdateRequest.getEmail());
-        contact.slackChannelOrUsername(contactUpdateRequest.getSlackChannelOrUsername());
-        contact.slackWebhookUrl(contactUpdateRequest.getSlackWebhookUrl());
+        contact.slack(contactUpdateRequest.getSlackWebhookUrl(),contactUpdateRequest.getSlackChannelOrUsername());
+        if(contactUpdateRequest.getStatus() == Status.DISABLED)
+        {
+            contact.disable();
+        }else{
+            contact.enable();
+        }
         userRepository.update(user);
     }
 }

@@ -57,9 +57,9 @@ public class ObserverController extends AuthenticatedUserController {
 
     @RequestMapping(path = "/{observerId}", method = RequestMethod.PUT)
     public void update(@PathVariable String observerId,
-                       @RequestParam(value = "label") String label,
-                       @RequestParam(value = "notifyStatusChanges") Boolean notifyStatusChanges,
-                       @RequestParam(value = "notifyInactivity") Boolean notifyInactivity,
+                       @RequestParam(value = "label", required = false) String label,
+                       @RequestParam(value = "notifyStatusChanges", required = false) Boolean notifyStatusChanges,
+                       @RequestParam(value = "notifyInactivity", required =  false) Boolean notifyInactivity,
                        @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status
     ) {
         ObserverUpdateRequest observerUpdateRequest = new ObserverUpdateRequest(new ObserverId(observerId), getAuthenticatedUserId(), label, notifyStatusChanges, notifyInactivity, status);

@@ -18,7 +18,7 @@ public class UserDeleteUseCase {
 
     public void execute(UserId userId) {
         User user = userRepository.ofId(userId);
-        user.updateStatus(Status.DISABLED);
+        user.delete();
         userRepository.update(user);
     }
 }

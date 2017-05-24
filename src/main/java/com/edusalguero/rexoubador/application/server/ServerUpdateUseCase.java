@@ -3,6 +3,7 @@ package com.edusalguero.rexoubador.application.server;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
+import com.edusalguero.rexoubador.domain.shared.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,18 @@ public class ServerUpdateUseCase {
     public void execute(ServerUpdateRequest serverUpdateRequest) {
         User user = userRepository.ofId(serverUpdateRequest.getUserId());
         Server server = user.server(serverUpdateRequest.getServerId());
-        server.updateIp(serverUpdateRequest.getIp());
+        if (! serverUpdateRequest.getIp().isEmpty())
+        {
+            server.updateIp(serverUpdateRequest.getIp());
+        }
+
         server.updateLabel(serverUpdateRequest.getLabel());
-        server.updateStatus(serverUpdateRequest.getStatus());
+        if(serverUpdateRequest.getStatus() == Status.DISABLED)
+        {
+            server.disable();
+        }else {
+            server.enable();
+        }
         userRepository.update(user);
     }
 }

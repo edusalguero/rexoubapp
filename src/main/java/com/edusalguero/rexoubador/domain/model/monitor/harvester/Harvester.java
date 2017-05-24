@@ -2,6 +2,8 @@ package com.edusalguero.rexoubador.domain.model.monitor.harvester;
 
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.shared.ValidationException;
+import com.edusalguero.rexoubador.domain.shared.validator.LabelValidator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -53,13 +55,22 @@ abstract public class Harvester {
     public Harvester(User user, HarvesterId harvesterId, String label, Boolean notifyWarning, Boolean notifyAlert, String warningValue, String alertValue, Status status) {
         this.user = user;
         this.harvesterId = harvesterId;
-        this.label = label;
+        setLabel(label);
         this.notifyWarning = notifyWarning;
         this.notifyAlert = notifyAlert;
         this.warningValue = warningValue;
         this.alertValue = alertValue;
         this.entryDate = new Date();
         this.status = status;
+    }
+
+    private void setLabel(String label) {
+        LabelValidator labelValidator = new LabelValidator();
+        if(!labelValidator.validate(label))
+        {
+            throw new ValidationException("Invalid label.");
+        }
+        this.label = label;
     }
 
     protected Harvester() {
@@ -112,9 +123,12 @@ abstract public class Harvester {
         return harvesterId.toString();
     }
 
+    public void disable() {
+        status = Status.DISABLED;
+    }
 
-    public void updateStatus(Status status) {
-        this.status = status;
+    public void enable() {
+        status = Status.ENABLED;
     }
 
     public Date entryDate() {
@@ -138,7 +152,7 @@ abstract public class Harvester {
     }
 
     public void label(String label) {
-        this.label = label;
+       setLabel(label);
     }
 
 

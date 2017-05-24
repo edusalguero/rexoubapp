@@ -2,6 +2,9 @@ package com.edusalguero.rexoubador.domain.model.monitor.observer;
 
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.shared.Status;
+import com.edusalguero.rexoubador.domain.shared.ValidationException;
+import com.edusalguero.rexoubador.domain.shared.validator.LabelValidator;
+import com.edusalguero.rexoubador.domain.shared.validator.ObserverNameValidator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -49,12 +52,30 @@ abstract public class Observer {
     public Observer(User user, ObserverId observerId, String name, String label, Boolean notifyStatusChanges, Boolean notifyInactivity, Status status) {
         this.user = user;
         this.observerId = observerId;
-        this.name = name;
-        this.label = label;
+        setName(name);
+        setLabel(label);
         this.notifyStatusChanges = notifyStatusChanges;
         this.notifyInactivity = notifyInactivity;
         this.entryDate = new Date();
         this.status = status;
+    }
+
+    private void setName(String name) {
+        ObserverNameValidator observerNameValidator = new ObserverNameValidator();
+        if(!observerNameValidator.validate(name))
+        {
+            throw new ValidationException("Invalid observer name.");
+        }
+        this.name = name;
+    }
+
+    private void setLabel(String label) {
+        LabelValidator labelValidator = new LabelValidator();
+        if(!labelValidator.validate(label))
+        {
+            throw new ValidationException("Invalid label.");
+        }
+        this.label = label;
     }
 
     protected Observer() {
@@ -86,13 +107,16 @@ abstract public class Observer {
         return observerId;
     }
 
-    public String id() {
-        return observerId.toString();
+    public void disable() {
+        status = Status.DISABLED;
     }
 
+    public void enable() {
+        status = Status.ENABLED;
+    }
 
-    public void updateStatus(Status status) {
-        this.status = status;
+    public String id() {
+        return observerId.toString();
     }
 
     public Date entryDate() {
@@ -116,7 +140,7 @@ abstract public class Observer {
     }
 
     public void label(String label) {
-        this.label = label;
+        setLabel(label);
     }
 
     public String name() {

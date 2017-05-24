@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
 @RestController
@@ -57,7 +58,7 @@ public class ServerController extends AuthenticatedUserController {
     @RequestMapping(path = "/{serverId}", method = RequestMethod.PUT)
     public void update(@PathVariable String serverId,
                        @RequestParam(value = "label") String label,
-                       @RequestParam(value = "ip") String ip,
+                       @RequestParam(value = "ip", defaultValue = "") String ip,
                        @RequestParam(value = "status", required = false, defaultValue = "ENABLED") Status status
     ) {
         ServerUpdateRequest serverUpdateRequest = new ServerUpdateRequest(getAuthenticatedUserId(), new ServerId(serverId), ip, label, status);
