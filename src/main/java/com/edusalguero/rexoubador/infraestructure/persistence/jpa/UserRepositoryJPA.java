@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.math.BigInteger;
 import java.util.UUID;
 
 
@@ -28,6 +30,13 @@ public class UserRepositoryJPA extends JPARepository implements UserRepository {
         } catch (NoResultException e) {
             throw new UserNotFoundException();
         }
+    }
+
+    @Override
+    public BigInteger countOfUsername(String username) {
+        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM User WHERE username = :username " ).
+        setParameter("username", username);
+        return  (BigInteger) query.getSingleResult();
     }
 
     public User ofUsername(String username) {

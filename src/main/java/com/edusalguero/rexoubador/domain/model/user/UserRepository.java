@@ -1,8 +1,12 @@
 package com.edusalguero.rexoubador.domain.model.user;
 
 
+import java.math.BigInteger;
+
 public interface UserRepository {
     User ofId(UserId userId);
+
+    BigInteger countOfUsername(String username);
 
     User ofUsername(String username);
 
