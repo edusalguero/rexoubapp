@@ -1,6 +1,7 @@
 package com.edusalguero.rexoubador.infraestructure.spring.error;
 
 import com.edusalguero.rexoubador.domain.shared.RexoubadorException;
+import com.edusalguero.rexoubador.domain.shared.ValidationException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -27,6 +28,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler({RexoubadorException.class})
     public ResponseEntity<Object> handleRexoubadorExceptions(final RexoubadorException ex, final WebRequest request) {
         return errorResponse(ex.getCode(), ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ValidationException.class})
+    public ResponseEntity<Object> handleValidationExceptions(final ValidationException ex, final WebRequest request) {
+        return errorResponse("20000", ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({JwtException.class, AuthenticationException.class})
