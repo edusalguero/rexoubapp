@@ -20,9 +20,11 @@ public class UserUpdateUseCase {
             user.changePassword(userUpdateRequest.getPassword());
         }
 
-        if (userUpdateRequest.nameHasChanged()) {
-            user.lastName(userUpdateRequest.getLastName());
+        if (userUpdateRequest.getFirstName()!=null) {
             user.firstName(userUpdateRequest.getFirstName());
+        }
+        if (userUpdateRequest.getLastName()!=null) {
+            user.lastName(userUpdateRequest.getLastName());
         }
         userRepository.update(user);
     }
