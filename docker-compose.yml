@@ -6,6 +6,8 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+      - backend
 
   mongodb:
     image: mongo:latest
@@ -14,36 +16,30 @@ services:
     command: mongod --smallfiles
     volumes:
      - ./var/mongo:/data
+    networks:
+      - backend
 
-#  mysql:
-#    image: mysql:latest
-#    ports:
-#      - 9999:3306
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=123qweasd
-#      - MYSQL_ROOT_HOST=172.18.0.1
-#      - MYSQL_DATABASE=rexoubador
-#      - MYSQL_PASSWORD=123qweasd
+  mysql:
+    image: mysql:latest
+    ports:
+      - 9999:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123qweasd
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=rexoubador
+      - MYSQL_USER=rexoubador
+      - MYSQL_PASSWORD=rexoubador
+    networks:
+      - backend
 
-#  rexoubador-api:
-#    image: java:openjdk-8u91-jdk
-#    working_dir: /app
-#    volumes:
-#      - ./build/libs:/app
-#    command: java -jar /app/rexoubador-api-0.1.0.jar
-#    depends_on:
-#      - mysql
-#      - mongodb
-#      - rabbitmq
-#    links:
-#      - mysql
-#      - mongodb
-#      - rabbitmq
-#    ports:
-#      - 8081:8080
-#    environment:
-#      - DATABASE_HOST=demo
-#      - DATABASE_USER=dbuser
-#      - DATABASE_PASSWORD=dbp4ss
-#      - DATABASE_NAME=demo
-#      - DATABASE_PORT=3306
+networks:
+  backend:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
+         aux_addresses:
+          mysql: 10.5.0.5
+          mongodb: 10.5.0.6
+          rabbitmq: 10.5.0.7
