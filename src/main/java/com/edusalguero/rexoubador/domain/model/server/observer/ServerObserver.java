@@ -36,7 +36,7 @@ public class ServerObserver {
     private Date entryDate;
 
     @Basic(optional = false)
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

@@ -45,7 +45,7 @@ abstract public class Observer {
     protected Status status;
 
     @Basic(optional = false)
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedAt;
 
