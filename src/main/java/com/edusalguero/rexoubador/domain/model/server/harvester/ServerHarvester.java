@@ -70,6 +70,10 @@ public class ServerHarvester {
     }
 
     public Harvest getLastHarvest() {
+        if (lastHarvestDate == null)
+        {
+            return new NullHarvest();
+        }
         MonitorDataInterface monitorDataInterface = getMonitorData();
         return new Harvest(lastHarvestDate, monitorDataInterface);
     }

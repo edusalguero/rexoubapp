@@ -69,6 +69,10 @@ public class ServerObserver {
     }
 
     public Observation getLastObservation() {
+        if(this.lastCheckDate == null)
+        {
+            return new NullObservation();
+        }
         return new Observation(this.lastCheckDate, this.lastCheckStatus);
     }
 
