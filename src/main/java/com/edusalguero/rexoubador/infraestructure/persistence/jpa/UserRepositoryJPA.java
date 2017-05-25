@@ -34,7 +34,7 @@ public class UserRepositoryJPA extends JPARepository implements UserRepository {
 
     @Override
     public BigInteger countOfUsername(String username) {
-        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM User WHERE username = :username " ).
+        Query query = entityManager.createNativeQuery("SELECT COUNT(*) FROM user WHERE username = :username " ).
         setParameter("username", username);
         return  (BigInteger) query.getSingleResult();
     }
