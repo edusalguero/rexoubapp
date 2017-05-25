@@ -16,6 +16,6 @@ public class SlackWebhookUrlValidator implements ValidatorInterface<String> {
     @Override
     public boolean validate(String url) {
         Matcher matcher = pattern.matcher(url);
-        return matcher.matches();
+        return !matcher.matches();
     }
 }
