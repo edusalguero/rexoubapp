@@ -70,7 +70,7 @@ public class ServerHarvester {
     }
 
     public Harvest getLastHarvest() {
-        if (lastHarvestDate == null)
+        if (!hasBeenCollectedBefore())
         {
             return new NullHarvest();
         }
@@ -83,9 +83,17 @@ public class ServerHarvester {
         return harvestFactory.make(harvester(), this.lastHarvestData);
     }
 
+    private Boolean hasBeenCollectedBefore()
+    {
+        if (lastHarvestDate == null)
+        {
+            return  false;
+        }
+        return  true;
+    }
     public void addCollectedData(Date harvestDate, MonitorDataInterface data) {
 
-        if (!lastHarvestData.isEmpty()) {
+        if (hasBeenCollectedBefore() && !lastHarvestData.isEmpty()) {
             ExceedThresholdUsageService thresholdUsageService = new ExceedThresholdUsageService(data, getMonitorData());
             if (thresholdUsageService.exceeded(harvester().alertValue())) {
                 EventPublisher.publish(new ServerHarvesterExceededUsageThresholdUsage(server.serverId(), server.user().userId(),
