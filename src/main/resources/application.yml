@@ -14,9 +14,9 @@ spring:
   resources:
     add-mappings: false
   datasource:
-    url: jdbc:mysql://localhost:8889/rexoubador
+    url: jdbc:mysql://localhost:9999/rexoubador?useSSL=false&verifyServerCertificate=false
     username: rexoubador
-    password: 123qweasd
+    password: rexoubador
     driver-class-name: com.mysql.jdbc.Driver
 # ===============================
 # = JPA / HIBERNATE
