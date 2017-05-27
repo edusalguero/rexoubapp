@@ -47,7 +47,11 @@ public class EventResponse {
         return contactsResponse;
     }
 
-    public String getServer() {
-        return server.serverId().getId();
+    public HashMap<String, String> getServer() {
+        HashMap<String, String> serverMap = new HashMap<>();
+        serverMap.put("id", server.serverId().getId());
+        serverMap.put("label",server.label());
+        return serverMap;
     }
+
 }
