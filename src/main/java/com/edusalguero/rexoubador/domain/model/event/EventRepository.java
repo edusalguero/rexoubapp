@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface EventRepository {
 
-    Collection<Event> ofUser(User user);
+    Collection<Event> ofUserInDays(User user, int days);
 
     EventId nextIdentity();
 

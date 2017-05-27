@@ -23,10 +23,10 @@ public class UserEventsUseCase {
         this.eventRepository = eventRepository;
     }
 
-    public ArrayList<EventResponse> execute(UserId userId) {
+    public ArrayList<EventResponse> execute(UserId userId, int days) {
         User user = userRepository.ofId(userId);
         ArrayList<EventResponse> eventResponses = new ArrayList<>();
-        Collection<Event> events = eventRepository.ofUser(user);
+        Collection<Event> events = eventRepository.ofUserInDays(user, days);
         for (Event event : events) {
             eventResponses.add(new EventResponse(event));
         }

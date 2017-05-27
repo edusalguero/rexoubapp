@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -23,8 +24,9 @@ public class EventController extends AuthenticatedUserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ArrayList<EventResponse> list() {
-        return userEventsUseCase.execute(getAuthenticatedUserId());
+    public ArrayList<EventResponse> list(@RequestParam(value="days", defaultValue="30") int days) {
+
+        return userEventsUseCase.execute(getAuthenticatedUserId(), days);
     }
 
 }
