@@ -16,15 +16,8 @@ public class UserInformationResponse {
     private String lastName;
     private Date signUpDate;
     private int serverCount;
-
-    public UserInformationResponse(UserId id, String username, String firstName, String lastName, Date signUpDate, int serverCount) {
-        this.id = id.toString();
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.signUpDate = signUpDate;
-        this.serverCount = serverCount;
-    }
+    private int harvestersCount;
+    private int observersCount;
 
     public UserInformationResponse(User user) {
         this.id = user.id();
@@ -33,6 +26,8 @@ public class UserInformationResponse {
         this.lastName = user.lastName();
         this.signUpDate = user.signUpDate();
         this.serverCount = user.servers().size();
+        this.observersCount = user.observers().size();
+        this.harvestersCount = user.harvesters().size();
     }
 
     public String getId() {
@@ -51,14 +46,22 @@ public class UserInformationResponse {
         return lastName;
     }
 
+    public int getServerCount() {
+        return serverCount;
+    }
+
+    public int getHarvestersCount() {
+        return harvestersCount;
+    }
+
+    public int getObserversCount() {
+        return observersCount;
+    }
+
     public String getSignUpDate() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
         df.setTimeZone(tz);
         return df.format(signUpDate);
-    }
-
-    public int getServerCount() {
-        return serverCount;
     }
 }
