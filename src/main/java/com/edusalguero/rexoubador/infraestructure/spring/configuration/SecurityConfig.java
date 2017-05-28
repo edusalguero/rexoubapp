@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+        httpSecurity.cors().and()
                 // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
                 // Call our errorHandler if authentication/authorisation fails
@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //.and()
                 .and()
+
                 // All urls must be authenticated (filter for token always fires (/**)
                     .authorizeRequests()
                     .antMatchers("/v1/auth/*").permitAll()
