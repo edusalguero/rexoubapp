@@ -15,9 +15,11 @@ public class UserInformationResponse {
     private String firstName;
     private String lastName;
     private Date signUpDate;
-    private int serverCount;
+    private int serversCount;
     private int harvestersCount;
     private int observersCount;
+
+    private final int contactsCount;
 
     public UserInformationResponse(User user) {
         this.id = user.id();
@@ -25,9 +27,10 @@ public class UserInformationResponse {
         this.firstName = user.firstName();
         this.lastName = user.lastName();
         this.signUpDate = user.signUpDate();
-        this.serverCount = user.servers().size();
+        this.serversCount = user.servers().size();
         this.observersCount = user.observers().size();
         this.harvestersCount = user.harvesters().size();
+        this.contactsCount = user.contacts().size();
     }
 
     public String getId() {
@@ -46,8 +49,8 @@ public class UserInformationResponse {
         return lastName;
     }
 
-    public int getServerCount() {
-        return serverCount;
+    public int getServersCount() {
+        return serversCount;
     }
 
     public int getHarvestersCount() {
@@ -58,6 +61,9 @@ public class UserInformationResponse {
         return observersCount;
     }
 
+    public int getContactsCount() {
+        return contactsCount;
+    }
     public String getSignUpDate() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
