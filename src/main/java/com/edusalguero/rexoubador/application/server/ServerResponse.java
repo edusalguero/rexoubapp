@@ -19,6 +19,9 @@ public class ServerResponse {
     private MachineStatus machineStatus;
     private Date lastHarvestDate;
     private int uptime;
+    private int observersCount;
+    private int harvestersCount;
+
 
     public ServerResponse(Server server) {
         this.id = server.id();
@@ -30,6 +33,8 @@ public class ServerResponse {
         this.machineStatus = server.machineStatus();
         this.lastHarvestDate = server.lastHarvestDate();
         this.uptime = server.uptime();
+        this.harvestersCount = server.harvesters().size();
+        this.observersCount = server.observers().size();
     }
 
     public String getId() {
@@ -66,5 +71,13 @@ public class ServerResponse {
 
     public int getUptime() {
         return uptime;
+    }
+
+    public int getHarvestersCount() {
+        return harvestersCount;
+    }
+
+    public int getObserversCount() {
+        return observersCount;
     }
 }
