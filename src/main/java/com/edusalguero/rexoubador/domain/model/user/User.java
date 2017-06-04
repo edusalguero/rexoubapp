@@ -13,12 +13,9 @@ import com.edusalguero.rexoubador.domain.model.user.service.HashingService;
 import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.shared.ValidationException;
 import com.edusalguero.rexoubador.domain.shared.validator.EmailValidator;
-import com.edusalguero.rexoubador.infraestructure.service.BcryptHashingService;
-import org.hibernate.validator.constraints.Email;
-import org.springframework.validation.ValidationUtils;
+import com.edusalguero.rexoubador.infrastructure.service.BcryptHashingService;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
