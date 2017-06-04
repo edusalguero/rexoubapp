@@ -26,7 +26,7 @@ public class EventRepositoryJPA extends JPARepository implements EventRepository
         LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         LocalDateTime minLocalDate = localDateTime.plusDays(-days);
         Date minDate = java.sql.Date.valueOf(minLocalDate.toLocalDate());
-        String hql = "FROM Event as event  WHERE event.server.user = :user AND event.server.status<>:status AND date > :minDate";
+        String hql = "FROM Event as event  WHERE event.server.user = :user AND event.server.status<>:status AND date > :minDate ORDER BY date DESC";
         Query query = entityManager.createQuery(hql).
                 setParameter("user", user).
                 setParameter("status", Status.DELETED).
