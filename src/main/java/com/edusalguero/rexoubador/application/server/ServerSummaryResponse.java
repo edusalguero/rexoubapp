@@ -9,7 +9,7 @@ import com.edusalguero.rexoubador.domain.shared.Status;
 import java.util.Date;
 
 
-public class ServerResponse {
+public class ServerSummaryResponse {
     private String id;
     private String label;
     private String ip;
@@ -23,7 +23,7 @@ public class ServerResponse {
     private int harvestersCount;
 
 
-    public ServerResponse(Server server) {
+    public ServerSummaryResponse(Server server) {
         this.id = server.id();
         this.label = server.label();
         this.ip = server.ip();

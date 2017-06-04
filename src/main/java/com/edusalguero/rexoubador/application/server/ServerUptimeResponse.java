@@ -4,20 +4,22 @@ import com.edusalguero.rexoubador.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubador.domain.model.server.Server;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class ServerUptimeResponse {
-    private String serverId;
     private int uptime;
     private Date harvestDate;
+    private HashMap<String, String> server = new HashMap<>();
 
     public ServerUptimeResponse(Server server) {
-        this.serverId = server.id();
+        this.server.put("label",server.label());
+        this.server.put("id",server.id());
         this.uptime = server.uptime();
         this.harvestDate = server.lastHarvestDate();
     }
 
-    public String getServerId() {
-        return serverId;
+    public HashMap<String, String> getServer() {
+        return server;
     }
 
     public int getUptime() {

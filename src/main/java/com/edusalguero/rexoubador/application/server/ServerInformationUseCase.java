@@ -18,9 +18,9 @@ public class ServerInformationUseCase {
         this.userRepository = userRepository;
     }
 
-    public ServerResponse execute(ServerId serverId, UserId userId) {
+    public ServerFullResponse execute(ServerId serverId, UserId userId) {
         User user = userRepository.ofId(userId);
         Server server = user.server(serverId);
-        return new ServerResponse(server);
+        return new ServerFullResponse(server);
     }
 }

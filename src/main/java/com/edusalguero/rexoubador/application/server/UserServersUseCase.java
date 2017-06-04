@@ -20,12 +20,12 @@ public class UserServersUseCase {
         this.userRepository = userRepository;
     }
 
-    public ArrayList<ServerResponse> execute(UserId userId) {
-        ArrayList<ServerResponse> userServers = new ArrayList<>();
+    public ArrayList<ServerSummaryResponse> execute(UserId userId) {
+        ArrayList<ServerSummaryResponse> userServers = new ArrayList<>();
         User user = userRepository.ofId(userId);
         List<Server> servers = user.servers();
         for (Server server : servers) {
-            userServers.add(new ServerResponse(server));
+            userServers.add(new ServerSummaryResponse(server));
         }
         return userServers;
     }

@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
 @RestController
@@ -38,7 +37,7 @@ public class ServerController extends AuthenticatedUserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ArrayList<ServerResponse> list() {
+    public ArrayList<ServerSummaryResponse> list() {
         return userServersUseCase.execute(getAuthenticatedUserId());
     }
 
@@ -51,7 +50,7 @@ public class ServerController extends AuthenticatedUserController {
 
 
     @RequestMapping(path = "/{serverId}", method = RequestMethod.GET)
-    public ServerResponse view(@PathVariable String serverId) {
+    public ServerFullResponse view(@PathVariable String serverId) {
         return serverInformationUseCase.execute(new ServerId(serverId), getAuthenticatedUserId());
     }
 
