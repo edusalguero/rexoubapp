@@ -13,7 +13,6 @@ import com.edusalguero.rexoubador.domain.model.user.service.HashingService;
 import com.edusalguero.rexoubador.domain.shared.Status;
 import com.edusalguero.rexoubador.domain.shared.ValidationException;
 import com.edusalguero.rexoubador.domain.shared.validator.EmailValidator;
-import com.edusalguero.rexoubador.infrastructure.service.BcryptHashingService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ import java.util.stream.Collectors;
 public class User {
 
     @Transient
-    private HashingService hashingService = new BcryptHashingService();
+    private HashingService hashingService;
 
     @EmbeddedId
     private UserId userId;
@@ -67,14 +66,32 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Harvester.class, orphanRemoval = true)
     private List<Harvester> harvesters = new ArrayList<>();
 
-    public User(UserId userId, String username, String password, String firstName, String lastName) {
+    public User(UserId userId, String username, String password, String firstName, String lastName, HashingService hashingService) {
         this.userId = userId;
         setUsername(username);
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = Status.ENABLED;
         this.signUpDate = new Date();
+        this.hashingService = hashingService;
         this.changePassword(password);
+    }
+
+    protected User() {
+        // Needed by JPA
+    }
+
+    
+    private HashingService getHashingService() {
+        if (hashingService == null || ! (hashingService instanceof HashingService))
+        {
+            throw new UndefinedOrInvalidHashingService();
+        }
+        return hashingService;
+    }
+
+    public void setHashingService(HashingService hashingService) {
+        this.hashingService = hashingService;
     }
 
     private void setUsername(String username) {
@@ -83,10 +100,6 @@ public class User {
             throw new ValidationException("Username must be an email address");
         }
         this.username = username;
-    }
-
-    protected User() {
-        // Needed by JPA
     }
 
     public List<Contact> contacts() {
@@ -239,11 +252,11 @@ public class User {
     }
 
     public void changePassword(String password) {
-        this.password = hashingService.hash(password.trim());
+        this.password = getHashingService().hash(password.trim());
     }
 
     public boolean matchPassword(String password) {
-        return hashingService.matches(password, this.password);
+        return getHashingService().matches(password, this.password);
     }
 
     public boolean isEnabled() {

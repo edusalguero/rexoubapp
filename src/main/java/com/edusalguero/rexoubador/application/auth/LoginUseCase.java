@@ -3,6 +3,7 @@ package com.edusalguero.rexoubador.application.auth;
 import com.edusalguero.rexoubador.domain.model.user.User;
 import com.edusalguero.rexoubador.domain.model.user.UserNotFoundException;
 import com.edusalguero.rexoubador.domain.model.user.UserRepository;
+import com.edusalguero.rexoubador.domain.model.user.service.HashingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,21 @@ public class LoginUseCase {
 
     private final TokenGenerator tokenGenerator;
 
+    private HashingService hashingService;
+
     @Autowired
-    public LoginUseCase(@Value("${jwt.secret}") String secret, UserRepository userRepository, TokenGenerator tokenGenerator) {
+    public LoginUseCase(@Value("${jwt.secret}") String secret, UserRepository userRepository, TokenGenerator tokenGenerator, HashingService hashingService) {
         this.secret = secret;
         this.userRepository = userRepository;
         this.tokenGenerator = tokenGenerator;
+        this.hashingService = hashingService;
     }
 
     public LoginResponse execute(String username, String password) {
         User u;
         try {
             u = userRepository.ofUsername(username);
-
+            u.setHashingService(hashingService);
             if (!u.matchPassword(password) || !u.isEnabled()) {
                 throw new InvalidUsernameOrPassword();
             }
