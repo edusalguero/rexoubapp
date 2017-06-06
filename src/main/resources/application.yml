@@ -14,9 +14,9 @@ spring:
   resources:
     add-mappings: false
   datasource:
-    url: jdbc:mysql://localhost:9999/rexoubador?useSSL=false&verifyServerCertificate=false
-    username: rexoubador
-    password: rexoubador
+    url: jdbc:mysql://localhost:9999/rexoubapp?useSSL=false&verifyServerCertificate=false
+    username: rexoubapp
+    password: rexoubapp
     driver-class-name: com.mysql.jdbc.Driver
 # ===============================
 # = JPA / HIBERNATE
@@ -35,7 +35,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: rexoubador
+      database: rexoubapp
   rabbitmq:
     host: localhost
     port: 5672
@@ -56,7 +56,7 @@ management:
   security:
     enabled: true # set to false to disable 'default' Spring Boot security
 
-rexoubador:
+rexoubapp:
   publicSSHKey: "THE PUBLIC KEY"
   privateKeyPath: "/Users/edusalguero/.ssh/id_rsa"
   passphrase:   "edusalguero"

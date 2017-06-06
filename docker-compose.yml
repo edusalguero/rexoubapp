@@ -26,9 +26,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123qweasd
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=rexoubador
-      - MYSQL_USER=rexoubador
-      - MYSQL_PASSWORD=rexoubador
+      - MYSQL_DATABASE=rexoubapp
+      - MYSQL_USER=rexoubapp
+      - MYSQL_PASSWORD=rexoubapp
     networks:
       - backend
 
