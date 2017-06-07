@@ -7,10 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class RexoubadorApiApplication {
+public class RexoubappApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(RexoubadorApiApplication.class, args);
+        SpringApplication.run(RexoubappApplication.class, args);
     }
 }

@@ -1,9 +1,9 @@
 package com.edusalguero.rexoubapp.domain.shared;
 
 
-public class RexoubadorException extends RuntimeException {
+public class RexoubappException extends RuntimeException {
     private String code = "00000";
-    public RexoubadorException(String code, String message) {
+    public RexoubappException(String code, String message) {
         super(message);
         this.code = code;
     }

@@ -1,6 +1,6 @@
 package com.edusalguero.rexoubapp.infrastructure.spring.error;
 
-import com.edusalguero.rexoubapp.domain.shared.RexoubadorException;
+import com.edusalguero.rexoubapp.domain.shared.RexoubappException;
 import com.edusalguero.rexoubapp.domain.shared.ValidationException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.dao.DataAccessException;
@@ -25,8 +25,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         super();
     }
 
-    @ExceptionHandler({RexoubadorException.class})
-    public ResponseEntity<Object> handleRexoubadorExceptions(final RexoubadorException ex, final WebRequest request) {
+    @ExceptionHandler({RexoubappException.class})
+    public ResponseEntity<Object> handleRexoubappExceptions(final RexoubappException ex, final WebRequest request) {
         return errorResponse(ex.getCode(), ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 

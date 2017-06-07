@@ -27,8 +27,8 @@ public class SwaggerConfig {
 
     private ApiInfo metaData() {
         return new ApiInfo(
-                "Rexoubador REST API",
-                "REST API for Rexoubador monitoring platform",
+                "Rexoubapp REST API",
+                "REST API for Rexoubapp monitoring platform",
                 "1.0",
                 "Terms of service",
                 new Contact("Edu Salguero", "http://edusalguero.com", "edusalguero@gmail.com"),
