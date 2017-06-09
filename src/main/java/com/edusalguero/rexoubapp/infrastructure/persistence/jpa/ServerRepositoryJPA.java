@@ -56,10 +56,11 @@ public class ServerRepositoryJPA extends JPARepository implements ServerReposito
         Date oneMinuteAgo = new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(1));
 
         String hql = "FROM Server as server WHERE server.status<>:statusDeleted AND server.harvestStatus IN :statusToBeCollected" +
-                " AND ( server.lastHarvestDate < :lastHarvestDate OR server.lastHarvestDate IS NULL)";
+                " AND ( server.lastHarvestDate < :lastHarvestDate OR server.lastHarvestDate IS NULL) AND server.user.status = :userStatus";
         return (List<Server>) entityManager.createQuery(hql).
                 setParameter("statusToBeCollected", statusToBeCollected).
                 setParameter("statusDeleted", Status.DELETED).
+                setParameter("userStatus", Status.ENABLED).
                 setParameter("lastHarvestDate", oneMinuteAgo).
                 getResultList();
     }
