@@ -25,8 +25,8 @@ public class ServerReportsUseCase {
         this.userRepository = userRepository;
     }
 
-    public Collection<ServerReportResponse> execute(UserId userId, ServerId serverId) {
-        Collection<ServerReportResponse> reportResponses = new ArrayList<>();
+    public ArrayList<ServerReportResponse> execute(UserId userId, ServerId serverId) {
+        ArrayList<ServerReportResponse> reportResponses = new ArrayList<>();
         User user = userRepository.ofId(userId);
         Server server = user.server(serverId);
         Collection<Report> reports = reportRepository.ofServer(server);

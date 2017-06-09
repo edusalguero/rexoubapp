@@ -2,6 +2,7 @@ package com.edusalguero.rexoubapp.application.contact;
 
 import com.edusalguero.rexoubapp.application.datatransformer.DateConverter;
 import com.edusalguero.rexoubapp.domain.model.contact.Contact;
+import com.edusalguero.rexoubapp.domain.model.contact.Slack;
 import com.edusalguero.rexoubapp.domain.shared.Status;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ public class ContactResponse {
     private Status status;
     private Slack slack;
 
-    public ContactResponse(Contact contact) {
+    ContactResponse(Contact contact) {
         this.id = contact.id();
         this.email = contact.email();
         this.slack = new Slack(contact.slackChannelOrUsername(), contact.slackWebhookUrl());
@@ -40,23 +41,5 @@ public class ContactResponse {
 
     public Status getStatus() {
         return status;
-    }
-
-    class Slack {
-        private String slackWebhookUrl;
-        private String slackChannelOrUsername;
-
-        Slack(String slackWebhookUrl, String slackChannelOrUsername) {
-            this.slackWebhookUrl = slackWebhookUrl;
-            this.slackChannelOrUsername = slackChannelOrUsername;
-        }
-
-        public String getSlackWebhookUrl() {
-            return slackWebhookUrl;
-        }
-
-        public String getSlackChannelOrUsername() {
-            return slackChannelOrUsername;
-        }
     }
 }
