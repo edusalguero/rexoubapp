@@ -27,6 +27,7 @@ public class UserReportsUseCase {
         ArrayList<ServerReportResponse> reportResponses = new ArrayList<>();
         User user = userRepository.ofId(userId);
         Collection<Report> reports = reportRepository.ofUser(user);
+        reports.size();
         for (Report report : reports) {
             reportResponses.add(new ServerReportResponse(report));
         }

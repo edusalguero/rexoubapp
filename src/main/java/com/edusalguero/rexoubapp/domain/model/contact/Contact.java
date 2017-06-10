@@ -4,7 +4,6 @@ import com.edusalguero.rexoubapp.domain.model.user.User;
 import com.edusalguero.rexoubapp.domain.shared.Status;
 import com.edusalguero.rexoubapp.domain.shared.ValidationException;
 import com.edusalguero.rexoubapp.domain.shared.validator.EmailValidator;
-import com.edusalguero.rexoubapp.domain.shared.validator.SlackWebhookUrlValidator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,15 +21,17 @@ public class Contact {
 
     @Column(name = "email")
     private String email = null;
-    @Column(name = "slack_webhook_url")
-    private String slackWebhookUrl = null;
-    @Column(name = "slack_channel_or_username")
-    private String slackChannelOrUsername = null;
+
+    @Embedded
+    private Slack slack = null;
+
     @Column(name = "entry_date", columnDefinition = "DATETIME", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date entryDate;
+
     @Enumerated(EnumType.STRING)
     private Status status;
+
     @Basic(optional = false)
     @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
@@ -47,8 +48,7 @@ public class Contact {
     public Contact(User user, ContactId contactId, String slackWebhookUrl, String slackChannelOrUsername) {
         this.user = user;
         this.contactId = contactId;
-        setSlackWebhookUrl(slackWebhookUrl);
-        this.slackChannelOrUsername = slackChannelOrUsername;
+        slack(slackWebhookUrl, slackChannelOrUsername);
         this.entryDate = new Date();
         this.status = Status.ENABLED;
     }
@@ -58,8 +58,7 @@ public class Contact {
         this.contactId = contactId;
         validateData(email, slackWebhookUrl, slackChannelOrUsername);
         setEmail(email);
-        setSlackWebhookUrl(slackWebhookUrl);
-        this.slackChannelOrUsername = slackChannelOrUsername;
+        slack(slackWebhookUrl, slackChannelOrUsername);
         this.entryDate = new Date();
         this.status = Status.ENABLED;
     }
@@ -90,13 +89,6 @@ public class Contact {
         this.email = email;
     }
 
-    private void setSlackWebhookUrl(String slackWebhookUrl) {
-        SlackWebhookUrlValidator slackWebhookUrlValidator = new SlackWebhookUrlValidator();
-        if (!slackWebhookUrl.isEmpty() && !slackWebhookUrlValidator.validate(slackWebhookUrl)) {
-            throw new ValidationException(String.format("%s is not a valid Slack Webhook URL", slackWebhookUrl));
-        }
-        this.slackWebhookUrl = slackWebhookUrl;
-    }
 
     public ContactId contactId() {
         return contactId;
@@ -110,28 +102,22 @@ public class Contact {
         return email;
     }
 
-    public String slackWebhookUrl() {
-        return slackWebhookUrl;
+    public Slack slack() {
+        return slack;
     }
 
-    public String slackChannelOrUsername() {
-        return slackChannelOrUsername;
-    }
 
     public void email(String email) {
         setEmail(email);
     }
 
-    private void setSlackChannelOrUsername(String slackChannelOrUsername) {
-        this.slackChannelOrUsername = slackChannelOrUsername;
-    }
 
     public Boolean hasEmail() {
         return !email.isEmpty();
     }
 
     public Boolean hasSlack() {
-        return !slackChannelOrUsername.isEmpty() && !slackWebhookUrl.isEmpty();
+        return !slack.isEmpty();
     }
 
     public void disable() {
@@ -165,7 +151,16 @@ public class Contact {
             throw new ValidationException("Incomplete Slack configuration");
         }
 
-        setSlackWebhookUrl(slackWebhookUrl);
-        setSlackChannelOrUsername(slackChannelOrUsername);
+        slack = new Slack(slackWebhookUrl, slackChannelOrUsername);
+    }
+
+    public String slackWebhookUrl()
+    {
+        return slack.getSlackWebhookUrl();
+    }
+
+    public String slackChannelOrUsername()
+    {
+        return slack.getSlackChannelOrUsername();
     }
 }

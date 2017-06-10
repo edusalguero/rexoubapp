@@ -18,7 +18,7 @@ public class ContactResponse {
     ContactResponse(Contact contact) {
         this.id = contact.id();
         this.email = contact.email();
-        this.slack = new Slack(contact.slackChannelOrUsername(), contact.slackWebhookUrl());
+        this.slack = contact.slack();
         this.entryDate = contact.entryDate();
         this.status = contact.status();
     }

@@ -9,11 +9,11 @@ public class EventRecipient {
 
     public EventRecipient(Contact contact)
     {
-        if (contact.email() != null) {
+        if (contact.hasEmail()) {
             email = contact.email();
         }
-        if (contact.slackChannelOrUsername() != null) {
-            slack = contact.slackChannelOrUsername();
+        if (contact.hasSlack()) {
+            slack = contact.slack().getSlackChannelOrUsername();
 
         }
     }
