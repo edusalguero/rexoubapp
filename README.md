@@ -3,6 +3,8 @@
 **Rexoubapp** is a multi-user, easy-to-use monitoring platform build to monitor physical  and  virtual  servers  based  on  Debian  GNU/Linux.  
 > Monitoring  is  to collect and supervise  a set  of  system  metrics and check  the  status  of  some services. 
 
+**Rexoubapp** is basically a playground to explore and play with Spring Framework with Spring Boot.
+
 **Rexoubapp** allows to indicate critical usage thresholds in metrics or changes in  service  status  that  must  be  logged.  In addition  to  this,  it  allows  to  add contacts that will be notified, by email or Slack messages, when such events occur.
 
 The platform is composed of two elements:
